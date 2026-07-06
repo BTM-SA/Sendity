@@ -1,13 +1,12 @@
 {
-    "name": "avenor/avenor-ce",
-    "description": "Avenor CE - Self-hosted email infrastructure",
+    "name": "btm-sa/sendity",
+    "description": "A privacy-first, self-hosted email platform.",
     "type": "project",
-    "require": {
-        "php": "^8.2"
-    },
+    "license": "MIT",
+    "require": {},
     "autoload": {
         "psr-4": {
-            "Avenor\\": "app/"
+            "Sendity\\": "app/"
         }
     }
 }
