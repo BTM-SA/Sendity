@@ -15,39 +15,43 @@ Sendity is designed to be:
 
 ## Core Components
 
-Application
+-Application
 
 Responsible for bootstrapping the framework.
 
-Container
+-Configuration
+
+Loads application settings from the config directory and provides centralized access to application configuration.
+
+-Container
 
 Resolves dependencies automatically using reflection.
 
-Router
+-Router
 
 Matches HTTP requests to controllers or closures.
 
-Pipeline
+-Pipeline
 
 Executes middleware before the router.
 
-Request
+-Request
 
 Represents the incoming HTTP request.
 
-Response
+-Response
 
 Represents the outgoing HTTP response.
 
-Middleware
+-Middleware
 
 Intercepts requests before they reach controllers.
 
-Controllers
+-Controllers
 
 Handle application logic.
 
-Services
+-Services
 
 Reusable business logic.
 

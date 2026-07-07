@@ -2,6 +2,7 @@
 
 use Sendity\Controllers\HomeController;
 use Sendity\Core\Application;
+use Sendity\Core\Config;
 use Sendity\Core\Container;
 use Sendity\Http\Response;
 use Sendity\Services\Logger;
@@ -11,20 +12,39 @@ require_once __DIR__ . '/../vendor/autoload.php';
 // Container
 $container = new Container();
 
-// services
+// Configuration
+$container->singleton(
+    Config::class,
+    function () {
+        $config = new Config();
+
+        $config->load(
+            __DIR__ . '/../config/app.php'
+        );
+
+        $config->load(
+            __DIR__ . '/../config/mail.php'
+        );
+
+        return $config;
+    }
+);
+
+// Services
 $container->bind(Logger::class, fn () => new Logger());
 
-// IMPORTANT: singleton router
+// Router singleton
 $container->singleton(
     \Sendity\Http\Router::class,
     fn ($c) => new \Sendity\Http\Router($c)
 );
 
-// get shared router instance
+// Shared router instance
 $router = $container->get(\Sendity\Http\Router::class);
 
-// register routes on shared instance
+// Routes
 $router->get('/', [HomeController::class, 'index']);
+
 $router->get('/health', [HomeController::class, 'health']);
 
 $router->get('/api/status', function () {
@@ -38,5 +58,5 @@ $router->get('/user/{id}', function ($id) {
     return "User ID: {$id}";
 });
 
-// run app
+// Run application
 return $container->get(Application::class);

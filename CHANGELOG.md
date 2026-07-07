@@ -1,5 +1,27 @@
 # Changelog
 
+
+## v0.4
+
+### Added
+
+- Configuration system
+- Config service
+- Config loading from files
+- Container singleton registration for configuration
+
+---
+
+## v0.3
+
+### Added
+
+- Middleware Pipeline
+- Middleware Interface
+- Improved application lifecycle
+
+---
+
 ## v0.2
 
 ### Added
@@ -14,4 +36,4 @@
 
 ## Upcoming
 
-- Middleware Pipeline
+- Exception Handler

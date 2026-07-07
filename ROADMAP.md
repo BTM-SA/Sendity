@@ -18,16 +18,15 @@ Sendity is a privacy-first, self-hosted email platform built on a lightweight PH
 - Dependency Injection Container
 - Controller Resolution
 - Logging Middleware
-- GitHub Repository.
+- Middleware Pipeline
+- Configuration System
 
 ## 🚧 In Progress
 
-- Middleware Pipeline
+- Exception Handler
 
 ## 📋 Planned
 
-- Configuration System
-- Exception Handler
 - Event Dispatcher
 - Database Layer
 - Cache
