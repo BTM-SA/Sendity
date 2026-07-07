@@ -28,3 +28,10 @@
 [2026-07-06 13:44:41] [INFO] GET /user/123
 [2026-07-06 13:58:01] [INFO] GET /user/123
 [2026-07-06 17:55:41] [INFO] GET /user/123
+[2026-07-07 07:16:55] [INFO] GET /user/123
+[2026-07-07 07:40:39] [INFO] GET /user/123
+[2026-07-07 07:41:05] [INFO] GET /
+[2026-07-07 07:41:05] [INFO] GET /apple-touch-icon-precomposed.png
+[2026-07-07 07:41:05] [INFO] GET /apple-touch-icon.png
+[2026-07-07 07:41:05] [INFO] GET /favicon.ico
+[2026-07-07 07:45:42] [INFO] GET /

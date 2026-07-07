@@ -6,6 +6,11 @@ use Sendity\Http\Request;
 
 class Pipeline
 {
+    protected Request $request;
+
+    /**
+     * @var array<object>
+     */
     protected array $pipes = [];
 
     public function send(Request $request): static
@@ -27,7 +32,7 @@ class Pipeline
         $pipeline = array_reduce(
             array_reverse($this->pipes),
             function ($next, $pipe) {
-                return function ($request) use ($pipe, $next) {
+                return function (Request $request) use ($pipe, $next) {
                     return $pipe->handle($request, $next);
                 };
             },
@@ -36,6 +41,4 @@ class Pipeline
 
         return $pipeline($this->request);
     }
-
-    protected Request $request;
 }

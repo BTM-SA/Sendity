@@ -11,20 +11,21 @@ class Application
     public function __construct(
         protected Container $container,
         protected Request $request,
-        protected Router $router
+        protected Router $router,
+        protected Pipeline $pipeline
     ) {}
 
     public function run(): void
     {
-        $middleware = $this->container->get(LoggerMiddleware::class);
+        $middleware = [
+            $this->container->get(LoggerMiddleware::class),
+        ];
 
-        // ensure consistent format (always array)
-        $middlewareStack = is_array($middleware) ? $middleware : [$middleware];
-
-        foreach ($middlewareStack as $mw) {
-            $mw->handle($this->request);
-        }
-
-        $this->router->dispatch($this->request);
+        $this->pipeline
+            ->send($this->request)
+            ->through($middleware)
+            ->then(function ($request) {
+                $this->router->dispatch($request);
+            });
     }
 }
