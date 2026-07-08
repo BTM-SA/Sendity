@@ -1,11 +1,12 @@
 <?php
 
-use Sendity\Controllers\HomeController;
 use Sendity\Core\Application;
 use Sendity\Core\Config;
 use Sendity\Core\Container;
-use Sendity\Http\Response;
+use Sendity\Controllers\HomeController;
 use Sendity\Services\Logger;
+use Sendity\Core\Exceptions\ExceptionHandler;
+use Sendity\Http\Response;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
@@ -33,6 +34,10 @@ $container->singleton(
 // Services
 $container->bind(Logger::class, fn () => new Logger());
 
+$container->singleton(
+    ExceptionHandler::class,
+    fn () => new ExceptionHandler()
+);
 // Router singleton
 $container->singleton(
     \Sendity\Http\Router::class,
@@ -57,6 +62,7 @@ $router->get('/api/status', function () {
 $router->get('/user/{id}', function ($id) {
     return "User ID: {$id}";
 });
+
 
 // Run application
 return $container->get(Application::class);

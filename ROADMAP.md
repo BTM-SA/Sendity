@@ -2,7 +2,7 @@
 
 ## Vision
 
-Sendity is a privacy-first, self-hosted email platform built on a lightweight PHP framework developed specifically for secure communication applications.
+Sendity is a privacy-first email platform built on a lightweight PHP framework developed specifically for secure communication applications.
 
 ---
 
@@ -20,14 +20,14 @@ Sendity is a privacy-first, self-hosted email platform built on a lightweight PH
 - Logging Middleware
 - Middleware Pipeline
 - Configuration System
+- Exception Handler
 
 ## 🚧 In Progress
 
-- Exception Handler
+- Event Dispatcher
 
 ## 📋 Planned
 
-- Event Dispatcher
 - Database Layer
 - Cache
 - Queue
@@ -81,16 +81,16 @@ Middleware Pipeline
 Configuration & Exceptions
 
 ## v0.5
-Database Layer
+Event Dispatcher
 
 ## v0.6
-Authentication
+Database LayerAuthentication
 
 ## v0.7
-SMTP Engine
+Authentication
 
 ## v0.8
-IMAP Engine
+SMTP / IMAP Engine
 
 ## v0.9
 Plugin System

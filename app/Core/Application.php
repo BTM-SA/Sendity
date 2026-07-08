@@ -2,9 +2,11 @@
 
 namespace Sendity\Core;
 
+use Sendity\Core\Exceptions\ExceptionHandler;
+use Sendity\Http\Middleware\LoggerMiddleware;
 use Sendity\Http\Request;
 use Sendity\Http\Router;
-use Sendity\Http\Middleware\LoggerMiddleware;
+use Throwable;
 
 class Application
 {
@@ -17,15 +19,26 @@ class Application
 
     public function run(): void
     {
-        $middleware = [
-            $this->container->get(LoggerMiddleware::class),
-        ];
+        try {
 
-        $this->pipeline
-            ->send($this->request)
-            ->through($middleware)
-            ->then(function ($request) {
-                $this->router->dispatch($request);
-            });
+            $middleware = [
+                $this->container->get(LoggerMiddleware::class),
+            ];
+
+            $this->pipeline
+                ->send($this->request)
+                ->through($middleware)
+                ->then(function ($request) {
+                    $this->router->dispatch($request);
+                });
+
+        } catch (Throwable $e) {
+
+            $handler = $this->container->get(ExceptionHandler::class);
+
+            $reference = $handler->report($e);
+
+            $handler->render($e, $reference);
+        }
     }
 }

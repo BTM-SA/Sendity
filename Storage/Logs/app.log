@@ -35,3 +35,10 @@
 [2026-07-07 07:41:05] [INFO] GET /apple-touch-icon.png
 [2026-07-07 07:41:05] [INFO] GET /favicon.ico
 [2026-07-07 07:45:42] [INFO] GET /
+[2026-07-08 05:58:51] [INFO] GET /boom
+[2026-07-08 05:58:51] [ERROR] [B8DB667C] RuntimeException: Boom!
+[2026-07-08 06:04:40] [INFO] GET /boom
+[2026-07-08 06:04:46] [INFO] GET /
+[2026-07-08 06:04:46] [INFO] GET /apple-touch-icon-precomposed.png
+[2026-07-08 06:04:46] [INFO] GET /apple-touch-icon.png
+[2026-07-08 06:04:46] [INFO] GET /favicon.ico
