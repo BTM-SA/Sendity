@@ -42,3 +42,11 @@
 [2026-07-08 06:04:46] [INFO] GET /apple-touch-icon-precomposed.png
 [2026-07-08 06:04:46] [INFO] GET /apple-touch-icon.png
 [2026-07-08 06:04:46] [INFO] GET /favicon.ico
+[2026-07-09 06:05:41] [INFO] GET /event-test
+[2026-07-09 06:05:41] [ERROR] [CB8AC44D] Error: Interface "Sendity\Core\Events\Contracts\EventInterface" not found
+[2026-07-09 06:06:30] [INFO] GET /
+[2026-07-09 06:06:30] [INFO] GET /apple-touch-icon-precomposed.png
+[2026-07-09 06:06:30] [INFO] GET /apple-touch-icon.png
+[2026-07-09 06:06:30] [INFO] GET /favicon.ico
+[2026-07-09 07:02:03] [INFO] GET /event-test
+[2026-07-09 07:02:03] [INFO] Mail sent to cedric@example.com with subject "Hello Sendity!"

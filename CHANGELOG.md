@@ -1,5 +1,17 @@
 # Changelog
 
+
+## v0.6
+
+### Added
+* Event Dispatcher
+* Listener Interface
+* Event Interface
+
+
+---
+
+
 ## v0.5
 
 ### Added

@@ -21,14 +21,14 @@ Sendity is a privacy-first email platform built on a lightweight PHP framework d
 - Middleware Pipeline
 - Configuration System
 - Exception Handler
+- Event Dispatcher
 
 ## 🚧 In Progress
 
-- Event Dispatcher
+- Database Layer
 
 ## 📋 Planned
 
-- Database Layer
 - Cache
 - Queue
 - Scheduler
