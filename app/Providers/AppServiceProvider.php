@@ -1,0 +1,47 @@
+<?php
+
+namespace Sendity\Providers;
+
+
+use Sendity\Core\Providers\ServiceProvider;
+use Sendity\Services\Logger;
+use Sendity\Core\Config;
+use Sendity\Core\Exceptions\ExceptionHandler;
+
+class AppServiceProvider extends ServiceProvider
+{
+    public function register(): void
+{
+    $this->container->singleton(
+        Config::class,
+        function () {
+            $config = new Config();
+
+            $config->load(
+                __DIR__ . '/../../config/app.php'
+            );
+
+            $config->load(
+                __DIR__ . '/../../config/mail.php'
+            );
+
+            return $config;
+        }
+    );
+
+    $this->container->bind(
+        Logger::class,
+        fn () => new Logger()
+    );
+
+    $this->container->singleton(
+        ExceptionHandler::class,
+        fn () => new ExceptionHandler()
+    );
+}
+
+    public function boot(): void
+    {
+        //
+    }
+}

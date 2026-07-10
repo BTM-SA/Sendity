@@ -50,3 +50,14 @@
 [2026-07-09 06:06:30] [INFO] GET /favicon.ico
 [2026-07-09 07:02:03] [INFO] GET /event-test
 [2026-07-09 07:02:03] [INFO] Mail sent to cedric@example.com with subject "Hello Sendity!"
+[2026-07-10 04:50:17] [INFO] GET /event-test
+[2026-07-10 04:50:17] [INFO] Mail sent to cedric@example.com with subject "Hello Sendity!"
+[2026-07-10 04:51:31] [INFO] GET /event-test
+[2026-07-10 04:51:31] [INFO] Mail sent to cedric@example.com with subject "Hello Sendity!"
+[2026-07-10 05:21:29] [INFO] GET /event-test
+[2026-07-10 05:21:29] [INFO] Mail sent to cedric@example.com with subject "Hello Sendity!"
+[2026-07-10 05:33:25] [INFO] GET /event-test
+[2026-07-10 05:33:25] [INFO] Mail sent to cedric@example.com with subject "Hello Sendity!"
+[2026-07-10 05:33:34] [INFO] GET /boom
+[2026-07-10 05:36:17] [INFO] GET /boom
+[2026-07-10 05:36:17] [ERROR] [FF70D7A6] RuntimeException: Boom!

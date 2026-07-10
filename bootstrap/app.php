@@ -8,6 +8,8 @@ use Sendity\Services\Logger;
 use Sendity\Core\Exceptions\ExceptionHandler;
 use Sendity\Http\Response;
 use Sendity\Core\Events\EventDispatcher;
+use Sendity\Core\Providers\ProviderLoader;
+use Sendity\Providers\AppServiceProvider;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
@@ -16,29 +18,11 @@ $container = new Container();
 
 // Configuration
 $container->singleton(
-    Config::class,
-    function () {
-        $config = new Config();
-
-        $config->load(
-            __DIR__ . '/../config/app.php'
-        );
-
-        $config->load(
-            __DIR__ . '/../config/mail.php'
-        );
-
-        return $config;
-    }
+    ProviderLoader::class,
+    fn ($container) => new ProviderLoader($container)
 );
 
 // Services
-$container->bind(Logger::class, fn () => new Logger());
-
-$container->singleton(
-    ExceptionHandler::class,
-    fn () => new ExceptionHandler()
-);
 $container->singleton(
     EventDispatcher::class,
     fn ($container) => new EventDispatcher($container)
@@ -49,6 +33,13 @@ $container->singleton(
     fn ($c) => new \Sendity\Http\Router($c)
 );
 
+$providerLoader = $container->get(
+    ProviderLoader::class
+);
+
+$providerLoader->load([
+    AppServiceProvider::class,
+]);
 
 // Shared router instance
 $router = $container->get(\Sendity\Http\Router::class);
@@ -87,6 +78,9 @@ $router->get('/event-test', function () use ($container) {
     );
 
     return 'Event dispatched!';
+});
+$router->get('/boom', function () {
+    throw new RuntimeException('Boom!');
 });
 
 // Run application
