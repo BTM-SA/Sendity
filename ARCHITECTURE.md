@@ -1,11 +1,11 @@
 <div align="center"><img src="https://btm-sa.co.za/F4STMAIL/Logo.png" alt="Sendity_Logo" width="400">
 </div>
 
-# Sendity Framework Architecture Notes
+# Framework Architecture Notes
 
 ## Overview
 
-Sendity is being built as a modular PHP framework with a focus on clear separation of responsibilities, dependency injection, and service-based architecture.
+Sendity is being built as a secure digital delivery platform on top of a modular PHP framework with a focus on clear separation of responsibilities, dependency injection, and service-based architecture.
 
 The framework boot process is designed around three main concepts:
 

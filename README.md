@@ -2,11 +2,16 @@
 </div>
 
 
+# Secure Digital Delivery
+Sendity is being built as a secure digital delivery platform on top of a modular PHP framework.
+
+---
+
 # Sendity Framework
 
-Sendity is a modular PHP framework built around clean architecture principles, dependency injection, service providers, and a structured application lifecycle.
+The Sendity framework is built around clean architecture principles, dependency injection, service providers, and a structured application lifecycle.
 
-The goal of Sendity is to provide a lightweight but extensible foundation for building modern PHP applications while keeping the framework understandable and maintainable.
+The goal of the Sendity Framework is to provide a lightweight but extensible foundation for building modern PHP applications while keeping the framework understandable and maintainable.
 
 ---
 
