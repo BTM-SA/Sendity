@@ -1,3 +1,7 @@
+<div align="center"><img src="https://btm-sa.co.za/F4STMAIL/Logo.png" alt="Sendity_Logo" width="400">
+</div>
+
+
 # Sendity Framework
 
 Sendity is a modular PHP framework built around clean architecture principles, dependency injection, service providers, and a structured application lifecycle.

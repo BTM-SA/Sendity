@@ -1,5 +1,5 @@
-<div 
-
+<div align="center"><img src="https://btm-sa.co.za/F4STMAIL/Logo.png" alt="Sendity_Logo" width="400">
+</div>
 
 # Sendity Framework Architecture Notes
 
