@@ -1,4 +1,7 @@
-# Sendity Roadmap
+<div align="center"><img src="https://btm-sa.co.za/F4STMAIL/Logo.png" alt="Logo" width="400px">
+</div>  
+
+# Roadmap
 
 ## Vision
 
