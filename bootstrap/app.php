@@ -10,7 +10,7 @@ use Sendity\Http\Response;
 use Sendity\Core\Events\EventDispatcher;
 use Sendity\Core\Providers\ProviderLoader;
 use Sendity\Providers\AppServiceProvider;
-
+use Sendity\Providers\RoutingServiceProvider;
 require_once __DIR__ . '/../vendor/autoload.php';
 
 // Container
@@ -25,10 +25,6 @@ $container->singleton(
 // Services
 
 // Router singleton
-$container->singleton(
-    \Sendity\Http\Router::class,
-    fn ($c) => new \Sendity\Http\Router($c)
-);
 
 $providerLoader = $container->get(
     ProviderLoader::class
@@ -36,8 +32,8 @@ $providerLoader = $container->get(
 
 $providerLoader->load([
     AppServiceProvider::class,
+    RoutingServiceProvider::class,
 ]);
-
 // Shared router instance
 $router = $container->get(\Sendity\Http\Router::class);
 

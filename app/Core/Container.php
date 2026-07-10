@@ -8,30 +8,45 @@ class Container
 {
     protected array $bindings = [];
     protected array $instances = [];
-
+public function __construct()
+{
+    $this->instances[self::class] = $this;
+}
     public function bind(string $abstract, callable $factory): void
     {
-        $this->bindings[$abstract] = $factory;
+        $this->bindings[$abstract] = [
+            'factory' => $factory,
+            'singleton' => false,
+        ];
     }
 
     public function singleton(string $abstract, callable $factory): void
     {
-        $this->instances[$abstract] = $factory($this);
+        $this->bindings[$abstract] = [
+            'factory' => $factory,
+            'singleton' => true,
+        ];
     }
 
     public function get(string $abstract)
     {
-        // 1. Return singleton if already created
         if (isset($this->instances[$abstract])) {
             return $this->instances[$abstract];
         }
 
-        // 2. Use manual binding if exists
         if (isset($this->bindings[$abstract])) {
-            return $this->bindings[$abstract]($this);
+
+            $binding = $this->bindings[$abstract];
+
+            $instance = $binding['factory']($this);
+
+            if ($binding['singleton']) {
+                $this->instances[$abstract] = $instance;
+            }
+
+            return $instance;
         }
 
-        // 3. Auto-resolve via reflection
         return $this->build($abstract);
     }
 
@@ -43,7 +58,6 @@ class Container
 
         $reflection = new ReflectionClass($class);
 
-        // If no constructor → just instantiate
         $constructor = $reflection->getConstructor();
 
         if (is_null($constructor)) {
@@ -53,10 +67,13 @@ class Container
         $dependencies = [];
 
         foreach ($constructor->getParameters() as $param) {
+
             $type = $param->getType();
 
             if (!$type) {
-                throw new \Exception("Cannot resolve {$param->getName()} in {$class}");
+                throw new \Exception(
+                    "Cannot resolve {$param->getName()} in {$class}"
+                );
             }
 
             $dependencies[] = $this->get($type->getName());

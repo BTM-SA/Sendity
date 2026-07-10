@@ -7,6 +7,7 @@ use Sendity\Core\Providers\ServiceProvider;
 use Sendity\Services\Logger;
 use Sendity\Core\Config;
 use Sendity\Core\Exceptions\ExceptionHandler;
+use Sendity\Core\Events\EventDispatcher;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -38,6 +39,10 @@ class AppServiceProvider extends ServiceProvider
         ExceptionHandler::class,
         fn () => new ExceptionHandler()
     );
+        $this->container->singleton(
+    EventDispatcher::class,
+    fn ($container) => new EventDispatcher($container)
+);
 }
 
     public function boot(): void
