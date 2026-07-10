@@ -131,3 +131,12 @@
 [2026-07-10 14:36:59] [INFO] Mail sent to cedric@example.com with subject "Hello Sendity!"
 [2026-07-10 14:38:10] [INFO] GET /event-test
 [2026-07-10 14:38:10] [INFO] Mail sent to cedric@example.com with subject "Hello Sendity!"
+[2026-07-10 14:49:07] [INFO] GET /event-test
+[2026-07-10 14:49:07] [INFO] Mail sent to cedric@example.com with subject "Hello Sendity!"
+[2026-07-10 14:54:18] [INFO] GET /event-test
+[2026-07-10 14:54:18] [INFO] Mail sent to cedric@example.com with subject "Hello Sendity!"
+[2026-07-10 14:57:22] [INFO] GET /event-test
+[2026-07-10 14:57:22] [ERROR] [FCB61AB7] Error: Call to a member function get() on null
+[2026-07-10 14:58:02] [INFO] GET /health
+[2026-07-10 14:58:13] [INFO] GET /
+[2026-07-10 15:00:35] [INFO] GET /

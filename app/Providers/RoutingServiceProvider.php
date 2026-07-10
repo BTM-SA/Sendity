@@ -4,6 +4,7 @@ namespace Sendity\Providers;
 
 use Sendity\Core\Providers\ServiceProvider;
 use Sendity\Http\Router;
+use Sendity\Routing\RouteLoader;
 
 class RoutingServiceProvider extends ServiceProvider
 {
@@ -17,9 +18,8 @@ class RoutingServiceProvider extends ServiceProvider
 
     public function boot(): void
 {
-    $router = $this->container->get(Router::class);
-    $container = $this->container;
+    $loader = $this->container->get(RouteLoader::class);
 
-    require __DIR__ . '/../../routes/web.php';
+    $loader->loadWebRoutes();
 }
 }

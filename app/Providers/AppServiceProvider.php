@@ -8,6 +8,7 @@ use Sendity\Services\Logger;
 use Sendity\Core\Config;
 use Sendity\Core\Exceptions\ExceptionHandler;
 use Sendity\Core\Events\EventDispatcher;
+use Sendity\Routing\RouteLoader;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -42,6 +43,13 @@ class AppServiceProvider extends ServiceProvider
         $this->container->singleton(
     EventDispatcher::class,
     fn ($container) => new EventDispatcher($container)
+);
+        $this->container->singleton(
+    RouteLoader::class,
+    fn ($container) => new RouteLoader(
+        $container->get(\Sendity\Http\Router::class),
+        $container
+    )
 );
 }
 
