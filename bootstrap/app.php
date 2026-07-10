@@ -23,10 +23,7 @@ $container->singleton(
 );
 
 // Services
-$container->singleton(
-    EventDispatcher::class,
-    fn ($container) => new EventDispatcher($container)
-);
+
 // Router singleton
 $container->singleton(
     \Sendity\Http\Router::class,

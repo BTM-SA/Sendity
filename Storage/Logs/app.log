@@ -61,3 +61,8 @@
 [2026-07-10 05:33:34] [INFO] GET /boom
 [2026-07-10 05:36:17] [INFO] GET /boom
 [2026-07-10 05:36:17] [ERROR] [FF70D7A6] RuntimeException: Boom!
+[2026-07-10 05:39:15] [INFO] GET /health
+[2026-07-10 05:54:07] [INFO] GET /boom
+[2026-07-10 05:54:07] [ERROR] [D878A135] RuntimeException: Boom!
+[2026-07-10 05:54:14] [INFO] GET /event-test
+[2026-07-10 05:54:14] [INFO] Mail sent to cedric@example.com with subject "Hello Sendity!"
