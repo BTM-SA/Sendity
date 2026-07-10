@@ -16,6 +16,10 @@ class RoutingServiceProvider extends ServiceProvider
     }
 
     public function boot(): void
-    {
-    }
+{
+    $router = $this->container->get(Router::class);
+    $container = $this->container;
+
+    require __DIR__ . '/../../routes/web.php';
+}
 }

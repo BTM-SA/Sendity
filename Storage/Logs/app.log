@@ -117,3 +117,17 @@
 [2026-07-10 12:54:23] [INFO] GET /apple-touch-icon-precomposed.png
 [2026-07-10 12:54:23] [INFO] GET /apple-touch-icon.png
 [2026-07-10 12:54:23] [INFO] GET /favicon.ico
+[2026-07-10 14:29:48] [INFO] GET /
+[2026-07-10 14:29:48] [INFO] GET /apple-touch-icon-precomposed.png
+[2026-07-10 14:29:48] [INFO] GET /apple-touch-icon.png
+[2026-07-10 14:29:48] [INFO] GET /favicon.ico
+[2026-07-10 14:30:33] [INFO] GET /
+[2026-07-10 14:32:07] [INFO] GET /
+[2026-07-10 14:32:30] [INFO] GET /health
+[2026-07-10 14:32:36] [INFO] GET /event
+[2026-07-10 14:32:47] [INFO] GET /event-test
+[2026-07-10 14:32:47] [INFO] Mail sent to cedric@example.com with subject "Hello Sendity!"
+[2026-07-10 14:36:59] [INFO] GET /event-test
+[2026-07-10 14:36:59] [INFO] Mail sent to cedric@example.com with subject "Hello Sendity!"
+[2026-07-10 14:38:10] [INFO] GET /event-test
+[2026-07-10 14:38:10] [INFO] Mail sent to cedric@example.com with subject "Hello Sendity!"
