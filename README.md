@@ -2,341 +2,76 @@
 </div>
 
 
-# Secure Digital Delivery
-Sendity is being built as a secure digital delivery platform on top of a modular PHP framework.
+# Sendity
+
+> An email platform built around trust, control, and choice.
+
+Powerful when you need it. Invisible when you don't.
 
 ---
 
-# Sendity Framework
+# Why Sendity Exists
 
-The Sendity framework is built around clean architecture principles, dependency injection, service providers, and a structured application lifecycle.
 
-The goal of the Sendity Framework is to provide a lightweight but extensible foundation for building modern PHP applications while keeping the framework understandable and maintainable.
 
----
+## Our Philosophy
 
-# Current Features
+- The sender remains in control.
+- Privacy and transparency matter.
+- Security should be honest and practical.
+- Complexity should stay out of the way.
 
-## Dependency Injection Container
+Sendity is built around a simple idea:
 
-Sendity includes its own service container supporting:
+Communication should be easy by default, while still giving users meaningful control when their message requires more.
 
-* Service bindings
-* Singleton services
-* Automatic dependency resolution
-* Shared application lifecycle management
-
-The container manages framework dependencies and ensures services receive the correct application context.
 
 ---
 
-## Service Provider Architecture
+## Communication Policies
 
-Framework services are organised through service providers.
-
-Current providers include:
-
-```
-app/
-└── Providers/
-    ├── AppServiceProvider.php
-    └── RoutingServiceProvider.php
-```
-
-Providers allow services to be registered and booted in a modular way.
-
-The framework uses a ProviderLoader to manage the provider lifecycle:
-
-```
-ProviderLoader
-
-    ↓
-
-register()
-
-    ↓
-
-boot()
-```
-
-Framework services are now registered through the ProviderLoader, establishing the foundation for modular service registration.
+Sendity allows senders to define how messages are handled.
 
 ---
 
-# Application Lifecycle
+## Features
 
-The application boot process follows a structured flow:
+- Email communication
+- Templates
+- Auditing
+- Open tracking
+- Link tracking
+- Controlled document access
 
-```
-public/index.php
-
-        ↓
-
-bootstrap/app.php
-
-        ↓
-
-Container
-
-        ↓
-
-ProviderLoader
-
-        ↓
-
-Application
-
-        ↓
-
-Request Pipeline
-
-        ↓
-
-Router
-```
-
-The bootstrap layer is responsible only for preparing the framework.
-
-Application functionality is separated into services and providers.
 
 ---
 
-# Routing System
+## Self-hosted and Cloud
 
-Sendity includes a dedicated routing layer.
-
-Routes are stored separately from the framework bootstrap:
-
-```
-routes/
-
-    web.php
-```
-
-Example:
-
-```php
-$router->get('/', [HomeController::class, 'index']);
-```
-
-Routing responsibilities are separated:
-
-```
-RoutingServiceProvider
-
-        ↓
-
-RouteLoader
-
-        ↓
-
-routes/web.php
-```
-
-This creates a foundation for future support of:
-
-* API routes
-* Admin routes
-* Route groups
-* Middleware-based routing
-* Route caching
+Same product, different hosting model.
 
 ---
 
-# Request Handling
+## Architecture
 
-Requests flow through the application pipeline:
+High-level overview.
 
-```
-HTTP Request
-
-      ↓
-
-Request Object
-
-      ↓
-
-Middleware Pipeline
-
-      ↓
-
-Router Dispatch
-
-      ↓
-
-Controller / Response
-```
+See:
+- Architecture documentation
+- ADRs
 
 ---
 
-# Exception Handling
+## Getting Started
 
-Sendity includes a central exception handling system.
-
-Exceptions are captured by the application lifecycle and processed through the framework exception handler.
-
-This provides a consistent location for:
-
-* Error reporting
-* Logging
-* Exception rendering
+(Installation and first launch.)
 
 ---
 
-# Events
+## Contributing
 
-Sendity includes an event system supporting:
-
-* Events
-* Listeners
-* Dispatching
-
-Example:
-
-```php
-$events->dispatch(
-    new MailSent(
-        'user@example.com',
-        'Hello Sendity!'
-    )
-);
-```
-
-This allows framework features to communicate without tightly coupling components.
+Find out how you can participate.
 
 ---
 
-# Project Structure
-
-Current structure:
-
-```
-Sendity/
-
-├── app/
-
-│   ├── Core/
-
-│   ├── Controllers/
-
-│   ├── Events/
-
-│   ├── Listeners/
-
-│   ├── Providers/
-
-│   ├── Routing/
-
-│   └── Services/
-
-│
-
-├── bootstrap/
-
-│   └── app.php
-
-│
-
-├── config/
-
-│
-
-├── routes/
-
-│   └── web.php
-
-│
-
-├── public/
-
-│   └── index.php
-
-│
-
-└── vendor/
-```
-
----
-
-# Design Principles
-
-Sendity follows several core principles:
-
-## Separation of Responsibilities
-
-Each component has a clear role:
-
-* Container manages dependencies
-* Providers register services
-* RouteLoader loads routes
-* Router handles matching requests
-* Application controls execution flow
-
----
-
-## Shared Application Lifecycle
-
-The container itself is part of the framework lifecycle.
-
-The container now manages its own lifecycle by binding itself as a singleton, ensuring providers and services receive the shared application container instance.
-
-This prevents accidental creation of isolated framework instances.
-
----
-
-## Modular Growth
-
-The architecture is designed to grow without rewriting the foundation.
-
-Future areas include:
-
-* Authentication
-* Database layer
-* ORM
-* CLI tools
-* Queues
-* Scheduling
-* Package system
-* Middleware groups
-* Configuration caching
-
----
-
-# Development Status
-
-Sendity is currently under active development.
-
-Completed foundation:
-
-✅ Dependency Injection Container
-✅ Singleton lifecycle management
-✅ Service Providers
-✅ ProviderLoader
-✅ Router
-✅ Request handling
-✅ Response handling
-✅ Middleware pipeline
-✅ Exception handling
-✅ Event system
-✅ RouteLoader architecture
-
----
-
-# Documentation
-
-Detailed architecture notes are maintained separately and cover:
-
-* Framework lifecycle
-* Container design
-* Provider architecture
-* Routing architecture
-* Future development plans
-
----
-
-# License
-
-License information will be added as the project develops.
-
-```
-```
+## License
