@@ -10,9 +10,32 @@ Powerful when you need it. Invisible when you don't.
 
 ---
 
-# Why Sendity Exists
 
+## Why Sendity Exists
 
+Sendity began with a simple question:
+
+**What actually happens after you press "Send"?**
+
+For something as fundamental as email, the answer is often surprisingly unclear.
+
+Was the message delivered?
+
+Was it opened?
+
+Could the recipient access the attachment?
+
+Did their email client silently remove or block part of the message?
+
+Traditional email platforms are designed to deliver messages reliably, but they often make decisions on behalf of the sender and provide little visibility into what happens once a message leaves the outbox.
+
+Sendity was created to explore a different approach.
+
+An email platform where the sender can choose how a message is handled, where communication policies can be applied when needed, and where modern communication is supported by greater transparency and control—without making everyday email more complicated.
+
+Because sending an email shouldn't feel like dropping a letter into a mailbox and simply hoping for the best.
+
+---
 
 ## Our Philosophy
 
