@@ -3,8 +3,6 @@
 namespace Sendity\Http;
 
 use Sendity\Core\Container;
-use Sendity\Http\Request;
-use Sendity\Http\Response;
 
 class Router
 {
@@ -12,7 +10,8 @@ class Router
 
     public function __construct(
         protected Container $container
-    ) {}
+    ) {
+    }
 
     public function get(string $path, callable|array $handler): void
     {
@@ -36,12 +35,21 @@ class Router
 
     protected function convertPathToRegex(string $path): string
     {
-        return "#^" . preg_replace('#\{([\w]+)\}#', '([^/]+)', $path) . "$#";
+        return "#^" . preg_replace(
+            '#\{([\w]+)\}#',
+            '([^/]+)',
+            $path
+        ) . "$#";
     }
 
     protected function extractParameterNames(string $path): array
     {
-        preg_match_all('#\{([\w]+)\}#', $path, $matches);
+        preg_match_all(
+            '#\{([\w]+)\}#',
+            $path,
+            $matches
+        );
+
         return $matches[1];
     }
 
@@ -65,25 +73,38 @@ class Router
                 );
 
                 if ($result instanceof Response) {
+
                     $result->send();
+
                     return;
                 }
 
-                echo $result;
+                if ($result !== null) {
+
+                    echo $result;
+
+                    return;
+                }
+
                 return;
             }
         }
 
         http_response_code(404);
+
         echo "404 Not Found";
     }
 
-    protected function executeWithParams(callable|array $handler, array $params, array $values)
-    {
+    protected function executeWithParams(
+        callable|array $handler,
+        array $params,
+        array $values
+    ) {
         $args = array_combine($params, $values) ?: [];
 
         // Controller action: [Class, method]
         if (is_array($handler)) {
+
             [$class, $method] = $handler;
 
             $controller = $this->container->get($class);

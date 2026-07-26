@@ -10,13 +10,13 @@ use Sendity\Services\Logger;
 class LogMailSent implements ListenerInterface
 {
     public function handle(EventInterface $event): void
-    {
-        /** @var MailSent $event */
+{
+    /** @var MailSent $event */
 
-        Logger::info(sprintf(
-            'Mail sent to %s with subject "%s"',
-            $event->recipient,
-            $event->subject
-        ));
-    }
+    Logger::info(sprintf(
+        'Mail sent to %s with subject "%s"',
+        $event->message->getTo()[0]->getEmail(),
+        $event->message->getSubject()
+    ));
+}
 }

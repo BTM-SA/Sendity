@@ -1,7 +1,3 @@
-<div align="center"><img src="https://btm-sa.co.za/F4STMAIL/Logo.png" alt="Sendity_Logo" width="400">
-</div>
-
-
 # Architecture Decision Record
 
 ### ADR-0003: Service Provider Lifecycle
@@ -11,7 +7,7 @@
 ---
 
 
-# Context
+## Context
 
 As Sendity grew, framework services needed a structured way to register themselves with the application container.
 
@@ -21,7 +17,7 @@ A provider-based system was introduced to allow framework components to register
 
 ---
 
-# Problem
+## Problem
 
 Framework services have two different responsibilities:
 
@@ -47,11 +43,11 @@ The framework needs a predictable order.
 
 ---
 
-# Decision
+## Decision
 
 Service providers will have two lifecycle methods:
 
-## register()
+### register()
 
 Used only for registering services into the container.
 
@@ -67,7 +63,7 @@ public function register(): void
 }
 ```
 
-## boot()
+### boot()
 
 Used for actions that require already registered services.
 
@@ -98,7 +94,7 @@ boot()
 
 ---
 
-# Reasoning
+## Reasoning
 
 Separating registration and booting provides:
 
@@ -111,24 +107,25 @@ A provider can declare what services it provides without mixing that responsibil
 
 ---
 
-# Consequences
+## Consequences
 
-## Positive
+### Positive
 
 * Framework initialization becomes predictable.
 * Services can depend on other registered services.
 * Providers remain small and focused.
 * Third-party packages can integrate through providers.
 
-## Trade-offs
+### Trade-offs
 
 * Developers must understand the difference between registration and booting.
 * Some simple services may require more structure than a direct instantiation.
 
 ---
 
-# Related Decisions
+## Related Decisions
 
 * ADR-0001: Framework Development Principles
 * ADR-0002: Container Self Binding
 * ADR-0004: ProviderLoader Architecture
+* ADR-0005: Sendity Framework Boundary

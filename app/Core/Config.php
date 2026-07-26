@@ -6,12 +6,9 @@ class Config
 {
     protected array $items = [];
 
-    public function load(string $path): void
+    public function load(string $name, string $path): void
     {
-        $this->items = array_merge(
-            $this->items,
-            require $path
-        );
+        $this->items[$name] = require $path;
     }
 
     public function get(string $key, mixed $default = null): mixed

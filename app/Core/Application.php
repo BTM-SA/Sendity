@@ -15,7 +15,8 @@ class Application
         protected Request $request,
         protected Router $router,
         protected Pipeline $pipeline
-    ) {}
+    ) {
+    }
 
     public function run(): void
     {

@@ -1,7 +1,3 @@
-<div align="center"><img src="https://btm-sa.co.za/F4STMAIL/Logo.png" alt="Sendity_Logo" width="400">
-</div>
-
-
 # Architecture Decision Record
 
 ### ADR-0004: ProviderLoader Architecture
@@ -12,7 +8,7 @@
 ---
 
 
-# Context
+## Context
 
 During early development, framework services were registered directly inside `bootstrap/app.php`.
 
@@ -22,7 +18,7 @@ This mixed application bootstrapping with framework initialization.
 
 ---
 
-# Problem
+## Problem
 
 The bootstrap file should prepare the application, not contain the logic for loading framework providers.
 
@@ -32,9 +28,9 @@ Without a dedicated loader, the provider lifecycle would become scattered throug
 
 ---
 
-# Decision
+## Decision
 
-Introduce a dedicated `ProviderLoader` responsible for managing the complete provider lifecycle.
+Introduce a dedicated `ProviderLoader` responsible for orchestrating provider lifecycle execution.
 
 The `ProviderLoader` is responsible for:
 
@@ -58,7 +54,7 @@ The bootstrap process is responsible only for invoking the `ProviderLoader`.
 
 ---
 
-# Reasoning
+## Reasoning
 
 Separating provider loading from application bootstrapping creates a cleaner architecture.
 
@@ -74,25 +70,26 @@ The `ProviderLoader` becomes the single authority responsible for provider execu
 
 ---
 
-# Consequences
+## Consequences
 
-## Positive
+### Positive
 
 * `bootstrap/app.php` remains focused on preparing the application.
 * Providers follow a consistent lifecycle.
 * New framework features can be introduced by simply registering additional providers.
 * Third-party packages can integrate through the same provider mechanism.
 
-## Trade-offs
+### Trade-offs
 
 * Introduces an additional framework component.
 * Developers must understand the provider lifecycle when extending the framework.
 
 ---
 
-# Related Decisions
+## Related Decisions
 
 * ADR-0001: Framework Development Principles
 * ADR-0002: Container Self Binding
 * ADR-0003: Service Provider Lifecycle
-* ADR-0005: Route Facade
+* ADR-0005: Sendity Framework Boundary
+

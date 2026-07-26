@@ -1,16 +1,11 @@
-<div align="center"><img src="https://btm-sa.co.za/F4STMAIL/Logo.png" alt="Sendity_Logo" width="400">
-</div>
+# Architecture Decision Record
 
+### ADR-0005: Sendity and Framework Boundary
 
-# ADR-0005: Sendity and Framework Boundary
+> **Status:** Accepted <br>
+> **Date:** 2026-07-14
 
-## Status
-
-Accepted
-
-## Date
-
-2026-07-14
+---
 
 ## Context
 

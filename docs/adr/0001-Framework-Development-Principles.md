@@ -1,7 +1,3 @@
-<div align="center"><img src="https://btm-sa.co.za/F4STMAIL/Logo.png" alt="Sendity_Logo" width="400">
-</div>
-
-
 # Architecture Decision Record
 
 ### ADR-0001: Framework Development Principles
@@ -10,7 +6,7 @@
 > **Date:** 2026-07-11
 ---
 
-# Context
+## Context
 
 As Sendity grows, architectural consistency becomes increasingly important.
 
@@ -20,11 +16,11 @@ This ADR establishes the engineering principles that guide all future architectu
 
 ---
 
-# Decision
+## Decision
 
 The Sendity framework will follow the principles below.
 
-## 1. Clarity Over Cleverness
+### 1. Clarity Over Cleverness
 
 Framework code should be easy to read and understand.
 
@@ -34,7 +30,7 @@ Code should explain itself whenever possible.
 
 ---
 
-## 2. Explicit Dependencies
+### 2. Explicit Dependencies
 
 Classes should receive their dependencies through constructor injection.
 
@@ -44,7 +40,7 @@ Every class should clearly express what it requires to operate.
 
 ---
 
-## 3. Single Responsibility
+### 3. Single Responsibility
 
 Each class should have one well-defined responsibility.
 
@@ -59,7 +55,7 @@ When responsibilities begin to overlap, they should be separated into dedicated 
 
 ---
 
-## 4. The Container Is the Source of Truth
+### 4. The Container Is the Source of Truth
 
 Shared framework services must be resolved through the application container.
 
@@ -69,7 +65,7 @@ Framework services should not create independent instances of other shared frame
 
 ---
 
-## 5. Providers Register Services
+### 5. Providers Register Services
 
 Service providers exist to register and bootstrap framework services.
 
@@ -79,7 +75,7 @@ Complex behavior should be implemented inside dedicated service classes.
 
 ---
 
-## 6. Separation of Concerns
+### 6. Separation of Concerns
 
 Framework responsibilities should remain clearly separated.
 
@@ -95,7 +91,7 @@ Each layer should remain focused on its own responsibility.
 
 ---
 
-## 7. Incremental Development
+### 7. Incremental Development
 
 The framework will evolve through small, well-tested improvements.
 
@@ -105,7 +101,7 @@ Each completed feature should leave the framework in a better state than before.
 
 ---
 
-## 8. Documentation Is Part of Development
+### 8. Documentation Is Part of Development
 
 Documentation is considered part of the implementation.
 
@@ -119,7 +115,7 @@ Documentation should evolve alongside the framework.
 
 ---
 
-## 9. Architectural Decisions Are Recorded
+### 9. Architectural Decisions Are Recorded
 
 Every significant architectural decision should be documented as an Architecture Decision Record (ADR).
 
@@ -134,7 +130,7 @@ Architectural knowledge should never exist only in commit history or developer m
 
 ---
 
-## 10. Developer Experience Matters
+### 10. Developer Experience Matters
 
 Internal architecture should support an enjoyable developer experience.
 
@@ -144,7 +140,7 @@ Developer convenience should never come at the expense of architectural clarity.
 
 ---
 
-# Consequences
+## Consequences
 
 Following these principles should result in a framework that is:
 

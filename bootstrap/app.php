@@ -9,7 +9,11 @@ use Sendity\Core\Events\EventDispatcher;
 use Sendity\Core\Providers\ProviderLoader;
 use Sendity\Providers\AppServiceProvider;
 use Sendity\Providers\RoutingServiceProvider;
+use Dotenv\Dotenv;
 require_once __DIR__ . '/../vendor/autoload.php';
+$dotenv = Dotenv::createImmutable(dirname(__DIR__));
+$dotenv->safeLoad();
+
 
 // Container
 $container = new Container();
@@ -28,9 +32,8 @@ $providerLoader = $container->get(
     ProviderLoader::class
 );
 
-$providerLoader->load([
-    AppServiceProvider::class,
-    RoutingServiceProvider::class,
-]);
+$providers = require __DIR__ . '/../config/providers.php';
+
+$providerLoader->load($providers);
 // Run application
 return $container->get(Application::class);

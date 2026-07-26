@@ -1,18 +1,14 @@
-<div align="center"><img src="https://btm-sa.co.za/F4STMAIL/Logo.png" alt="Sendity_Logo" width="400">
-</div>
-
-
 # Architecture Decision Record
 
 ### ADR-0002: Container Self Binding
 
 > **Status:** Accepted <br>
 > **Date:** 2026-07-11
+
 ---
 
 
-
-# Context
+## Context
 
 Sendity uses a dependency injection container to manage framework services and their dependencies.
 
@@ -24,7 +20,7 @@ The result was that routes were successfully registered during bootstrap, but th
 
 ---
 
-# Problem
+## Problem
 
 The application lifecycle depended on a shared Container instance.
 
@@ -47,7 +43,7 @@ Application Container
 
 ---
 
-# Decision
+## Decision
 
 The Container will register itself as a singleton within the application lifecycle.
 
@@ -57,7 +53,7 @@ The Container becomes the source of truth for dependency resolution.
 
 ---
 
-# Reasoning
+## Reasoning
 
 A framework container manages the lifecycle of all shared services.
 
@@ -71,24 +67,25 @@ By making the Container a singleton, all framework components operate within the
 
 ---
 
-# Consequences
+## Consequences
 
-## Positive
+### Positive
 
 * Services share the same application lifecycle.
 * Singleton services behave correctly.
 * Providers, loaders, and the application resolve dependencies consistently.
 * Debugging becomes easier because object identity is predictable.
 
-## Trade-offs
+### Trade-offs
 
 * The container becomes a central framework service.
 * Care must be taken to avoid excessive dependence on the container from application code.
 
 ---
 
-# Related Decisions
+## Related Decisions
 
 * ADR-0001: Framework Development Principles
 * ADR-0003: Service Provider Lifecycle
 * ADR-0004: ProviderLoader Architecture
+* ADR-0005: Sendity Framework Boundary

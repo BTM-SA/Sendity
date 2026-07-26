@@ -1,6 +1,3 @@
-<div align="center"><img src="https://btm-sa.co.za/F4STMAIL/Logo.png" alt="Sendity_Logo" width="400">
-</div>
-
 # Framework Architecture Notes
 
 ## Overview
@@ -138,7 +135,18 @@ Framework services are organised through service providers.
 
 Providers allow Sendity to register framework components in a modular way.
 
-Current providers:
+The ProviderLoader controls the loading process.
+
+### Framework provider infrastructure:
+
+```
+app/Core/Providers/
+
+    ServiceProvider.php
+
+    ProviderLoader.php
+```
+### Application providers infrastructure:
 
 ```
 app/Providers/
@@ -146,11 +154,41 @@ app/Providers/
     AppServiceProvider.php
 
     RoutingServiceProvider.php
+
+    EventServiceProvider.php
+
+    MailServiceProvider.php
 ```
 
-The ProviderLoader controls the loading process.
+
 
 ---
+
+## Framework and Application Provider Separation
+
+Sendity separates provider infrastructure from application providers.
+
+Framework provider infrastructure is responsible for implementing the provider system itself.
+
+Examples:
+
+* ServiceProvider
+* ProviderLoader
+
+Application providers are responsible for registering Sendity services.
+
+Examples:
+
+* MailServiceProvider
+* EventServiceProvider
+* RoutingServiceProvider
+
+This separation keeps framework internals independent from application configuration.
+
+See ADR-0006: Separation of Framework and Application Providers.
+
+---
+
 
 # ProviderLoader
 
@@ -224,11 +262,37 @@ AppServiceProvider
 
     ├── Logger
 
-    ├── ExceptionHandler
+    └── ExceptionHandler
 
-    ├── EventDispatcher
+
+EventServiceProvider
+
+    |
+
+    └── EventDispatcher
+
+
+RoutingServiceProvider
+
+    |
+
+    ├── Router
 
     └── RouteLoader
+
+
+MailServiceProvider
+
+    |
+
+    └── MailerInterface
+
+            |
+
+            ▼
+
+      SmtpTransport
+      
 ```
 
 ---

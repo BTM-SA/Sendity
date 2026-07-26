@@ -40,14 +40,14 @@ class Response
         return $this;
     }
 
-    public function send(): void
-    {
-        http_response_code($this->status);
+   public function send(): void
+{
+    http_response_code($this->status);
 
-        foreach ($this->headers as $key => $value) {
-            header("{$key}: {$value}");
-        }
-
-        echo $this->content;
+    foreach ($this->headers as $key => $value) {
+        header("{$key}: {$value}");
     }
+
+    echo $this->content;
+}
 }

@@ -19,6 +19,7 @@ $router->get('/api/status', function () {
         'app' => 'Sendity'
     ]);
 });
+$router->get('/send-test', [HomeController::class, 'sendTest']);
 
 $router->get('/user/{id}', function ($id) {
     return "User ID: {$id}";

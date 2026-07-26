@@ -1,142 +1,26 @@
-[GET] /user/123
-[GET] /user/123
-[GET] /user/123
-[2026-07-06 11:28:58] [INFO] GET /user/123
-[2026-07-06 11:35:04] [INFO] GET /user/123
-[2026-07-06 11:51:28] [INFO] GET /
-[2026-07-06 11:52:25] [INFO] GET /
-[2026-07-06 11:53:48] [INFO] GET /
-[2026-07-06 12:04:02] [INFO] GET /
-[2026-07-06 13:27:42] [INFO] GET /
-[2026-07-06 13:27:42] [INFO] GET /apple-touch-icon-precomposed.png
-[2026-07-06 13:27:42] [INFO] GET /apple-touch-icon.png
-[2026-07-06 13:27:42] [INFO] GET /favicon.ico
-[2026-07-06 13:27:50] [INFO] GET /health
-[2026-07-06 13:28:57] [INFO] GET /user/123
-[2026-07-06 13:31:35] [INFO] GET /user/123
-[2026-07-06 13:31:47] [INFO] GET /user/123
-[2026-07-06 13:31:52] [INFO] GET /
-[2026-07-06 13:31:58] [INFO] GET /
-[2026-07-06 13:32:15] [INFO] GET /
-[2026-07-06 13:32:33] [INFO] GET /
-[2026-07-06 13:33:37] [INFO] GET /health
-[2026-07-06 13:33:52] [INFO] GET /
-[2026-07-06 13:36:49] [INFO] GET /
-[2026-07-06 13:43:12] [INFO] GET /
-[2026-07-06 13:43:27] [INFO] GET /
-[2026-07-06 13:43:33] [INFO] GET /health
-[2026-07-06 13:44:41] [INFO] GET /user/123
-[2026-07-06 13:58:01] [INFO] GET /user/123
-[2026-07-06 17:55:41] [INFO] GET /user/123
-[2026-07-07 07:16:55] [INFO] GET /user/123
-[2026-07-07 07:40:39] [INFO] GET /user/123
-[2026-07-07 07:41:05] [INFO] GET /
-[2026-07-07 07:41:05] [INFO] GET /apple-touch-icon-precomposed.png
-[2026-07-07 07:41:05] [INFO] GET /apple-touch-icon.png
-[2026-07-07 07:41:05] [INFO] GET /favicon.ico
-[2026-07-07 07:45:42] [INFO] GET /
-[2026-07-08 05:58:51] [INFO] GET /boom
-[2026-07-08 05:58:51] [ERROR] [B8DB667C] RuntimeException: Boom!
-[2026-07-08 06:04:40] [INFO] GET /boom
-[2026-07-08 06:04:46] [INFO] GET /
-[2026-07-08 06:04:46] [INFO] GET /apple-touch-icon-precomposed.png
-[2026-07-08 06:04:46] [INFO] GET /apple-touch-icon.png
-[2026-07-08 06:04:46] [INFO] GET /favicon.ico
-[2026-07-09 06:05:41] [INFO] GET /event-test
-[2026-07-09 06:05:41] [ERROR] [CB8AC44D] Error: Interface "Sendity\Core\Events\Contracts\EventInterface" not found
-[2026-07-09 06:06:30] [INFO] GET /
-[2026-07-09 06:06:30] [INFO] GET /apple-touch-icon-precomposed.png
-[2026-07-09 06:06:30] [INFO] GET /apple-touch-icon.png
-[2026-07-09 06:06:30] [INFO] GET /favicon.ico
-[2026-07-09 07:02:03] [INFO] GET /event-test
-[2026-07-09 07:02:03] [INFO] Mail sent to cedric@example.com with subject "Hello Sendity!"
-[2026-07-10 04:50:17] [INFO] GET /event-test
-[2026-07-10 04:50:17] [INFO] Mail sent to cedric@example.com with subject "Hello Sendity!"
-[2026-07-10 04:51:31] [INFO] GET /event-test
-[2026-07-10 04:51:31] [INFO] Mail sent to cedric@example.com with subject "Hello Sendity!"
-[2026-07-10 05:21:29] [INFO] GET /event-test
-[2026-07-10 05:21:29] [INFO] Mail sent to cedric@example.com with subject "Hello Sendity!"
-[2026-07-10 05:33:25] [INFO] GET /event-test
-[2026-07-10 05:33:25] [INFO] Mail sent to cedric@example.com with subject "Hello Sendity!"
-[2026-07-10 05:33:34] [INFO] GET /boom
-[2026-07-10 05:36:17] [INFO] GET /boom
-[2026-07-10 05:36:17] [ERROR] [FF70D7A6] RuntimeException: Boom!
-[2026-07-10 05:39:15] [INFO] GET /health
-[2026-07-10 05:54:07] [INFO] GET /boom
-[2026-07-10 05:54:07] [ERROR] [D878A135] RuntimeException: Boom!
-[2026-07-10 05:54:14] [INFO] GET /event-test
-[2026-07-10 05:54:14] [INFO] Mail sent to cedric@example.com with subject "Hello Sendity!"
-[2026-07-10 06:29:09] [INFO] GET /event-test
-[2026-07-10 06:29:43] [INFO] GET /event-test
-[2026-07-10 06:29:49] [INFO] GET /health
-[2026-07-10 06:30:24] [INFO] GET /
-[2026-07-10 06:30:24] [INFO] GET /apple-touch-icon-precomposed.png
-[2026-07-10 06:30:24] [INFO] GET /apple-touch-icon.png
-[2026-07-10 06:30:24] [INFO] GET /favicon.ico
-[2026-07-10 06:31:23] [INFO] GET /
-[2026-07-10 07:04:34] [INFO] GET /
-[2026-07-10 07:13:35] [INFO] GET /event-test
-[2026-07-10 07:33:01] [INFO] GET /
-[2026-07-10 07:33:01] [INFO] GET /apple-touch-icon-precomposed.png
-[2026-07-10 07:33:01] [INFO] GET /apple-touch-icon.png
-[2026-07-10 07:33:01] [INFO] GET /favicon.ico
-[2026-07-10 07:33:26] [INFO] GET /
-[2026-07-10 07:33:45] [INFO] GET /
-[2026-07-10 07:33:46] [INFO] GET /
-[2026-07-10 10:13:01] [INFO] GET /
-[2026-07-10 10:13:01] [INFO] GET /apple-touch-icon-precomposed.png
-[2026-07-10 10:13:01] [INFO] GET /apple-touch-icon.png
-[2026-07-10 10:13:01] [INFO] GET /favicon.ico
-[2026-07-10 10:13:09] [INFO] GET /
-[2026-07-10 10:13:14] [INFO] GET /
-[2026-07-10 10:57:23] [INFO] GET /
-[2026-07-10 10:57:27] [INFO] GET /
-[2026-07-10 10:59:37] [INFO] GET /
-[2026-07-10 11:02:04] [INFO] GET /
-[2026-07-10 11:02:15] [INFO] GET /
-[2026-07-10 11:06:10] [INFO] GET /
-[2026-07-10 11:06:38] [INFO] GET /
-[2026-07-10 11:08:23] [INFO] GET /
-[2026-07-10 11:11:37] [INFO] GET /
-[2026-07-10 11:11:39] [INFO] GET /
-[2026-07-10 11:14:31] [INFO] GET /
-[2026-07-10 11:14:31] [INFO] GET /apple-touch-icon-precomposed.png
-[2026-07-10 11:14:31] [INFO] GET /apple-touch-icon.png
-[2026-07-10 11:14:31] [INFO] GET /favicon.ico
-[2026-07-10 11:15:41] [INFO] GET /
-[2026-07-10 11:15:41] [INFO] GET /
-[2026-07-10 11:15:42] [INFO] GET /
-[2026-07-10 11:17:11] [INFO] GET /
-[2026-07-10 11:20:16] [INFO] GET /
-[2026-07-10 11:26:05] [INFO] GET /
-[2026-07-10 11:26:48] [INFO] GET /
-[2026-07-10 11:42:53] [INFO] GET /
-[2026-07-10 11:45:14] [INFO] GET /
-[2026-07-10 11:49:20] [INFO] GET /
-[2026-07-10 12:54:23] [INFO] GET /
-[2026-07-10 12:54:23] [INFO] GET /apple-touch-icon-precomposed.png
-[2026-07-10 12:54:23] [INFO] GET /apple-touch-icon.png
-[2026-07-10 12:54:23] [INFO] GET /favicon.ico
-[2026-07-10 14:29:48] [INFO] GET /
-[2026-07-10 14:29:48] [INFO] GET /apple-touch-icon-precomposed.png
-[2026-07-10 14:29:48] [INFO] GET /apple-touch-icon.png
-[2026-07-10 14:29:48] [INFO] GET /favicon.ico
-[2026-07-10 14:30:33] [INFO] GET /
-[2026-07-10 14:32:07] [INFO] GET /
-[2026-07-10 14:32:30] [INFO] GET /health
-[2026-07-10 14:32:36] [INFO] GET /event
-[2026-07-10 14:32:47] [INFO] GET /event-test
-[2026-07-10 14:32:47] [INFO] Mail sent to cedric@example.com with subject "Hello Sendity!"
-[2026-07-10 14:36:59] [INFO] GET /event-test
-[2026-07-10 14:36:59] [INFO] Mail sent to cedric@example.com with subject "Hello Sendity!"
-[2026-07-10 14:38:10] [INFO] GET /event-test
-[2026-07-10 14:38:10] [INFO] Mail sent to cedric@example.com with subject "Hello Sendity!"
-[2026-07-10 14:49:07] [INFO] GET /event-test
-[2026-07-10 14:49:07] [INFO] Mail sent to cedric@example.com with subject "Hello Sendity!"
-[2026-07-10 14:54:18] [INFO] GET /event-test
-[2026-07-10 14:54:18] [INFO] Mail sent to cedric@example.com with subject "Hello Sendity!"
-[2026-07-10 14:57:22] [INFO] GET /event-test
-[2026-07-10 14:57:22] [ERROR] [FCB61AB7] Error: Call to a member function get() on null
-[2026-07-10 14:58:02] [INFO] GET /health
-[2026-07-10 14:58:13] [INFO] GET /
-[2026-07-10 15:00:35] [INFO] GET /
+[2026-07-26 11:43:48] [INFO] GET /
+[2026-07-26 11:43:48] [ERROR] [0795FE42] Error: Interface "Sendity\Mail\SMTP\MailerInterface" not found
+[2026-07-26 11:43:49] [INFO] GET /favicon.ico
+[2026-07-26 11:43:49] [INFO] GET /apple-touch-icon-precomposed.png
+[2026-07-26 11:43:49] [INFO] GET /apple-touch-icon.png
+[2026-07-26 11:43:49] [INFO] GET /favicon.ico
+[2026-07-26 11:46:55] [INFO] GET /
+[2026-07-26 11:46:55] [ERROR] [02A36F87] Error: Interface "Sendity\Mail\SMTP\MailerInterface" not found
+[2026-07-26 11:47:00] [INFO] GET /ok
+[2026-07-26 11:47:37] [INFO] GET /health
+[2026-07-26 11:47:37] [ERROR] [8DB1B127] Error: Interface "Sendity\Mail\SMTP\MailerInterface" not found
+[2026-07-26 11:47:38] [INFO] GET /apple-touch-icon-precomposed.png
+[2026-07-26 11:47:38] [INFO] GET /favicon.ico
+[2026-07-26 11:47:38] [INFO] GET /apple-touch-icon.png
+[2026-07-26 11:47:38] [INFO] GET /favicon.ico
+[2026-07-26 11:57:42] [INFO] GET /health
+[2026-07-26 11:57:42] [ERROR] [77794347] Error: Interface "Sendity\Mail\SMTP\MailerInterface" not found
+[2026-07-26 11:58:00] [INFO] GET /
+[2026-07-26 11:58:00] [ERROR] [6E25C56E] Error: Interface "Sendity\Mail\SMTP\MailerInterface" not found
+[2026-07-26 12:02:00] [INFO] GET /
+[2026-07-26 12:03:12] [INFO] GET /
+[2026-07-26 12:06:47] [INFO] GET /
+[2026-07-26 12:07:50] [INFO] GET /
+[2026-07-26 12:08:06] [INFO] GET /send-test
+[2026-07-26 12:08:12] [INFO] Mail sent to jason.healey22@gmail.com with subject "Sendity BCC test"
+[2026-07-26 12:09:59] [INFO] GET /
