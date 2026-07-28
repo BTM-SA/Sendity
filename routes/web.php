@@ -46,6 +46,39 @@ $router->get('/event-test', function () use ($container) {
     return 'Event dispatched!';
 });
 
+$router->get('/imap-test', function () use ($container) {
+
+    $mailbox = $container->get(
+        \Sendity\Mail\Contracts\MailboxInterface::class
+    );
+
+    $mailbox->connect();
+
+    $mailbox->disconnect();
+
+    return 'IMAP connection successful';
+});
+$router->get('/imap-folders', function () use ($container) {
+
+    $mailbox = $container->get(
+        \Sendity\Mail\Contracts\MailboxInterface::class
+    );
+
+    $folders = $mailbox->folders();
+
+    return implode('<br>', $folders);
+});
+
+$router->get('/mailbox-driver-test', function () use ($container) {
+
+    $mailbox = $container->get(
+        \Sendity\Mail\Contracts\MailboxInterface::class
+    );
+
+    return get_class($mailbox);
+
+});
+
 $router->get('/boom', function () {
     throw new RuntimeException('Boom!');
 });

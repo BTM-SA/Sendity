@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Sendity\Mail\IMAP;
+namespace Sendity\Mail\Drivers\IMAP;
 
 use Sendity\Core\Config;
 use Sendity\Mail\Contracts\MailboxInterface;
 
-class ImapClient implements MailboxInterface
+class PhpImapClient implements MailboxInterface
 {
     public function __construct(
         protected Config $config
@@ -16,12 +16,13 @@ class ImapClient implements MailboxInterface
 
     public function connect(): void
     {
-        //
+        throw new \RuntimeException(
+            'PHP IMAP driver is not implemented yet.'
+        );
     }
 
     public function disconnect(): void
     {
-        //
     }
 
     public function folders(): array
@@ -29,8 +30,10 @@ class ImapClient implements MailboxInterface
         return [];
     }
 
-    public function saveSent(string $mime): void
+    public function appendSent(string $mime): void
     {
-        //
+        throw new \RuntimeException(
+            'PHP IMAP driver is not implemented yet.'
+        );
     }
 }

@@ -24,3 +24,48 @@
 [2026-07-26 12:08:06] [INFO] GET /send-test
 [2026-07-26 12:08:12] [INFO] Mail sent to jason.healey22@gmail.com with subject "Sendity BCC test"
 [2026-07-26 12:09:59] [INFO] GET /
+[2026-07-26 16:01:00] [INFO] GET /send-test
+[2026-07-26 16:02:14] [INFO] GET /send-test
+[2026-07-26 16:02:31] [INFO] GET /
+[2026-07-26 16:02:31] [INFO] GET /apple-touch-icon-precomposed.png
+[2026-07-26 16:02:31] [INFO] GET /apple-touch-icon.png
+[2026-07-26 16:02:31] [INFO] GET /favicon.ico
+[2026-07-26 16:02:42] [INFO] GET /send-test
+[2026-07-26 16:03:26] [INFO] GET /send-test
+[2026-07-26 16:03:32] [INFO] Mail sent to jason.healey22@gmail.com with subject "Sendity BCC test"
+[2026-07-26 16:03:32] [INFO] GET /send-test
+[2026-07-26 16:03:38] [INFO] Mail sent to jason.healey22@gmail.com with subject "Sendity BCC test"
+[2026-07-27 15:00:47] [INFO] GET /imap-test
+[2026-07-27 15:01:05] [INFO] GET /imap-test
+[2026-07-27 15:05:19] [INFO] GET /imap-test
+[2026-07-27 15:05:19] [ERROR] [45FF2625] ParseError: syntax error, unexpected token "=>"
+[2026-07-27 15:09:40] [INFO] GET /imap-test
+[2026-07-27 15:09:40] [ERROR] [6153F530] ParseError: syntax error, unexpected token "=>"
+[2026-07-27 15:18:13] [INFO] GET /imap-test
+[2026-07-27 15:18:13] [ERROR] [76C8503B] ParseError: syntax error, unexpected token "=>"
+[2026-07-27 15:19:25] [INFO] GET /imap-test
+[2026-07-27 15:19:25] [ERROR] [1F082163] ParseError: syntax error, unexpected token "=>"
+[2026-07-27 15:19:49] [INFO] GET /imap-test
+[2026-07-27 15:19:49] [ERROR] [E4919334] ParseError: syntax error, unexpected token "=>"
+[2026-07-27 15:22:02] [INFO] GET /imap-test
+[2026-07-27 15:22:02] [ERROR] [411ED467] ParseError: syntax error, unexpected token "=>"
+[2026-07-27 15:22:17] [INFO] GET /imap-test
+[2026-07-27 15:22:17] [ERROR] [76B964F0] ParseError: syntax error, unexpected token "=>"
+[2026-07-27 15:23:20] [INFO] GET /imap-test
+[2026-07-27 15:23:20] [ERROR] [F4B78F9F] ParseError: syntax error, unexpected token "=>"
+[2026-07-27 15:28:55] [INFO] GET /imap-test
+[2026-07-27 15:34:13] [INFO] GET /imap-test
+[2026-07-27 15:34:13] [ERROR] [102FE77F] Error: Call to undefined function Sendity\Mail\IMAP\imap_open()
+[2026-07-28 08:06:34] [INFO] GET /
+[2026-07-28 08:06:35] [INFO] GET /apple-touch-icon-precomposed.png
+[2026-07-28 08:06:35] [INFO] GET /apple-touch-icon.png
+[2026-07-28 08:06:35] [INFO] GET /favicon.ico
+[2026-07-28 08:06:43] [INFO] GET /send-test
+[2026-07-28 08:06:49] [INFO] Mail sent to jason.healey22@gmail.com with subject "Sendity BCC test"
+[2026-07-28 08:18:30] [INFO] GET /mailbox-driver-test
+[2026-07-28 08:18:30] [ERROR] [1C5F94EE] Error: Class "Sendity\Providers\NativeImapClient" not found
+[2026-07-28 08:20:24] [INFO] GET /mailbox-driver-test
+[2026-07-28 08:20:24] [ERROR] [8EFD527B] Error: Class "Sendity\Mail\Drivers\IMAP\NativeImapClient" not found
+[2026-07-28 08:21:15] [INFO] GET /mailbox-driver-test
+[2026-07-28 08:21:15] [ERROR] [88F34DBF] Error: Class "Sendity\Mail\Drivers\IMAP\NativeImapClient" not found
+[2026-07-28 08:22:35] [INFO] GET /mailbox-driver-test

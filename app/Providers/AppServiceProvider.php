@@ -46,13 +46,16 @@ class AppServiceProvider extends ServiceProvider
         );
 
         $this->container->singleton(
-            RouteLoader::class,
-            fn($container) =>
-                new RouteLoader(
-                    $container->get(\Sendity\Http\Router::class),
-                    $container
-                )
+    RouteLoader::class,
+    function ($container) {
+
+        return new RouteLoader(
+            $container->get(\Sendity\Http\Router::class),
+            $container
         );
+
+    }
+);
     }
 
     public function boot(): void

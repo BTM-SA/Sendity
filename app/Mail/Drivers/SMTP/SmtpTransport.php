@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Sendity\Mail\SMTP;
+namespace Sendity\Mail\Drivers\SMTP;
 
 use PHPMailer\PHPMailer\PHPMailer;
 use Sendity\Core\Config;

@@ -24,5 +24,5 @@ interface MailboxInterface
     /**
      * Save a MIME message to the Sent folder.
      */
-    public function saveSent(string $mime): void;
+    public function appendSent(string $mime): void;
 }
