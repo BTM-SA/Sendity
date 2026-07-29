@@ -39,41 +39,58 @@ return [
     ],
 
     /*
-    |--------------------------------------------------------------------------
-    | Default Sender
-    |--------------------------------------------------------------------------
-    */
+|--------------------------------------------------------------------------
+| Default Sender
+|--------------------------------------------------------------------------
+*/
 
-    'from' => [
+'from' => [
 
-        'address' => $_ENV['MAIL_FROM_ADDRESS'] ?? null,
+    'address' => $_ENV['MAIL_FROM_ADDRESS']
+        ?? $_ENV['MAIL_USERNAME']
+        ?? null,
 
-        'name' => $_ENV['MAIL_FROM_NAME'] ?? 'Sendity',
+    'name' => $_ENV['MAIL_FROM_NAME']
+        ?? 'Sendity',
 
-    ],
-
+],
     /*
     |--------------------------------------------------------------------------
     | IMAP Configuration
     |--------------------------------------------------------------------------
     */
+/*
+|--------------------------------------------------------------------------
+| IMAP Configuration
+|--------------------------------------------------------------------------
+*/
 
-    'imap' => [
+'imap' => [
 
-        'host' => 'mail.btm-sa.co.za',
+    'host' => $_ENV['MAIL_IMAP_HOST'] ?? 'localhost',
 
-        'port' => 993,
+    'port' => (int) (
+        $_ENV['MAIL_IMAP_PORT'] ?? 993
+    ),
 
-        'username' => 'admin@btm-sa.co.za',
+    'username' => $_ENV['MAIL_IMAP_USERNAME'] ?? '',
 
-        'password' => '*******',
+    'password' => $_ENV['MAIL_IMAP_PASSWORD'] ?? '',
 
-        'encryption' => 'ssl',
+    'encryption' => $_ENV['MAIL_IMAP_ENCRYPTION'] ?? 'ssl',
 
-        'sent_folder' => 'Sent',
-    
-        'save_sent' => true,
+    'sent_folder' => $_ENV['MAIL_IMAP_SENT_FOLDER'] ?? null,
 
-    ],
+    'save_sent' => filter_var(
+        $_ENV['MAIL_IMAP_SAVE_SENT'] ?? true,
+        FILTER_VALIDATE_BOOLEAN
+    ),
+
+    'validate_cert' => filter_var(
+        $_ENV['MAIL_IMAP_VALIDATE_CERT'] ?? true,
+        FILTER_VALIDATE_BOOLEAN
+    ),
+
+],
 
 ];

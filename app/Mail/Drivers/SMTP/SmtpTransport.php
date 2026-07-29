@@ -202,7 +202,7 @@ class SmtpTransport implements MailerInterface
 
             $mail->send();
 
-            /*
+                       /*
             |--------------------------------------------------------------------------
             | Save a copy to the Sent mailbox.
             |--------------------------------------------------------------------------
@@ -210,27 +210,27 @@ class SmtpTransport implements MailerInterface
 
             if ($this->config->get('mail.imap.save_sent')) {
 
-    try {
+                try {
 
-        $mime = $mail->getSentMIMEMessage();
+                    $mime = $mail->getSentMIMEMessage();
 
-        $this->mailbox->appendSent($mime);
+                    $this->mailbox->appendSent($mime);
 
-    } catch (Throwable $e) {
+                } catch (Throwable $e) {
 
-        /*
-         * SMTP delivery already succeeded.
-         *
-         * Saving a copy to Sent is secondary.
-         * Do not mark the email as failed.
-         */
+                    /*
+                     * SMTP delivery already succeeded.
+                     *
+                     * Saving a copy to Sent is secondary.
+                     * Do not mark the email as failed.
+                     */
 
-        error_log(
-            'Unable to save message to Sent folder: ' .
-            $e->getMessage()
-        );
-    }
-}
+                    error_log(
+                        'Unable to save message to Sent folder: ' .
+                        $e->getMessage()
+                    );
+                }
+            }
 
         } catch (Throwable $e) {
 

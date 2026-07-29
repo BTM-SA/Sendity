@@ -19,11 +19,13 @@ $router->get('/api/status', function () {
         'app' => 'Sendity'
     ]);
 });
+
 $router->get('/send-test', [HomeController::class, 'sendTest']);
 
 $router->get('/user/{id}', function ($id) {
     return "User ID: {$id}";
 });
+
 
 $router->get('/event-test', function () use ($container) {
 
@@ -46,6 +48,7 @@ $router->get('/event-test', function () use ($container) {
     return 'Event dispatched!';
 });
 
+
 $router->get('/imap-test', function () use ($container) {
 
     $mailbox = $container->get(
@@ -57,7 +60,10 @@ $router->get('/imap-test', function () use ($container) {
     $mailbox->disconnect();
 
     return 'IMAP connection successful';
+
 });
+
+
 $router->get('/imap-folders', function () use ($container) {
 
     $mailbox = $container->get(
@@ -74,15 +80,56 @@ $router->get('/imap-folders', function () use ($container) {
 
 });
 
+
 $router->get('/mailbox-driver-test', function () use ($container) {
 
     $mailbox = $container->get(
         \Sendity\Mail\Contracts\MailboxInterface::class
     );
 
-    return $mailbox->driverName();
+    echo '<pre>';
+
+    echo "Driver: ";
+    echo $mailbox->driverName();
+
+    echo PHP_EOL . PHP_EOL;
+
+    echo "Connecting..." . PHP_EOL;
+
+    $mailbox->connect();
+
+    echo "Connected OK" . PHP_EOL . PHP_EOL;
+
+
+    echo "Folders:" . PHP_EOL;
+
+    print_r(
+        $mailbox->folders()
+    );
+
+
+    echo PHP_EOL . "Special folders:" . PHP_EOL;
+
+    if (method_exists($mailbox, 'specialFolders')) {
+
+        print_r(
+            $mailbox->specialFolders()
+        );
+
+    } else {
+
+        echo "specialFolders() not available";
+
+    }
+
+
+    echo '</pre>';
+
+    $mailbox->disconnect();
 
 });
+
+
 $router->get('/imap-function-test', function () {
 
     return function_exists('imap_open')
@@ -90,6 +137,8 @@ $router->get('/imap-function-test', function () {
         : 'imap_open missing';
 
 });
+
+
 $router->get('/imap-mailboxes', function () use ($container) {
 
     $mailbox = $container->get(
@@ -105,6 +154,8 @@ $router->get('/imap-mailboxes', function () use ($container) {
     echo '</pre>';
 
 });
+
+
 $router->get('/mailbox-discovery-test', function () use ($container) {
 
     $mailbox = $container->get(
@@ -127,6 +178,7 @@ $router->get('/mailbox-discovery-test', function () use ($container) {
     echo '</pre>';
 
 });
+
 
 $router->get('/boom', function () {
     throw new RuntimeException('Boom!');

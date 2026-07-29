@@ -16,67 +16,96 @@ class ImapClient implements MailboxInterface
 
     protected array $specialFolders = [];
 
+
     public function __construct(
         protected Config $config
     ) {
     }
+
 
     public function driverName(): string
     {
         return 'imap';
     }
 
+
     public function connect(): void
     {
         $imap = $this->config->get('mail.imap');
 
+
         $this->connection = imap_open(
-            $this->serverString(),
+            $this->serverString() . 'INBOX',
             $imap['username'],
             $imap['password']
         );
 
+
         if ($this->connection === false) {
+
             throw new \RuntimeException(
-                imap_last_error() ?: 'Unable to connect to IMAP server.'
+                imap_last_error()
+                ?: 'Unable to connect to IMAP server.'
             );
         }
 
-        /*
-         * Discover available mailboxes.
-         */
-        $this->mailboxes = $this->discoverMailboxes();
 
         /*
-         * Resolve special folders.
-         */
+        |--------------------------------------------------------------------------
+        | Discover mailboxes
+        |--------------------------------------------------------------------------
+        */
+
+        $this->mailboxes = $this->discoverMailboxes();
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Resolve special folders
+        |--------------------------------------------------------------------------
+        */
+
         $this->specialFolders = (new MailboxDiscovery(
             $this->mailboxes,
             $this->config
         ))->resolve();
     }
 
+
     public function disconnect(): void
     {
         if ($this->connection !== null) {
-            imap_close($this->connection);
+
+            imap_close(
+                $this->connection
+            );
+
             $this->connection = null;
         }
     }
 
+
     public function folders(): array
     {
+        if ($this->connection === null) {
+            $this->connect();
+        }
+
+
         return array_map(
             function ($mailbox) {
+
                 return preg_replace(
                     '/^\{.*\}/',
                     '',
                     $mailbox->name
                 );
+
             },
             $this->mailboxes
         );
     }
+
 
     public function mailboxes(): array
     {
@@ -84,8 +113,10 @@ class ImapClient implements MailboxInterface
             $this->connect();
         }
 
+
         return $this->mailboxes;
     }
+
 
     public function specialFolders(): array
     {
@@ -93,54 +124,62 @@ class ImapClient implements MailboxInterface
             $this->connect();
         }
 
+
         return $this->specialFolders;
     }
 
-    /**
-     * Return the resolved path of a special IMAP folder.
-     *
-     * @throws \RuntimeException
-     */
+
     protected function specialFolder(string $type): string
     {
         if ($this->connection === null) {
             $this->connect();
         }
 
+
         $folder = $this->specialFolders[$type] ?? null;
 
+
         if (empty($folder)) {
+
             throw new \RuntimeException(
                 sprintf(
-                    'Unable to determine the IMAP %s folder.',
-                    ucfirst($type)
+                    'Unable to determine IMAP %s folder.',
+                    $type
                 )
             );
         }
 
+
         return $folder;
     }
 
+
     public function appendSent(string $rawMessage): void
-{
-    if ($this->connection === null) {
-        $this->connect();
-    }
+    {
+        if ($this->connection === null) {
+            $this->connect();
+        }
 
-    $mailbox = $this->serverString() . $this->specialFolder('sent');
 
-    $result = imap_append(
-        $this->connection,
-        $mailbox,
-        $rawMessage
-    );
+        $folder = $this->specialFolder('sent');
 
-    if ($result === false) {
-        throw new \RuntimeException(
-            imap_last_error() ?: 'Unable to append message to Sent folder.'
+
+        $result = imap_append(
+            $this->connection,
+            $this->serverString() . $folder,
+            $rawMessage
         );
+
+
+        if ($result === false) {
+
+            throw new \RuntimeException(
+                imap_last_error()
+                ?: 'Unable to append message to Sent folder.'
+            );
+        }
     }
-}
+
 
     protected function discoverMailboxes(): array
     {
@@ -150,37 +189,42 @@ class ImapClient implements MailboxInterface
             '*'
         );
 
+
         if ($mailboxes === false) {
+
             throw new \RuntimeException(
-                imap_last_error() ?: 'Unable to retrieve mailboxes.'
+                imap_last_error()
+                ?: 'Unable to retrieve mailboxes.'
             );
         }
+
 
         return $mailboxes;
     }
 
-    protected function mailboxString(): string
-    {
-        $imap = $this->config->get('mail.imap');
-
-        return sprintf(
-            '{%s:%d/imap/%s}%s',
-            $imap['host'],
-            $imap['port'],
-            $imap['encryption'],
-            $imap['sent_folder']
-        );
-    }
 
     protected function serverString(): string
     {
         $imap = $this->config->get('mail.imap');
 
+
+        $flags = sprintf(
+            'imap/%s',
+            $imap['encryption']
+        );
+
+
+        if (!$imap['validate_cert']) {
+
+            $flags .= '/novalidate-cert';
+        }
+
+
         return sprintf(
-            '{%s:%d/imap/%s}',
+            '{%s:%d/%s}',
             $imap['host'],
             $imap['port'],
-            $imap['encryption']
+            $flags
         );
     }
 }
