@@ -66,7 +66,12 @@ $router->get('/imap-folders', function () use ($container) {
 
     $folders = $mailbox->folders();
 
-    return implode('<br>', $folders);
+    echo '<pre>';
+    var_dump($folders);
+    echo '</pre>';
+
+    exit;
+
 });
 
 $router->get('/mailbox-driver-test', function () use ($container) {
@@ -75,7 +80,51 @@ $router->get('/mailbox-driver-test', function () use ($container) {
         \Sendity\Mail\Contracts\MailboxInterface::class
     );
 
-    return get_class($mailbox);
+    return $mailbox->driverName();
+
+});
+$router->get('/imap-function-test', function () {
+
+    return function_exists('imap_open')
+        ? 'imap_open exists'
+        : 'imap_open missing';
+
+});
+$router->get('/imap-mailboxes', function () use ($container) {
+
+    $mailbox = $container->get(
+        \Sendity\Mail\Contracts\MailboxInterface::class
+    );
+
+    echo '<pre>';
+
+    var_dump(
+        $mailbox->mailboxes()
+    );
+
+    echo '</pre>';
+
+});
+$router->get('/mailbox-discovery-test', function () use ($container) {
+
+    $mailbox = $container->get(
+        \Sendity\Mail\Contracts\MailboxInterface::class
+    );
+
+    $mailboxes = $mailbox->mailboxes();
+
+    $discovery = new \Sendity\Mail\MailboxDiscovery(
+        $mailboxes,
+        $container->get(\Sendity\Core\Config::class)
+    );
+
+    echo '<pre>';
+
+    print_r(
+        $discovery->resolve()
+    );
+
+    echo '</pre>';
 
 });
 

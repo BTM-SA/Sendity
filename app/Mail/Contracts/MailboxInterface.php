@@ -7,6 +7,11 @@ namespace Sendity\Mail\Contracts;
 interface MailboxInterface
 {
     /**
+     * Return the driver name.
+     */
+    public function driverName(): string;
+
+    /**
      * Connect to the mailbox.
      */
     public function connect(): void;
@@ -20,6 +25,11 @@ interface MailboxInterface
      * Return available folders.
      */
     public function folders(): array;
+
+    /**
+     * Return raw mailbox information from the server.
+     */
+    public function mailboxes(): array;
 
     /**
      * Save a MIME message to the Sent folder.

@@ -11,6 +11,7 @@ use Sendity\Providers\AppServiceProvider;
 use Sendity\Providers\RoutingServiceProvider;
 use Dotenv\Dotenv;
 require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/mail.php';
 $dotenv = Dotenv::createImmutable(dirname(__DIR__));
 $dotenv->safeLoad();
 

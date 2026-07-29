@@ -69,3 +69,59 @@
 [2026-07-28 08:21:15] [INFO] GET /mailbox-driver-test
 [2026-07-28 08:21:15] [ERROR] [88F34DBF] Error: Class "Sendity\Mail\Drivers\IMAP\NativeImapClient" not found
 [2026-07-28 08:22:35] [INFO] GET /mailbox-driver-test
+[2026-07-28 08:40:26] [INFO] GET /mailbox-driver-test
+[2026-07-28 09:20:24] [INFO] GET /mailbox-driver-test
+[2026-07-28 09:22:29] [INFO] GET /mailbox-driver-test
+[2026-07-28 09:22:30] [INFO] GET /mailbox-driver-test
+[2026-07-28 09:23:34] [INFO] GET /mailbox-driver-test
+[2026-07-28 09:24:18] [INFO] GET /mailbox-driver-test
+[2026-07-28 09:25:28] [INFO] GET /mailbox-driver-test
+[2026-07-28 09:31:29] [INFO] GET /imap-folders
+[2026-07-28 09:31:29] [ERROR] [B3631C47] Error: Call to undefined function Sendity\Mail\Drivers\IMAP\imap_open()
+[2026-07-28 09:33:37] [INFO] GET /imap-folders
+[2026-07-28 09:33:37] [ERROR] [BC9AF8B3] Error: Call to undefined function Sendity\Mail\Drivers\IMAP\imap_open()
+[2026-07-28 09:36:01] [INFO] GET /imap-folders
+[2026-07-28 11:03:17] [INFO] GET /imap-test
+[2026-07-28 11:03:17] [ERROR] [3867FF5C] Error: Call to undefined function Sendity\Mail\Drivers\IMAP\imap_open()
+[2026-07-28 11:06:52] [INFO] GET /imap-test
+[2026-07-28 11:06:52] [ERROR] [FEAF6223] Error: Call to undefined function Sendity\Mail\Drivers\IMAP\imap_open()
+[2026-07-28 11:08:04] [INFO] GET /imap-test
+[2026-07-28 11:08:04] [ERROR] [2FB52863] Error: Call to undefined function Sendity\Mail\Drivers\IMAP\imap_open()
+[2026-07-28 11:08:41] [INFO] GET /imap-test
+[2026-07-28 11:08:41] [ERROR] [A76C8A14] Error: Call to undefined function Sendity\Mail\Drivers\IMAP\imap_open()
+[2026-07-28 11:10:05] [INFO] GET /imap-function-test
+[2026-07-28 11:11:50] [INFO] GET /imap-function-test
+[2026-07-28 11:12:26] [INFO] GET /imap-test
+[2026-07-28 11:12:26] [ERROR] [47F14523] RuntimeException: Can not authenticate to IMAP server: Could not connect to ssl://imap.example.com:993: php_network_getaddresses: getaddrinfo for imap.example.com failed: nodename nor servname provided, or not known
+[2026-07-28 11:15:27] [INFO] GET /imap-test
+[2026-07-28 11:15:40] [INFO] GET /imap-folders
+[2026-07-28 11:16:36] [INFO] GET /imap-folders
+[2026-07-28 11:18:37] [INFO] GET /imap-folders
+[2026-07-28 11:22:16] [INFO] GET /imap-folders
+[2026-07-28 13:24:38] [INFO] GET /imap-mailboxes
+[2026-07-29 05:19:59] [INFO] GET /mailbox-discovery-test
+[2026-07-29 05:24:36] [INFO] GET /mailbox-discovery-test
+[2026-07-29 05:25:39] [INFO] GET /mailbox-discovery-test
+[2026-07-29 05:25:40] [ERROR] [BAFE0BB0] ParseError: syntax error, unexpected token "protected"
+[2026-07-29 05:26:33] [INFO] GET /mailbox-discovery-test
+[2026-07-29 05:26:33] [ERROR] [E59C32AA] ParseError: syntax error, unexpected token "protected"
+[2026-07-29 05:27:35] [INFO] GET /mailbox-discovery-test
+[2026-07-29 05:32:23] [INFO] GET /mailbox-discovery-test
+[2026-07-29 05:34:14] [INFO] GET /mailbox-discovery-test
+[2026-07-29 05:35:09] [INFO] GET /
+[2026-07-29 05:35:26] [INFO] GET /imap-test
+[2026-07-29 05:35:37] [INFO] GET /mailbox-driver-test
+[2026-07-29 05:35:37] [ERROR] [B74A22D3] Error: Call to undefined method Sendity\Mail\Drivers\IMAP\ImapClient::driverName()
+[2026-07-29 05:35:54] [INFO] GET /mailbox-discovery-test
+[2026-07-29 05:35:59] [INFO] GET /mailbox-driver-test
+[2026-07-29 05:35:59] [ERROR] [FAD5B7BE] Error: Call to undefined method Sendity\Mail\Drivers\IMAP\ImapClient::driverName()
+[2026-07-29 05:36:01] [INFO] GET /mailbox-driver-test
+[2026-07-29 05:36:01] [ERROR] [F047895C] Error: Call to undefined method Sendity\Mail\Drivers\IMAP\ImapClient::driverName()
+[2026-07-29 05:36:03] [INFO] GET /mailbox-driver-test
+[2026-07-29 05:36:03] [ERROR] [70D796D3] Error: Call to undefined method Sendity\Mail\Drivers\IMAP\ImapClient::driverName()
+[2026-07-29 05:38:00] [INFO] GET /mailbox-driver-test
+[2026-07-29 12:12:01] [INFO] GET /send-test
+[2026-07-29 12:12:03] [INFO] Mail sent to admin@btm-sa.co.za with subject "Sendity Test"
+[2026-07-29 12:12:03] [INFO] GET /favicon.ico
+[2026-07-29 12:18:34] [INFO] GET /send-test
+[2026-07-29 12:18:36] [INFO] Mail sent to admin@btm-sa.co.za with subject "Sendity Test"

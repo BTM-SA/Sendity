@@ -1,0 +1,2 @@
+find /home/btmsacw1n9y2/public_html/mail -type d -exec chmod 755 {} \;
+find /home/btmsacw1n9y2/public_html/mail -type f -exec chmod 644 {} \;

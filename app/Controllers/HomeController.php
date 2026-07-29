@@ -27,9 +27,9 @@ class HomeController
 {
     $message = new MailMessage();
 $message
-    ->to('jason.healey22@gmail.com')
-    ->subject('Sendity BCC test')
-    ->text('Testing Sendity delivery.');
+    ->to('admin@btm-sa.co.za')
+    ->subject('Sendity Test')
+    ->text('Testing Sendity Delivery.');
 
     try {
 

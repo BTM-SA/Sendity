@@ -54,35 +54,25 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Mailbox Driver
-    |--------------------------------------------------------------------------
-    */
-
-    'mailbox' => [
-
-        'driver' => 'native',
-
-    ],
-
-    /*
-    |--------------------------------------------------------------------------
     | IMAP Configuration
     |--------------------------------------------------------------------------
     */
 
     'imap' => [
 
-        'host' => 'imap.example.com',
+        'host' => 'mail.btm-sa.co.za',
 
         'port' => 993,
 
-        'username' => 'your@email.com',
+        'username' => 'admin@btm-sa.co.za',
 
-        'password' => 'your-password',
+        'password' => '*******',
 
         'encryption' => 'ssl',
 
         'sent_folder' => 'Sent',
+    
+        'save_sent' => true,
 
     ],
 
