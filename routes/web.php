@@ -197,6 +197,23 @@ $router->get('/mail-manager-test', function () use ($container) {
         );
 
 });
+$router->get('/message-id-test', function () use ($container) {
+
+    $generator = $container->get(
+        \Sendity\Mail\MessageIdGenerator::class
+    );
+
+    return $generator->generate();
+
+});
+
+$router->get('/message-test', function () {
+
+    $message = new \Sendity\Mail\MailMessage();
+
+    return $message->id();
+
+});
 
 $router->get('/boom', function () {
     throw new RuntimeException('Boom!');

@@ -58,11 +58,11 @@ Rather than making decisions on behalf of the sender, Sendity puts those decisio
 ---
 
 
-## Core Capabilities
+# Core Capabilities
 
 
 
-### Email
+## Email
 
 At its core, Sendity is an email platform designed to keep communication simple.
 
@@ -72,7 +72,7 @@ Additional capabilities are available when needed, but sending an email should a
 
 
 
-### Templates
+## Templates
 
 Create consistent communications without starting from scratch every time.
 
@@ -81,7 +81,7 @@ Sendity provides reusable templates for common messages while allowing people to
 Templates help save time, maintain consistency, and make everyday communication easier.
 
 
-### Meaningful Insights
+## Meaningful Insights
 
 Once an email is sent, it's natural to wonder what happened next.
 
@@ -92,7 +92,7 @@ Whether it's confirming that a message was opened, understanding how it was rece
 Meaningful insights are designed to inform—not to intrude.
 
 
-### Communication Policies
+## Communication Policies
 
 Not every message serves the same purpose.
 
@@ -103,7 +103,7 @@ Whether it's adding visibility, applying additional controls, or defining how a 
 Communication Policies help make sure each message is treated according to its purpose.
 
 
-### Document Control
+## Document Control
 
 Important documents sometimes need more than simply being attached to an email.
 
@@ -113,7 +113,7 @@ Whether it's protecting sensitive information, managing access, or understanding
 
 Simple sharing remains simple. Additional control is available when required.
 
-### Audit History
+## Audit History
 
 Important communications may need to be understood after they are sent.
 
@@ -123,7 +123,7 @@ Whether reviewing a previous message, checking communication events, or understa
 
 A clear history helps people stay informed about their communications.
 
-## Self-hosted or Cloud
+# Self-hosted or Cloud
 
 Sendity is designed to give people a choice in how they use it.
 
@@ -148,24 +148,41 @@ Whichever option you choose, the goal remains the same:
 
 
 
-## Our Philosophy
+# Our Philosophy
 
 Every decision in Sendity begins with three principles.
 
-### 🤝 Trust
+- Trust
 
-Communication should be transparent, honest, and dependable.
 
-Trust is earned—not assumed.
+- Control
 
-### 🎛️ Control
 
-The sender decides.
+- Simplicity
 
-### ✨ Simplicity
 
-Powerful when you need it. Invisible when you don't.
+
+
+Communication should be transparent, honest, and dependable. Trust is earned—not assumed.
 
 The most common tasks should remain effortless, while advanced capabilities should always remain optional.
 
+# Architecture
+Sendity was built as a secure digital delivery platform on top of a modular PHP framework with a focus on clear separation of responsibilities, dependency injection, and service-based architecture.
+<a href="https://github.com/BTM-SA/Sendity/blob/main/ARCHITECTURE.md" > See more here.  🔎</a>
 
+## Architectural Decisions Are Recorded
+
+Every significant architectural decision is documented as an Architecture Decision Record (ADR).
+
+They can be   <a href="https://github.com/BTM-SA/Sendity/tree/main/docs/adr" >found here. 🔎</a> 
+
+Each ADR describes:
+
+- Problem
+
+- Decision
+- Reasoning
+- Consequences
+
+---

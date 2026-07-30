@@ -18,3 +18,18 @@
 [2026-07-30 19:56:02] [INFO] Mail sent to admin@btm-sa.co.za with subject "Sendity Test"
 [2026-07-30 19:56:26] [INFO] GET /imap-test
 [2026-07-30 19:57:34] [INFO] GET /mail-manager-test
+[2026-07-30 20:10:18] [INFO] GET /message-id-test
+[2026-07-30 20:10:18] [ERROR] [F811CAC6] Error: Class "Sendity\Mail\MessageIdGenerator" not found
+[2026-07-30 20:10:46] [INFO] GET /message-id-test
+[2026-07-30 20:10:51] [INFO] GET /message-id-test
+[2026-07-30 20:10:53] [INFO] GET /message-id-test
+[2026-07-30 20:14:02] [INFO] GET /message-test'
+[2026-07-30 20:14:17] [INFO] GET /message-test'
+[2026-07-30 20:14:25] [INFO] GET /message-test
+[2026-07-30 20:14:28] [INFO] GET /message-test
+[2026-07-30 20:16:51] [INFO] GET /send-test
+[2026-07-30 20:16:52] [INFO] Mail sent to admin@btm-sa.co.za with subject "Sendity Test"
+[2026-07-30 20:21:44] [INFO] GET /send-test
+[2026-07-30 20:21:46] [INFO] Mail sent to admin@btm-sa.co.za with subject "Sendity Test"
+[2026-07-30 21:15:40] [INFO] GET /send-test
+[2026-07-30 21:15:42] [INFO] Mail sent to admin@btm-sa.co.za with subject "Sendity Test"

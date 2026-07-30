@@ -14,6 +14,7 @@ use Sendity\Mail\MailerInterface;
 use Sendity\Mail\MailManager;
 use Sendity\Mail\MailTransportManager;
 use Sendity\Mail\MailboxManager;
+use Sendity\Mail\MessageIdGenerator;
 
 class MailServiceProvider extends ServiceProvider
 {
@@ -71,6 +72,22 @@ class MailServiceProvider extends ServiceProvider
                     $container->get(MailTransportManager::class),
                     $container->get(MailboxManager::class)
                 );
+
+            }
+        );
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Message ID Generator
+        |--------------------------------------------------------------------------
+        */
+
+        $this->container->singleton(
+            MessageIdGenerator::class,
+            function () {
+
+                return new MessageIdGenerator();
 
             }
         );

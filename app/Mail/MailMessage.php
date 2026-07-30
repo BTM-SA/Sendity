@@ -6,6 +6,8 @@ namespace Sendity\Mail;
 
 class MailMessage
 {
+    private string $id;
+
     private ?Address $from = null;
     private ?Address $replyTo = null;
 
@@ -18,7 +20,7 @@ class MailMessage
     /** @var Address[] */
     private array $bcc = [];
 
-    private string $subject = '';
+    private string $subject = "";
 
     private ?string $html = null;
     private ?string $text = null;
@@ -35,6 +37,15 @@ class MailMessage
      * A MailMessage describes what should be sent.
      * It does not know how the message is delivered.
      */
+    public function __construct(MessageIdGenerator $idGenerator)
+    {
+        $this->id = $idGenerator->generate();
+    }
+
+    public function id(): string
+    {
+        return $this->id;
+    }
 
     public function from(string $email, ?string $name = null): self
     {
