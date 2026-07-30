@@ -179,6 +179,24 @@ $router->get('/mailbox-discovery-test', function () use ($container) {
 
 });
 
+$router->get('/mail-manager-test', function () use ($container) {
+
+    $mail = $container->get(
+        \Sendity\Mail\MailManager::class
+    );
+
+    return
+        'Transport: ' .
+        get_class(
+            $mail->transport()->driver()
+        )
+        .
+        '<br>Mailbox: ' .
+        get_class(
+            $mail->mailbox()->driver()
+        );
+
+});
 
 $router->get('/boom', function () {
     throw new RuntimeException('Boom!');

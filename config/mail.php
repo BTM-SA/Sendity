@@ -1,14 +1,15 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Default Mail Transport
     |--------------------------------------------------------------------------
     */
 
-    'default' => 'smtp',
+    "default" => "smtp",
+    
+    'mailbox' => $_ENV['MAILBOX_DRIVER'] ?? 'imap',
 
     /*
     |--------------------------------------------------------------------------
@@ -16,26 +17,22 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'transports' => [
+    "transports" => [
+        "smtp" => [
+            "host" => $_ENV["MAIL_HOST"] ?? null,
 
-        'smtp' => [
+            "port" => (int) ($_ENV["MAIL_PORT"] ?? 587),
 
-            'host' => $_ENV['MAIL_HOST'] ?? null,
+            "username" => $_ENV["MAIL_USERNAME"] ?? null,
 
-            'port' => (int) ($_ENV['MAIL_PORT'] ?? 587),
+            "password" => $_ENV["MAIL_PASSWORD"] ?? null,
 
-            'username' => $_ENV['MAIL_USERNAME'] ?? null,
+            "encryption" => $_ENV["MAIL_ENCRYPTION"] ?? "tls",
 
-            'password' => $_ENV['MAIL_PASSWORD'] ?? null,
+            "timeout" => (int) ($_ENV["MAIL_TIMEOUT"] ?? 30),
 
-            'encryption' => $_ENV['MAIL_ENCRYPTION'] ?? 'tls',
-
-            'timeout' => (int) ($_ENV['MAIL_TIMEOUT'] ?? 30),
-
-            'hostname' => $_ENV['MAIL_HOSTNAME'] ?? 'localhost',
-
+            "hostname" => $_ENV["MAIL_HOSTNAME"] ?? "localhost",
         ],
-
     ],
 
     /*
@@ -44,53 +41,37 @@ return [
 |--------------------------------------------------------------------------
 */
 
-'from' => [
+    "from" => [
+        "address" => $_ENV["MAIL_FROM_ADDRESS"] ?? ($_ENV["MAIL_USERNAME"] ?? null),
 
-    'address' => $_ENV['MAIL_FROM_ADDRESS']
-        ?? $_ENV['MAIL_USERNAME']
-        ?? null,
-
-    'name' => $_ENV['MAIL_FROM_NAME']
-        ?? 'Sendity',
-
-],
+        "name" => $_ENV["MAIL_FROM_NAME"] ?? "Sendity",
+    ],
     /*
     |--------------------------------------------------------------------------
     | IMAP Configuration
     |--------------------------------------------------------------------------
     */
-/*
+    /*
 |--------------------------------------------------------------------------
 | IMAP Configuration
 |--------------------------------------------------------------------------
 */
 
-'imap' => [
+    "imap" => [
+        "host" => $_ENV["MAIL_IMAP_HOST"] ?? "localhost",
 
-    'host' => $_ENV['MAIL_IMAP_HOST'] ?? 'localhost',
+        "port" => (int) ($_ENV["MAIL_IMAP_PORT"] ?? 993),
 
-    'port' => (int) (
-        $_ENV['MAIL_IMAP_PORT'] ?? 993
-    ),
+        "username" => $_ENV["MAIL_IMAP_USERNAME"] ?? "",
 
-    'username' => $_ENV['MAIL_IMAP_USERNAME'] ?? '',
+        "password" => $_ENV["MAIL_IMAP_PASSWORD"] ?? "",
 
-    'password' => $_ENV['MAIL_IMAP_PASSWORD'] ?? '',
+        "encryption" => $_ENV["MAIL_IMAP_ENCRYPTION"] ?? "ssl",
 
-    'encryption' => $_ENV['MAIL_IMAP_ENCRYPTION'] ?? 'ssl',
+        "sent_folder" => $_ENV["MAIL_IMAP_SENT_FOLDER"] ?? null,
 
-    'sent_folder' => $_ENV['MAIL_IMAP_SENT_FOLDER'] ?? null,
+        "save_sent" => filter_var($_ENV["MAIL_IMAP_SAVE_SENT"] ?? true, FILTER_VALIDATE_BOOLEAN),
 
-    'save_sent' => filter_var(
-        $_ENV['MAIL_IMAP_SAVE_SENT'] ?? true,
-        FILTER_VALIDATE_BOOLEAN
-    ),
-
-    'validate_cert' => filter_var(
-        $_ENV['MAIL_IMAP_VALIDATE_CERT'] ?? true,
-        FILTER_VALIDATE_BOOLEAN
-    ),
-
-],
-
+        "validate_cert" => filter_var($_ENV["MAIL_IMAP_VALIDATE_CERT"] ?? true, FILTER_VALIDATE_BOOLEAN),
+    ],
 ];

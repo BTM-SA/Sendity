@@ -1,0 +1,20 @@
+[2026-07-29 20:46:26] [INFO] GET /send-test
+[2026-07-29 20:46:28] [INFO] Mail sent to admin@btm-sa.co.za with subject "Sendity Test"
+[2026-07-30 19:40:48] [INFO] GET /
+[2026-07-30 19:40:49] [INFO] GET /apple-touch-icon-precomposed.png
+[2026-07-30 19:40:49] [INFO] GET /apple-touch-icon.png
+[2026-07-30 19:40:49] [INFO] GET /favicon.ico
+[2026-07-30 19:40:59] [INFO] GET /imap-debug
+[2026-07-30 19:41:10] [INFO] GET /send-test
+[2026-07-30 19:41:12] [INFO] Mail sent to admin@btm-sa.co.za with subject "Sendity Test"
+[2026-07-30 19:41:41] [INFO] GET /imap-folders
+[2026-07-30 19:41:48] [INFO] GET /imap-debug
+[2026-07-30 19:55:39] [INFO] GET /imap-folders
+[2026-07-30 19:55:41] [INFO] GET /send-test
+[2026-07-30 19:55:41] [ERROR] [4AF7D6E1] Error: Class "Sendity\Mail\MailManager" not found
+[2026-07-30 19:55:45] [INFO] GET /send-test
+[2026-07-30 19:55:45] [ERROR] [F37464AE] Error: Class "Sendity\Mail\MailManager" not found
+[2026-07-30 19:56:00] [INFO] GET /send-test
+[2026-07-30 19:56:02] [INFO] Mail sent to admin@btm-sa.co.za with subject "Sendity Test"
+[2026-07-30 19:56:26] [INFO] GET /imap-test
+[2026-07-30 19:57:34] [INFO] GET /mail-manager-test

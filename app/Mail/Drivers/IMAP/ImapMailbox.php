@@ -6,49 +6,50 @@ namespace Sendity\Mail\Drivers\IMAP;
 
 use Sendity\Core\Config;
 use Sendity\Mail\Contracts\MailboxInterface;
+use Sendity\Mail\Exceptions\AuthenticationException;
+use Sendity\Mail\Exceptions\MailboxException;
 use Sendity\Mail\MailboxDiscovery;
 
-class ImapClient implements MailboxInterface
+class ImapMailbox implements MailboxInterface
 {
-    protected $connection = null;
+    protected $imap = null;
 
     protected array $mailboxes = [];
 
     protected array $specialFolders = [];
-
 
     public function __construct(
         protected Config $config
     ) {
     }
 
-
     public function driverName(): string
     {
         return 'imap';
     }
 
-
     public function connect(): void
     {
         $imap = $this->config->get('mail.imap');
 
-
-        $this->connection = imap_open(
+        $this->imap = imap_open(
             $this->serverString() . 'INBOX',
             $imap['username'],
             $imap['password']
         );
 
+        if ($this->imap === false) {
 
-        if ($this->connection === false) {
+            $error = imap_last_error() ?: '';
 
-            throw new \RuntimeException(
-                imap_last_error()
-                ?: 'Unable to connect to IMAP server.'
+            if (stripos($error, 'auth') !== false) {
+                throw new AuthenticationException($error);
+            }
+
+            throw new MailboxException(
+                $error ?: 'Unable to connect to IMAP server.'
             );
         }
-
 
         /*
         |--------------------------------------------------------------------------
@@ -57,7 +58,6 @@ class ImapClient implements MailboxInterface
         */
 
         $this->mailboxes = $this->discoverMailboxes();
-
 
         /*
         |--------------------------------------------------------------------------
@@ -71,26 +71,23 @@ class ImapClient implements MailboxInterface
         ))->resolve();
     }
 
-
     public function disconnect(): void
     {
-        if ($this->connection !== null) {
+        if ($this->imap !== null) {
 
             imap_close(
-                $this->connection
+                $this->imap
             );
 
-            $this->connection = null;
+            $this->imap = null;
         }
     }
 
-
     public function folders(): array
     {
-        if ($this->connection === null) {
+        if ($this->imap === null) {
             $this->connect();
         }
-
 
         return array_map(
             function ($mailbox) {
@@ -106,42 +103,35 @@ class ImapClient implements MailboxInterface
         );
     }
 
-
     public function mailboxes(): array
     {
-        if ($this->connection === null) {
+        if ($this->imap === null) {
             $this->connect();
         }
-
 
         return $this->mailboxes;
     }
 
-
     public function specialFolders(): array
     {
-        if ($this->connection === null) {
+        if ($this->imap === null) {
             $this->connect();
         }
-
 
         return $this->specialFolders;
     }
 
-
     protected function specialFolder(string $type): string
     {
-        if ($this->connection === null) {
+        if ($this->imap === null) {
             $this->connect();
         }
 
-
         $folder = $this->specialFolders[$type] ?? null;
-
 
         if (empty($folder)) {
 
-            throw new \RuntimeException(
+            throw new MailboxException(
                 sprintf(
                     'Unable to determine IMAP %s folder.',
                     $type
@@ -149,76 +139,63 @@ class ImapClient implements MailboxInterface
             );
         }
 
-
         return $folder;
     }
 
-
     public function appendSent(string $rawMessage): void
     {
-        if ($this->connection === null) {
+        if ($this->imap === null) {
             $this->connect();
         }
 
-
         $folder = $this->specialFolder('sent');
 
-
         $result = imap_append(
-            $this->connection,
+            $this->imap,
             $this->serverString() . $folder,
             $rawMessage
         );
 
-
         if ($result === false) {
 
-            throw new \RuntimeException(
+            throw new MailboxException(
                 imap_last_error()
                 ?: 'Unable to append message to Sent folder.'
             );
         }
     }
 
-
     protected function discoverMailboxes(): array
     {
         $mailboxes = imap_getmailboxes(
-            $this->connection,
+            $this->imap,
             $this->serverString(),
             '*'
         );
 
-
         if ($mailboxes === false) {
 
-            throw new \RuntimeException(
+            throw new MailboxException(
                 imap_last_error()
                 ?: 'Unable to retrieve mailboxes.'
             );
         }
 
-
         return $mailboxes;
     }
-
 
     protected function serverString(): string
     {
         $imap = $this->config->get('mail.imap');
-
 
         $flags = sprintf(
             'imap/%s',
             $imap['encryption']
         );
 
-
         if (!$imap['validate_cert']) {
-
             $flags .= '/novalidate-cert';
         }
-
 
         return sprintf(
             '{%s:%d/%s}',
