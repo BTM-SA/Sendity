@@ -8,6 +8,8 @@ class MailMessage
 {
     private string $id;
 
+    private MailLifecycle $lifecycle;
+
     private ?Address $from = null;
     private ?Address $replyTo = null;
 
@@ -20,7 +22,7 @@ class MailMessage
     /** @var Address[] */
     private array $bcc = [];
 
-    private string $subject = "";
+    private string $subject = '';
 
     private ?string $html = null;
     private ?string $text = null;
@@ -37,14 +39,28 @@ class MailMessage
      * A MailMessage describes what should be sent.
      * It does not know how the message is delivered.
      */
-    public function __construct(MessageIdGenerator $idGenerator)
-    {
+    public function __construct(
+        MessageIdGenerator $idGenerator
+    ) {
         $this->id = $idGenerator->generate();
+
+        $this->lifecycle = new MailLifecycle();
     }
 
+    /**
+     * Return the Sendity message ID.
+     */
     public function id(): string
     {
         return $this->id;
+    }
+
+    /**
+     * Return the message lifecycle.
+     */
+    public function lifecycle(): MailLifecycle
+    {
+        return $this->lifecycle;
     }
 
     public function from(string $email, ?string $name = null): self

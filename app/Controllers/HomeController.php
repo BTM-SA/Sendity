@@ -33,6 +33,10 @@ class HomeController
 
         try {
             $this->mailer->send($message);
+            echo '<pre>';
+print_r($message->lifecycle()->events());
+echo '</pre>';
+exit;
 
             return Response::text("Email sent successfully! ID: " . $message->id());
         } catch (\Throwable $e) {

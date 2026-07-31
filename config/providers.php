@@ -4,6 +4,7 @@ use Sendity\Providers\AppServiceProvider;
 use Sendity\Providers\RoutingServiceProvider;
 use Sendity\Providers\EventServiceProvider;
 use Sendity\Providers\MailServiceProvider;
+use Sendity\Providers\AuditServiceProvider;
 
 return [
 
@@ -14,5 +15,8 @@ return [
     EventServiceProvider::class,
 
     MailServiceProvider::class,
+    
+    AuditServiceProvider::class,
+
 
 ];

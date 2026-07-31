@@ -33,3 +33,16 @@
 [2026-07-30 20:21:46] [INFO] Mail sent to admin@btm-sa.co.za with subject "Sendity Test"
 [2026-07-30 21:15:40] [INFO] GET /send-test
 [2026-07-30 21:15:42] [INFO] Mail sent to admin@btm-sa.co.za with subject "Sendity Test"
+[2026-07-31 07:21:59] [INFO] GET /send-test
+[2026-07-31 07:22:01] [INFO] Mail sent to admin@btm-sa.co.za with subject "Sendity Test"
+[2026-07-31 07:32:57] [INFO] GET /send-test
+[2026-07-31 07:32:59] [INFO] Mail sent to admin@btm-sa.co.za with subject "Sendity Test"
+[2026-07-31 15:18:34] [INFO] GET /send-test
+[2026-07-31 15:24:07] [INFO] GET /send-test
+[2026-07-31 15:24:07] [ERROR] [9A90C665] TypeError: Cannot assign null to property Sendity\Audit\Stores\JsonAuditStore::$directory of type string
+[2026-07-31 15:24:43] [INFO] GET /send-test
+[2026-07-31 15:24:43] [ERROR] [F1312FFB] TypeError: Cannot assign null to property Sendity\Audit\Stores\JsonAuditStore::$directory of type string
+[2026-07-31 15:33:24] [INFO] GET /send-test
+[2026-07-31 15:33:26] [INFO] Mail sent to admin@btm-sa.co.za with subject "Sendity Test"
+[2026-07-31 18:18:04] [INFO] GET /send-test
+[2026-07-31 18:18:06] [INFO] Mail sent to admin@btm-sa.co.za with subject "Sendity Test"

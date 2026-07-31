@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace Sendity\Mail\Drivers\SMTP;
 
 use PHPMailer\PHPMailer\PHPMailer;
+use Sendity\Audit\AuditManager;
 use Sendity\Core\Config;
 use Sendity\Core\Events\EventDispatcher;
+use Sendity\Events\MailFailed;
 use Sendity\Events\MailSending;
 use Sendity\Events\MailSent;
-use Sendity\Events\MailFailed;
 use Sendity\Mail\Contracts\MailboxInterface;
 use Sendity\Mail\MailerInterface;
 use Sendity\Mail\MailMessage;
@@ -20,9 +21,11 @@ class SmtpTransport implements MailerInterface
     public function __construct(
         protected Config $config,
         protected EventDispatcher $events,
-        protected MailboxInterface $mailbox
+        protected MailboxInterface $mailbox,
+        protected AuditManager $audit
     ) {
     }
+
 
     public function send(MailMessage $message): void
     {
@@ -39,25 +42,37 @@ class SmtpTransport implements MailerInterface
             ],
         ];
 
+
         /*
         |--------------------------------------------------------------------------
         | SMTP
         |--------------------------------------------------------------------------
         */
 
-        $mail->Hostname = $this->config->get("mail.transports.smtp.hostname");
+        $mail->Hostname = $this->config->get(
+            "mail.transports.smtp.hostname"
+        );
 
-        $mail->Host = $this->config->get("mail.transports.smtp.host");
+        $mail->Host = $this->config->get(
+            "mail.transports.smtp.host"
+        );
 
-        $mail->Port = $this->config->get("mail.transports.smtp.port");
+        $mail->Port = $this->config->get(
+            "mail.transports.smtp.port"
+        );
 
         $mail->SMTPAuth = true;
 
-        $mail->Username = $this->config->get("mail.transports.smtp.username");
+        $mail->Username = $this->config->get(
+            "mail.transports.smtp.username"
+        );
 
-        $mail->Password = $this->config->get("mail.transports.smtp.password");
+        $mail->Password = $this->config->get(
+            "mail.transports.smtp.password"
+        );
 
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+
 
         /*
         |--------------------------------------------------------------------------
@@ -68,16 +83,30 @@ class SmtpTransport implements MailerInterface
         $from = $message->getFrom();
 
         if ($from !== null) {
-            $mail->setFrom($from->getEmail(), $from->getName());
 
-            $mail->Sender = $this->config->get("mail.from.address");
+            $mail->setFrom(
+                $from->getEmail(),
+                $from->getName()
+            );
+
+            $mail->Sender = $this->config->get(
+                "mail.from.address"
+            );
+
         } else {
-            $defaultFrom = $this->config->get("mail.from");
 
-            $mail->setFrom($defaultFrom["address"], $defaultFrom["name"]);
+            $defaultFrom = $this->config->get(
+                "mail.from"
+            );
+
+            $mail->setFrom(
+                $defaultFrom["address"],
+                $defaultFrom["name"]
+            );
 
             $mail->Sender = $defaultFrom["address"];
         }
+
 
         /*
         |--------------------------------------------------------------------------
@@ -86,16 +115,31 @@ class SmtpTransport implements MailerInterface
         */
 
         foreach ($message->getTo() as $address) {
-            $mail->addAddress($address->getEmail(), $address->getName());
+
+            $mail->addAddress(
+                $address->getEmail(),
+                $address->getName()
+            );
         }
+
 
         foreach ($message->getCc() as $address) {
-            $mail->addCC($address->getEmail(), $address->getName());
+
+            $mail->addCC(
+                $address->getEmail(),
+                $address->getName()
+            );
         }
 
+
         foreach ($message->getBcc() as $address) {
-            $mail->addBCC($address->getEmail(), $address->getName());
+
+            $mail->addBCC(
+                $address->getEmail(),
+                $address->getName()
+            );
         }
+
 
         /*
         |--------------------------------------------------------------------------
@@ -106,8 +150,13 @@ class SmtpTransport implements MailerInterface
         $replyTo = $message->getReplyTo();
 
         if ($replyTo !== null) {
-            $mail->addReplyTo($replyTo->getEmail(), $replyTo->getName());
+
+            $mail->addReplyTo(
+                $replyTo->getEmail(),
+                $replyTo->getName()
+            );
         }
+
 
         /*
         |--------------------------------------------------------------------------
@@ -118,37 +167,45 @@ class SmtpTransport implements MailerInterface
         $mail->Subject = $message->getSubject();
 
         if ($message->getHtml() !== null) {
+
             $mail->isHTML(true);
 
             $mail->Body = $message->getHtml();
 
             if ($message->getText() !== null) {
+
                 $mail->AltBody = $message->getText();
             }
+
         } else {
+
             $mail->isHTML(false);
 
             $mail->Body = $message->getText() ?? "";
         }
 
-        /*
-|--------------------------------------------------------------------------
-| Headers
-|--------------------------------------------------------------------------
-*/
 
         /*
-         * Add Sendity message identity.
-         */
-        $mail->addCustomHeader("X-Sendity-ID", $message->id());
+        |--------------------------------------------------------------------------
+        | Headers
+        |--------------------------------------------------------------------------
+        */
+
+        $mail->addCustomHeader(
+            "X-Sendity-ID",
+            $message->id()
+        );
 
 
-        /*
-         * Add custom message headers.
-         */
         foreach ($message->getHeaders() as $name => $value) {
-            $mail->addCustomHeader($name, $value);
+
+            $mail->addCustomHeader(
+                $name,
+                $value
+            );
         }
+
+
         /*
         |--------------------------------------------------------------------------
         | Attachments
@@ -156,52 +213,155 @@ class SmtpTransport implements MailerInterface
         */
 
         foreach ($message->getAttachments() as $attachment) {
+
             if ($attachment->hasName()) {
-                $mail->addAttachment($attachment->getPath(), $attachment->getName());
+
+                $mail->addAttachment(
+                    $attachment->getPath(),
+                    $attachment->getName()
+                );
+
             } else {
-                $mail->addAttachment($attachment->getPath());
+
+                $mail->addAttachment(
+                    $attachment->getPath()
+                );
             }
         }
 
+
         /*
         |--------------------------------------------------------------------------
-        | Events
+        | Lifecycle - Sending
         |--------------------------------------------------------------------------
         */
 
-        $this->events->dispatch(new MailSending($message));
+        $message
+            ->lifecycle()
+            ->sending([
+                "transport" => "smtp",
+                "host" => $this->config->get(
+                    "mail.transports.smtp.host"
+                ),
+                "port" => $this->config->get(
+                    "mail.transports.smtp.port"
+                ),
+                "attempt" => 1,
+            ]);
+
+
+        $this->events->dispatch(
+            new MailSending($message)
+        );
+
 
         try {
+
             $mail->send();
+
 
             /*
             |--------------------------------------------------------------------------
-            | Save a copy to the Sent mailbox.
+            | Lifecycle - Sent
             |--------------------------------------------------------------------------
             */
 
-            if ($this->config->get("mail.imap.save_sent")) {
+            $message
+                ->lifecycle()
+                ->sent([
+                    "transport" => "smtp",
+                    "message_id" => $message->id(),
+                ]);
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | Persist Audit
+            |--------------------------------------------------------------------------
+            */
+
+            $this->audit->save(
+                $message
+            );
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | Save copy to Sent mailbox
+            |--------------------------------------------------------------------------
+            */
+
+            if ($this->config->get(
+                "mail.imap.save_sent"
+            )) {
+
                 try {
+
                     $mime = $mail->getSentMIMEMessage();
 
-                    $this->mailbox->appendSent($mime);
-                } catch (Throwable $e) {
-                    /*
-                     * SMTP delivery already succeeded.
-                     *
-                     * Saving a copy to Sent is secondary.
-                     * Do not mark the email as failed.
-                     */
+                    $this->mailbox->appendSent(
+                        $mime
+                    );
 
-                    error_log("Unable to save message to Sent folder: " . $e->getMessage());
+                } catch (Throwable $e) {
+
+                    error_log(
+                        "Unable to save message to Sent folder: "
+                        . $e->getMessage()
+                    );
                 }
             }
+
+
         } catch (Throwable $e) {
-            $this->events->dispatch(new MailFailed($message, $e));
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | Lifecycle - Failed
+            |--------------------------------------------------------------------------
+            */
+
+            $message
+                ->lifecycle()
+                ->failed([
+                    "transport" => "smtp",
+                    "host" => $this->config->get(
+                        "mail.transports.smtp.host"
+                    ),
+                    "error" => $e->getMessage(),
+                    "exception" => get_class($e),
+                    "attempt" => 1,
+                ]);
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | Persist Failed Audit
+            |--------------------------------------------------------------------------
+            */
+
+            $this->audit->save(
+                $message
+            );
+
+
+            $this->events->dispatch(
+                new MailFailed(
+                    $message,
+                    $e
+                )
+            );
+
 
             throw $e;
         }
 
-        $this->events->dispatch(new MailSent($message));
+
+        $this->events->dispatch(
+            new MailSent(
+                $message
+            )
+        );
     }
 }
