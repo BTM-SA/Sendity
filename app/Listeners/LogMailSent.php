@@ -15,8 +15,8 @@ class LogMailSent implements ListenerInterface
 
     Logger::info(sprintf(
         'Mail sent to %s with subject "%s"',
-        $event->message->getTo()[0]->getEmail(),
-        $event->message->getSubject()
+        $event->message()->getTo()[0]->getEmail(),
+        $event->message()->getSubject()
     ));
 }
 }

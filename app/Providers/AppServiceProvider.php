@@ -28,8 +28,13 @@ class AppServiceProvider extends ServiceProvider
 
         $this->container->singleton(ExceptionHandler::class, fn() => new ExceptionHandler());
 
-        $this->container->singleton(EventDispatcher::class, fn($container) => new EventDispatcher($container));
-
+        $this->container->singleton(
+    EventDispatcher::class,
+    fn($container) => new EventDispatcher(
+        $container,
+        $container->get(Logger::class)
+    )
+);
         $this->container->singleton(RouteLoader::class, function ($container) {
             return new RouteLoader($container->get(\Sendity\Http\Router::class), $container);
         });

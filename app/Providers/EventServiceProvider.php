@@ -7,8 +7,11 @@ namespace Sendity\Providers;
 use Sendity\Core\Events\EventDispatcher;
 use Sendity\Core\Providers\ServiceProvider;
 
+use Sendity\Events\MailFailed;
 use Sendity\Events\MailSent;
+
 use Sendity\Listeners\LogMailSent;
+use Sendity\Listeners\AuditListener;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -19,12 +22,16 @@ class EventServiceProvider extends ServiceProvider
      */
     protected array $listen = [
 
-        MailSent::class => [
-            LogMailSent::class,
-        ],
+    MailSent::class => [
+        LogMailSent::class,
+        AuditListener::class,
+    ],
 
-    ];
+    MailFailed::class => [
+        AuditListener::class,
+    ],
 
+];
     public function register(): void
     {
         //

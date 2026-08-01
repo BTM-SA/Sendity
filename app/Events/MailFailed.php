@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 namespace Sendity\Events;
 
-use Sendity\Core\Events\Contracts\EventInterface;
-use Sendity\Mail\MailMessage;
 use Throwable;
 
-class MailFailed implements EventInterface
+class MailFailed extends MailEvent
 {
     public function __construct(
-        public readonly MailMessage $message,
+        \Sendity\Mail\MailMessage $message,
         public readonly Throwable $exception
     ) {
+        parent::__construct($message);
     }
 }
