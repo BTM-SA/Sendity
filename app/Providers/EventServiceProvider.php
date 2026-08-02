@@ -13,6 +13,7 @@ use Sendity\Events\MailSent;
 use Sendity\Listeners\LogMailSent;
 use Sendity\Listeners\AuditListener;
 
+
 class EventServiceProvider extends ServiceProvider
 {
     /**

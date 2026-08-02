@@ -1,0 +1,29 @@
+{
+    "id": "snd_bb6d221f3327a29e5de226d91e95bfc3",
+    "subject": "Sendity Test",
+    "events": [
+        {
+            "status": "created",
+            "occurred_at": "2026-08-02T05:20:31+00:00",
+            "metadata": []
+        },
+        {
+            "status": "sending",
+            "occurred_at": "2026-08-02T05:20:31+00:00",
+            "metadata": {
+                "transport": "smtp",
+                "host": "mail.bichet.co.za",
+                "port": 587,
+                "attempt": 1
+            }
+        },
+        {
+            "status": "sent",
+            "occurred_at": "2026-08-02T05:20:32+00:00",
+            "metadata": {
+                "transport": "smtp",
+                "message_id": "snd_bb6d221f3327a29e5de226d91e95bfc3"
+            }
+        }
+    ]
+}
