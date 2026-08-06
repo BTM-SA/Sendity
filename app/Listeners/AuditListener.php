@@ -7,8 +7,7 @@ namespace Sendity\Listeners;
 use Sendity\Audit\AuditManager;
 use Sendity\Core\Events\Contracts\EventInterface;
 use Sendity\Core\Events\Contracts\ListenerInterface;
-use Sendity\Events\MailFailed;
-use Sendity\Events\MailSent;
+use Sendity\Events\MailEvent;
 
 class AuditListener implements ListenerInterface
 {
@@ -22,21 +21,12 @@ class AuditListener implements ListenerInterface
         EventInterface $event
     ): void {
 
-        if ($event instanceof MailSent) {
-
-            $this->audit->save(
-                $event->message()
-            );
-
+        if (! $event instanceof MailEvent) {
             return;
         }
 
-
-        if ($event instanceof MailFailed) {
-
-            $this->audit->save(
-                $event->message()
-            );
-        }
+        $this->audit->save(
+            $event->message()
+        );
     }
 }

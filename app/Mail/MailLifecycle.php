@@ -120,7 +120,18 @@ public function failed(array $metadata = []): void
         $metadata
     );
 }
+/**
+ * @param array<string, mixed> $metadata
+ */
+public function retrying(array $metadata = []): void
+{
+    $this->status = MessageStatus::RETRYING;
 
+    $this->record(
+        MessageStatus::RETRYING,
+        $metadata
+    );
+}
     public function queuedAt(): ?DateTimeImmutable
     {
         return $this->queuedAt;

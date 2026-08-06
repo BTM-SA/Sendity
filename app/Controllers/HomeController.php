@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Sendity\Controllers;
 
 use Sendity\Http\Response;
-use Sendity\Mail\MailerInterface;
+use Sendity\Mail\Contracts\MailerInterface;
 use Sendity\Mail\MailMessage;
 use Sendity\Mail\MessageIdGenerator;
 

@@ -169,6 +169,7 @@ The most common tasks should remain effortless, while advanced capabilities shou
 
 # Architecture
 Sendity was built as a secure digital delivery platform on top of a modular PHP framework with a focus on clear separation of responsibilities, dependency injection, and service-based architecture.
+
 <a href="https://github.com/BTM-SA/Sendity/blob/main/ARCHITECTURE.md" > See more here.  🔎</a>
 
 ## Architectural Decisions Are Recorded

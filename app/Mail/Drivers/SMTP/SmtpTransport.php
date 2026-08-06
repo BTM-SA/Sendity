@@ -11,7 +11,7 @@ use Sendity\Events\MailFailed;
 use Sendity\Events\MailSending;
 use Sendity\Events\MailSent;
 use Sendity\Mail\Contracts\MailboxInterface;
-use Sendity\Mail\MailerInterface;
+use Sendity\Mail\Contracts\MailerInterface;
 use Sendity\Mail\MailMessage;
 use Throwable;
 

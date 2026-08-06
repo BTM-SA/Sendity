@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sendity\Http\Middleware;
 
+use Sendity\Http\Contracts\MiddlewareInterface;
 use Sendity\Http\Request;
 use Sendity\Services\Logger;
 

@@ -4,23 +4,36 @@ declare(strict_types=1);
 
 namespace Sendity\Mail;
 
-class MailManager
+use Sendity\Mail\Contracts\MailerInterface;
+
+class MailManager implements MailerInterface
 {
     public function __construct(
-        protected MailTransportManager $transport,
+        protected DeliveryManager $delivery,
         protected MailboxManager $mailbox
     ) {
     }
 
 
-    public function transport(): MailTransportManager
-    {
-        return $this->transport;
+    public function send(
+        MailMessage $message
+    ): void {
+        $this->delivery->deliver(
+            $message
+        );
     }
 
 
     public function mailbox(): MailboxManager
     {
         return $this->mailbox;
+    }
+
+
+    public function transportName(): string
+    {
+        return get_class(
+            $this->delivery->transport()
+        );
     }
 }

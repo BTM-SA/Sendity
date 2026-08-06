@@ -11,13 +11,15 @@ use Sendity\Core\Config;
 use Sendity\Core\Events\EventDispatcher;
 use Sendity\Core\Providers\ServiceProvider;
 use Sendity\Mail\Contracts\MailboxInterface;
+use Sendity\Mail\DeliveryManager;
 use Sendity\Mail\Drivers\IMAP\ImapMailbox;
 use Sendity\Mail\Drivers\SMTP\SmtpTransport;
-use Sendity\Mail\MailerInterface;
+use Sendity\Mail\Contracts\MailerInterface;
 use Sendity\Mail\MailManager;
 use Sendity\Mail\MailTransportManager;
 use Sendity\Mail\MailboxManager;
 use Sendity\Mail\MessageIdGenerator;
+
 
 class MailServiceProvider extends ServiceProvider
 {
@@ -63,25 +65,6 @@ class MailServiceProvider extends ServiceProvider
 
         /*
         |--------------------------------------------------------------------------
-        | Mail Manager
-        |--------------------------------------------------------------------------
-        */
-
-        $this->container->singleton(
-            MailManager::class,
-            function ($container) {
-
-                return new MailManager(
-                    $container->get(MailTransportManager::class),
-                    $container->get(MailboxManager::class)
-                );
-
-            }
-        );
-
-
-        /*
-        |--------------------------------------------------------------------------
         | Message ID Generator
         |--------------------------------------------------------------------------
         */
@@ -91,6 +74,24 @@ class MailServiceProvider extends ServiceProvider
             function () {
 
                 return new MessageIdGenerator();
+
+            }
+        );
+
+        /*
+        |--------------------------------------------------------------------------
+        | Delivery Manager
+        |--------------------------------------------------------------------------
+        */
+
+        $this->container->singleton(
+            DeliveryManager::class,
+            function ($container) {
+
+                return new DeliveryManager(
+                    $container->get(MailTransportManager::class),
+                    $container->get(RetryPolicy::class)
+                );
 
             }
         );
@@ -145,8 +146,26 @@ class MailServiceProvider extends ServiceProvider
                 return new SmtpTransport(
                     $container->get(Config::class),
                     $container->get(EventDispatcher::class),
-                    $container->get(MailboxInterface::class),
-                    $container->get(AuditManager::class)
+                    $container->get(MailboxInterface::class)
+                );
+
+            }
+        );
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Mail Manager
+        |--------------------------------------------------------------------------
+        */
+
+        $this->container->singleton(
+            MailManager::class,
+            function ($container) {
+
+                return new MailManager(
+                    $container->get(DeliveryManager::class),
+                    $container->get(MailboxManager::class)
                 );
 
             }
@@ -163,10 +182,9 @@ class MailServiceProvider extends ServiceProvider
             MailerInterface::class,
             function ($container) {
 
-                return $container
-                    ->get(MailManager::class)
-                    ->transport()
-                    ->driver();
+                return $container->get(
+                    MailManager::class
+                );
 
             }
         );

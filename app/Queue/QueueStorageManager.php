@@ -2,14 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Sendity\Mail;
+namespace Sendity\Queue;
 
 use Sendity\Core\Config;
 use Sendity\Core\Container;
-use Sendity\Mail\Contracts\MailerInterface;
+use Sendity\Queue\Contracts\QueueStorageInterface;
+use Sendity\Queue\Storage\FileQueueStorage;
 use InvalidArgumentException;
 
-class MailTransportManager
+class QueueStorageManager
 {
     public function __construct(
         protected Config $config,
@@ -18,23 +19,25 @@ class MailTransportManager
     }
 
 
-    public function driver(?string $name = null): MailerInterface
-    {
+    public function storage(
+        ?string $name = null
+    ): QueueStorageInterface {
+
         $name ??= $this->config->get(
-            'mail.default',
-            'smtp'
+            'queue.storage',
+            'file'
         );
 
 
         return match ($name) {
 
-            'smtp' => $this->container->get(
-                \Sendity\Mail\Drivers\SMTP\SmtpTransport::class
+            'file' => $this->container->get(
+                FileQueueStorage::class
             ),
 
 
             default => throw new InvalidArgumentException(
-                "Unsupported mail transport: {$name}"
+                "Unsupported queue storage: {$name}"
             ),
 
         };

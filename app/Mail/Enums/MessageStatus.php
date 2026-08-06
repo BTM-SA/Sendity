@@ -15,4 +15,6 @@ enum MessageStatus: string
     case SENT = 'sent';
 
     case FAILED = 'failed';
+    
+    case RETRYING = 'retrying';
 }

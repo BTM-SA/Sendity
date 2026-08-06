@@ -179,6 +179,7 @@ $router->get('/mailbox-discovery-test', function () use ($container) {
 
 });
 
+
 $router->get('/mail-manager-test', function () use ($container) {
 
     $mail = $container->get(
@@ -187,9 +188,7 @@ $router->get('/mail-manager-test', function () use ($container) {
 
     return
         'Transport: ' .
-        get_class(
-            $mail->transport()->driver()
-        )
+        $mail->transportName()
         .
         '<br>Mailbox: ' .
         get_class(
@@ -197,6 +196,8 @@ $router->get('/mail-manager-test', function () use ($container) {
         );
 
 });
+
+
 $router->get('/message-id-test', function () use ($container) {
 
     $generator = $container->get(
@@ -207,11 +208,34 @@ $router->get('/message-id-test', function () use ($container) {
 
 });
 
+
 $router->get('/message-test', function () {
 
     $message = new \Sendity\Mail\MailMessage();
 
     return $message->id();
+
+});
+
+$router->get('/queue-worker-test', function () use ($container) {
+
+    $queue = $container->get(
+        \Sendity\Queue\QueueManager::class
+    );
+
+    $queue->dispatch(
+        new \Sendity\Queue\Jobs\TestJob()
+    );
+
+
+    $worker = $container->get(
+        \Sendity\Queue\QueueWorker::class
+    );
+
+
+    return $worker->work()
+        ? 'Queue worker executed job'
+        : 'Nothing processed';
 
 });
 
