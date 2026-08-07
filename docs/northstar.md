@@ -580,29 +580,29 @@ Trusted communication is the goal.
 ### Framework
 The Sendity framework provides the foundation for Sendity features while remaining independent from the Sendity domain model.
 
-- <a href="https://github/docs/architecture/framework.md">framework.md</a>
+- <a href="https://github/docs/architecture/01-framework.md">framework.md</a>
 ---
 
 ### Domain
 The Sendity domain model defines the core concepts that make up the Sendity communication platform.
-- <a href="https://github/docs/architecture/domain.md">domain.md</a>
+- <a href="https://github/docs/architecture/02-domain.md">domain.md</a>
 
 ---
 ### Queue
 
 The queue system is responsible for managing background work while keeping application business logic separate from execution concerns.
-- <a href="https://github/docs/architecture/queue.md">queue.md</a>
+- <a href="https://github/docs/architecture/03-queue.md">queue.md</a>
 
 ## Workflow Documentation
 ### Purpose
 Workflows describe how users achieve goals within Sendity.
-- <a href="https://github/docs/workflows/purpose.md">purpose.md</a>
+- <a href="https://github/docs/workflows/01-purpose.md">purpose.md</a>
 ---
 ### Identity
 The Identity workflow describes how an email identity becomes available and reliable within Sendity.
-- <a href="https://github/docs/workflows/identity.md">identity.md</a>
+- <a href="https://github/docs/workflows/02-identity.md">identity.md</a>
 ---
 ### Send-email
 The Send Email workflow describes how a user creates and sends an email through Sendity.
-- <a href="https://github/docs/workflows/send-email.md">send-email.md</a>
+- <a href="https://github/docs/workflows/03-send-email.md">send-email.md</a>
 
