@@ -146,7 +146,7 @@ Whichever option you choose, the goal remains the same:
 
 **Trust. Control. Simplicity.**
 
-
+---
 
 # Our Philosophy
 
@@ -167,16 +167,18 @@ Communication should be transparent, honest, and dependable. Trust is earned—n
 
 The most common tasks should remain effortless, while advanced capabilities should always remain optional.
 
-# Architecture
-Sendity was built as a secure digital delivery platform on top of a modular PHP framework with a focus on clear separation of responsibilities, dependency injection, and service-based architecture.
+---
 
-<a href="https://github.com/BTM-SA/Sendity/blob/main/ARCHITECTURE.md" > See more here.  🔎</a>
+# Architecture
+Sendity was built as a secure digital delivery platform on top of a modular PHP framework with a focus on clear separation of responsibilities.
+
+<a href="https://github.com/BTM-SA/Sendity/tree/main/docs/architecture" > See more here.  🔎</a>
 
 ## Architectural Decisions Are Recorded
 
 Every significant architectural decision is documented as an Architecture Decision Record (ADR).
 
-They can be   <a href="https://github.com/BTM-SA/Sendity/tree/main/docs/adr" >found here. 🔎</a> 
+They can be   <a href="https://github.com/BTM-SA/Sendity/tree/main/docs/architecture/adr" >found here. 🔎</a> 
 
 Each ADR describes:
 
@@ -187,3 +189,23 @@ Each ADR describes:
 - Consequences
 
 ---
+
+# Workflows
+
+Workflows describe how users achieve goals within Sendity.
+
+> They can be   <a href="https://github.com/BTM-SA/Sendity/tree/main/docs/workflows" >found here. 🔎</a> 
+
+---
+
+# North Star
+
+The source of truth for Sendity's purpose, principles, and direction.
+>Find out <a href="https://github.com/BTM-SA/Sendity/tree/main/docs/northstar.md" > more here. 🔎</a> 
+---
+
+# Filetree 
+>View <a href="https://github.com/BTM-SA/Sendity/tree/main/docs/workflows" > here. 🔎</a> 
+
+
+
