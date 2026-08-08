@@ -575,34 +575,41 @@ Trusted communication is the goal.
 # Related 
 ## Architecture Documentation
 ### Filetree
-- <a href="https://github/docs/filetree.md">filetree.md</a>
+>- <strong><a href="https://github.com/BTM-SA/Sendity/blob/main/docs/filetree.md">filetree.md</a></strong>
 ---
 ### Framework
 The Sendity framework provides the foundation for Sendity features while remaining independent from the Sendity domain model.
 
-- <a href="https://github/docs/architecture/01-framework.md">framework.md</a>
+>- <strong><a href="https://github.com/BTM-SA/Sendity/blob/main/docs/architecture/01-framework.md">framework.md</a></strong>
 ---
 
 ### Domain
 The Sendity domain model defines the core concepts that make up the Sendity communication platform.
-- <a href="https://github/docs/architecture/02-domain.md">domain.md</a>
+>- <strong><a href="https://github.com/BTM-SA/Sendity/blob/main/docs/architecture/02-domain.md">domain.md</a></strong>
 
 ---
 ### Queue
 
 The queue system is responsible for managing background work while keeping application business logic separate from execution concerns.
-- <a href="https://github/docs/architecture/03-queue.md">queue.md</a>
+- <strong><a href="https://github.com/BTM-SA/Sendity/blob/main/docs/architecture/03-queue.md">queue.md</a></strong>
+
+---
 
 ## Workflow Documentation
 ### Purpose
 Workflows describe how users achieve goals within Sendity.
-- <a href="https://github/docs/workflows/01-purpose.md">purpose.md</a>
+>- <strong><a href="https://github.com/BTM-SA/Sendity/blob/main/docs/workflows/01-purpose.md">purpose.md</a></strong>
 ---
 ### Identity
 The Identity workflow describes how an email identity becomes available and reliable within Sendity.
-- <a href="https://github/docs/workflows/02-identity.md">identity.md</a>
+>- <strong><a href="https://github.com/BTM-SA/Sendity/blob/main/docs/workflows/02-identity.md">identity.md</a></strong>
 ---
 ### Send-email
 The Send Email workflow describes how a user creates and sends an email through Sendity.
-- <a href="https://github/docs/workflows/03-send-email.md">send-email.md</a>
+>- <strong><a href="https://github.com/BTM-SA/Sendity/blob/main/docs/workflows/03-send-email.md">send-email.md</a></strong>
+
+---
+### Receiving-email
+The Receive Email workflow describes how incoming email enters Sendity and becomes part of the user's mailbox.
+>- <strong><a href="https://github.com/BTM-SA/Sendity/blob/main/docs/workflows/04-receiving-email.md">receiving-email.md</a></strong>
 
