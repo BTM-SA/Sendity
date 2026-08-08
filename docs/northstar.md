@@ -613,3 +613,17 @@ The Send Email workflow describes how a user creates and sends an email through 
 The Receive Email workflow describes how incoming email enters Sendity and becomes part of the user's mailbox.
 >- <strong><a href="https://github.com/BTM-SA/Sendity/blob/main/docs/workflows/04-receiving-email.md">receiving-email.md</a></strong>
 
+---
+### Conversations
+The Conversation workflow describes how Sendity groups related emails into an ongoing exchange.
+>- <strong><a href="https://github.com/BTM-SA/Sendity/blob/main/docs/workflows/05-conversations.md">conversations.md</a></strong>
+
+---
+### Document-Protection
+The Document Protection workflow describes how a user optionally protects a document shared through Sendity.
+>- <strong><a href="https://github.com/BTM-SA/Sendity/blob/main/docs/workflows/06-document-protection.md">document-protection.md</a></strong>
+
+---
+### Templates
+This workflow describes how Sendity supports two distinct types of reusable templates
+>- <strong><a href="https://github.com/BTM-SA/Sendity/blob/main/docs/workflows/07-templates.md">templates.md</a></strong>
