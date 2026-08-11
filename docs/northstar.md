@@ -573,10 +573,12 @@ Trusted communication is the goal.
 ---
 
 # Related 
-## Architecture Documentation
+
 ### Filetree
 >- <strong><a href="https://github.com/BTM-SA/Sendity/blob/main/docs/filetree.md">filetree.md</a></strong>
 ---
+## Architecture Documentation
+
 ### Framework
 The Sendity framework provides the foundation for Sendity features while remaining independent from the Sendity domain model.
 
@@ -591,7 +593,7 @@ The Sendity domain model defines the core concepts that make up the Sendity comm
 ### Queue
 
 The queue system is responsible for managing background work while keeping application business logic separate from execution concerns.
-- <strong><a href="https://github.com/BTM-SA/Sendity/blob/main/docs/architecture/03-queue.md">queue.md</a></strong>
+>- <strong><a href="https://github.com/BTM-SA/Sendity/blob/main/docs/architecture/03-queue.md">queue.md</a></strong>
 
 ---
 
@@ -617,13 +619,32 @@ The Receive Email workflow describes how incoming email enters Sendity and becom
 ### Conversations
 The Conversation workflow describes how Sendity groups related emails into an ongoing exchange.
 >- <strong><a href="https://github.com/BTM-SA/Sendity/blob/main/docs/workflows/05-conversations.md">conversations.md</a></strong>
-
 ---
+
 ### Document-Protection
 The Document Protection workflow describes how a user optionally protects a document shared through Sendity.
 >- <strong><a href="https://github.com/BTM-SA/Sendity/blob/main/docs/workflows/06-document-protection.md">document-protection.md</a></strong>
-
 ---
 ### Templates
 This workflow describes how Sendity supports two distinct types of reusable templates
 >- <strong><a href="https://github.com/BTM-SA/Sendity/blob/main/docs/workflows/07-templates.md">templates.md</a></strong>
+
+---
+
+## Product
+
+### Credential-health
+This describes how Sendity gives users a clear understanding of whether the currently stored credential is working.
+>- <strong><a href="https://github.com/BTM-SA/Sendity/blob/main/docs/product/01-credential-health.md">credential-health.md</a></strong>
+
+---
+### Email experience
+This describes how Sendity should improve the email experience without forcing users to understand the technology behind it.
+>- <strong><a href="https://github.com/BTM-SA/Sendity/blob/main/docs/product/02-email-experience.md">email-experience.md</a></strong>
+
+---
+## User Interface
+### UI shell
+The Sendity UI shell provides the structural foundation for the application.
+>- <strong><a href="https://github.com/BTM-SA/Sendity/blob/main/docs/ui/ui-shell.md">ui-shell.md</a></strong>
+

@@ -10,6 +10,27 @@
 
 ---
 
+# Our Philosophy
+
+Every decision in Sendity begins with three principles.
+
+- Trust
+
+
+- Control
+
+
+- Simplicity
+
+
+
+
+Communication should be transparent, honest, and dependable. Trust is earned—not assumed.
+
+The most common tasks should remain effortless, while advanced capabilities should always remain optional.
+
+---
+
 ## Who Sendity Is For
 
 Sendity is for people who want more confidence in their email communications without sacrificing simplicity.
@@ -148,26 +169,7 @@ Whichever option you choose, the goal remains the same:
 
 ---
 
-# Our Philosophy
 
-Every decision in Sendity begins with three principles.
-
-- Trust
-
-
-- Control
-
-
-- Simplicity
-
-
-
-
-Communication should be transparent, honest, and dependable. Trust is earned—not assumed.
-
-The most common tasks should remain effortless, while advanced capabilities should always remain optional.
-
----
 
 # Architecture
 Sendity was built as a secure digital delivery platform on top of a modular PHP framework with a focus on clear separation of responsibilities.
@@ -180,14 +182,6 @@ Every significant architectural decision is documented as an Architecture Decisi
 
 >-   <strong><a href="https://github.com/BTM-SA/Sendity/tree/main/docs/architecture/adr" >View here</a></strong>
 
-
----
-
-# Workflows
-
-Workflows describe how users achieve goals within Sendity.
-
->- <strong><a href="https://github.com/BTM-SA/Sendity/tree/main/docs/workflows" >View here</a> </strong>
 
 ---
 
