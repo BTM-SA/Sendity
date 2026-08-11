@@ -637,7 +637,7 @@ This workflow describes how Communication Insights help users understand what ha
 ---
 ### Security and Identity
 This workflow describes how Sendity helps users establish trust in an email identity and optionally use security capabilities when sending or receiving email.
->- <strong><a href="https://github.com/BTM-SA/Sendity/blob/main/docs/workflows/09-Security-and-identity.md">09-Security-and-identity.md</a></strong>
+>- <strong><a href="https://github.com/BTM-SA/Sendity/blob/main/docs/workflows/09-security-and-identity.md">09-security-and-identity.md</a></strong>
 
 ---
 
