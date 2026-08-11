@@ -119,6 +119,8 @@
     │   ├── providers.php
     │   └── queue.php
     ├── docs
+    │   ├── filetree.md
+    │   ├── northstar.md
     │   ├── architecture
     │   │   ├── 01-framework.md
     │   │   ├── 02-domain.md
@@ -138,21 +140,21 @@
     │   │       ├── 0012-Isolate-Event-Listener-Failures-From-Core-Operations.md
     │   │       ├── 0013-Event-Listener-Failure-Isolation.md
     │   │       └── 0014-Queue-Architecture.md
-    │   ├── filetree.md
-    │   ├── northstar.md
+    │   ├── workflows
+    │   │   ├── 01-purpose.md
+    │   │   ├── 02-identity.md
+    │   │   ├── 03-send-email.md
+    │   │   ├── 04-receiving-email.md
+    │   │   ├── 05-conversations.md
+    │   │   ├── 06-document-protection.md
+    │   │   ├── 07-templates.md
+    │   │   ├── 08-communication-insights.md
+    │   │   └── 09-security-and-identity
     │   ├── product
     │   │   ├── 01-credential-health.md
     │   │   └── 02-email-experience.md
-    │   ├── ui
-    │   │   └── ui-shell.md
-    │   └── workflows
-    │       ├── 01-purpose.md
-    │       ├── 02-identity.md
-    │       ├── 03-send-email.md
-    │       ├── 04-receiving-email.md
-    │       ├── 05-conversations.md
-    │       ├── 06-document-protection.md
-    │       └── 07-templates.md
+    │   └── ui
+    │       └── ui-shell.md
     ├── public
     │   └── index.php
     ├── README.md

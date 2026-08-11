@@ -577,73 +577,83 @@ Trusted communication is the goal.
 ### Filetree
 >- <strong><a href="https://github.com/BTM-SA/Sendity/blob/main/docs/filetree.md">filetree.md</a></strong>
 ---
-## Architecture Documentation
+# Architecture Documentation
 
 ### Framework
 The Sendity framework provides the foundation for Sendity features while remaining independent from the Sendity domain model.
 
->- <strong><a href="https://github.com/BTM-SA/Sendity/blob/main/docs/architecture/01-framework.md">framework.md</a></strong>
+>- <strong><a href="https://github.com/BTM-SA/Sendity/blob/main/docs/architecture/01-framework.md">Framework</a></strong>
 ---
 
 ### Domain
 The Sendity domain model defines the core concepts that make up the Sendity communication platform.
->- <strong><a href="https://github.com/BTM-SA/Sendity/blob/main/docs/architecture/02-domain.md">domain.md</a></strong>
+>- <strong><a href="https://github.com/BTM-SA/Sendity/blob/main/docs/architecture/02-domain.md">Domain</a></strong>
 
 ---
 ### Queue
 
 The queue system is responsible for managing background work while keeping application business logic separate from execution concerns.
->- <strong><a href="https://github.com/BTM-SA/Sendity/blob/main/docs/architecture/03-queue.md">queue.md</a></strong>
+>- <strong><a href="https://github.com/BTM-SA/Sendity/blob/main/docs/architecture/03-queue.md">Queue</a></strong>
 
 ---
 
-## Workflow Documentation
+# Workflow Documentation
 ### Purpose
 Workflows describe how users achieve goals within Sendity.
->- <strong><a href="https://github.com/BTM-SA/Sendity/blob/main/docs/workflows/01-purpose.md">purpose.md</a></strong>
+>- <strong><a href="https://github.com/BTM-SA/Sendity/blob/main/docs/workflows/01-purpose.md">01-Purpose</a></strong>
 ---
 ### Identity
 The Identity workflow describes how an email identity becomes available and reliable within Sendity.
->- <strong><a href="https://github.com/BTM-SA/Sendity/blob/main/docs/workflows/02-identity.md">identity.md</a></strong>
+>- <strong><a href="https://github.com/BTM-SA/Sendity/blob/main/docs/workflows/02-identity.md">02-Identity</a></strong>
 ---
-### Send-email
+### Sending email
 The Send Email workflow describes how a user creates and sends an email through Sendity.
->- <strong><a href="https://github.com/BTM-SA/Sendity/blob/main/docs/workflows/03-send-email.md">send-email.md</a></strong>
+>- <strong><a href="https://github.com/BTM-SA/Sendity/blob/main/docs/workflows/03-send-email.md">03-Send email</a></strong>
 
 ---
-### Receiving-email
+### Receiving email
 The Receive Email workflow describes how incoming email enters Sendity and becomes part of the user's mailbox.
->- <strong><a href="https://github.com/BTM-SA/Sendity/blob/main/docs/workflows/04-receiving-email.md">receiving-email.md</a></strong>
+>- <strong><a href="https://github.com/BTM-SA/Sendity/blob/main/docs/workflows/04-receiving-email.md">04-Receiving email</a></strong>
 
 ---
 ### Conversations
 The Conversation workflow describes how Sendity groups related emails into an ongoing exchange.
->- <strong><a href="https://github.com/BTM-SA/Sendity/blob/main/docs/workflows/05-conversations.md">conversations.md</a></strong>
+>- <strong><a href="https://github.com/BTM-SA/Sendity/blob/main/docs/workflows/05-conversations.md">05-Conversations</a></strong>
 ---
 
-### Document-Protection
+### Document Protection
 The Document Protection workflow describes how a user optionally protects a document shared through Sendity.
->- <strong><a href="https://github.com/BTM-SA/Sendity/blob/main/docs/workflows/06-document-protection.md">document-protection.md</a></strong>
+>- <strong><a href="https://github.com/BTM-SA/Sendity/blob/main/docs/workflows/06-document-protection.md">06-document-protection.md</a></strong>
 ---
 ### Templates
 This workflow describes how Sendity supports two distinct types of reusable templates
->- <strong><a href="https://github.com/BTM-SA/Sendity/blob/main/docs/workflows/07-templates.md">templates.md</a></strong>
+>- <strong><a href="https://github.com/BTM-SA/Sendity/blob/main/docs/workflows/07-templates.md">07-templates.md</a></strong>
+
+---
+### Communication Insights
+This workflow describes how Communication Insights help users understand what happened after an email was sent.
+>- <strong><a href="https://github.com/BTM-SA/Sendity/blob/main/docs/workflows/08-communication-insights.md">08-communication-insights.md</a></strong>
+
+---
+### Security and Identity
+This workflow describes how Sendity helps users establish trust in an email identity and optionally use security capabilities when sending or receiving email.
+>- <strong><a href="https://github.com/BTM-SA/Sendity/blob/main/docs/workflows/09-Security-and-identity.md">09-Security-and-identity.md</a></strong>
 
 ---
 
-## Product
+# Product Documentation
 
 ### Credential-health
 This describes how Sendity gives users a clear understanding of whether the currently stored credential is working.
->- <strong><a href="https://github.com/BTM-SA/Sendity/blob/main/docs/product/01-credential-health.md">credential-health.md</a></strong>
+>- <strong><a href="https://github.com/BTM-SA/Sendity/blob/main/docs/product/01-credential-health.md">01-credential-health.md</a></strong>
 
 ---
 ### Email experience
 This describes how Sendity should improve the email experience without forcing users to understand the technology behind it.
->- <strong><a href="https://github.com/BTM-SA/Sendity/blob/main/docs/product/02-email-experience.md">email-experience.md</a></strong>
+>- <strong><a href="https://github.com/BTM-SA/Sendity/blob/main/docs/product/02-email-experience.md">02-email-experience.md</a></strong>
 
 ---
-## User Interface
+# User Interface Documentation
 ### UI shell
 The Sendity UI shell provides the structural foundation for the application.
 >- <strong><a href="https://github.com/BTM-SA/Sendity/blob/main/docs/ui/ui-shell.md">ui-shell.md</a></strong>
