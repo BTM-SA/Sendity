@@ -8,6 +8,9 @@ use Sendity\Core\Config;
 use Sendity\Core\Exceptions\ExceptionHandler;
 use Sendity\Core\Events\EventDispatcher;
 use Sendity\Routing\RouteLoader;
+use Sendity\Mail\SendEmail;
+use Sendity\Mail\MailManager;
+use Sendity\Mail\MessageIdGenerator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -38,6 +41,15 @@ class AppServiceProvider extends ServiceProvider
         $this->container->singleton(RouteLoader::class, function ($container) {
             return new RouteLoader($container->get(\Sendity\Http\Router::class), $container);
         });
+        $this->container->singleton(
+    SendEmail::class,
+    function ($container) {
+        return new SendEmail(
+            $container->get(MailManager::class),
+            $container->get(MessageIdGenerator::class)
+        );
+    }
+);
     }
 
     public function boot(): void

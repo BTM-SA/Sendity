@@ -19,6 +19,7 @@ use Sendity\Mail\MailManager;
 use Sendity\Mail\MailTransportManager;
 use Sendity\Mail\MailboxManager;
 use Sendity\Mail\MessageIdGenerator;
+use Sendity\Queue\Retry\RetryPolicy;
 
 
 class MailServiceProvider extends ServiceProvider

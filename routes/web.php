@@ -238,7 +238,91 @@ $router->get('/queue-worker-test', function () use ($container) {
         : 'Nothing processed';
 
 });
+$router->get('/identity-test', function () {
 
+    $identity = new \Sendity\Domain\Identity\Identity(
+        'alex@company.com',
+        'Alex Botha'
+    );
+
+    return
+        'Email: ' . $identity->email()
+        . '<br>Name: ' . $identity->displayName();
+});
+$router->get('/mailbox-test', function () {
+
+    $identity = new \Sendity\Domain\Identity\Identity(
+        'alex@company.com',
+        'Alex Botha'
+    );
+
+    $mailbox = new \Sendity\Domain\Mailbox\Mailbox(
+        $identity,
+        'Alex Mailbox'
+    );
+
+    return
+        'Mailbox: ' . $mailbox->name()
+        . '<br>Email: ' . $mailbox->identity()->email()
+        . '<br>Name: ' . $mailbox->identity()->displayName();
+});
+$router->get('/conversation-test', function () {
+
+    $identity = new \Sendity\Domain\Identity\Identity(
+        'alex@company.com',
+        'Alex Botha'
+    );
+
+    $conversation = new \Sendity\Domain\Conversation\Conversation(
+        $identity,
+        'Invoice Discussion'
+    );
+
+    return
+        'Conversation: ' . $conversation->subject()
+        . '<br>Email: ' . $conversation->identity()->email()
+        . '<br>Name: ' . $conversation->identity()->displayName();
+});
+$router->get('/domain-message-test', function () {
+
+    $sender = new \Sendity\Domain\Identity\Identity(
+        'alex@company.com',
+        'Alex Botha'
+    );
+
+    $recipient = new \Sendity\Domain\Identity\Identity(
+        'client@example.com',
+        'Client'
+    );
+
+    $conversation = new \Sendity\Domain\Conversation\Conversation(
+        $sender,
+        'Invoice Discussion'
+    );
+
+    $message = new \Sendity\Domain\Message\Message(
+        $sender,
+        $conversation,
+        'Invoice #1001',
+        'Please find the invoice attached.',
+        [$recipient]
+    );
+
+    return
+        'Subject: ' . $message->subject()
+        . '<br>From: ' . $message->sender()->email()
+        . '<br>To: ' . $message->recipients()[0]->email()
+        . '<br>Conversation: ' . $message->conversation()->subject()
+        . '<br>Content: ' . $message->content();
+});
+$router->get('/domain-send-resolve-test', function () use ($container) {
+
+    $sendEmail = $container->get(
+        \Sendity\Mail\SendEmail::class
+    );
+
+    return get_class($sendEmail);
+});
 $router->get('/boom', function () {
     throw new RuntimeException('Boom!');
 });
