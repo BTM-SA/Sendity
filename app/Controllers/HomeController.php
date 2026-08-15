@@ -5,15 +5,17 @@ declare(strict_types=1);
 namespace Sendity\Controllers;
 
 use Sendity\Http\Response;
-use Sendity\Mail\Contracts\MailerInterface;
-use Sendity\Mail\MailMessage;
-use Sendity\Mail\MessageIdGenerator;
+use Sendity\Domain\Identity\Identity;
+use Sendity\Domain\Conversation\Conversation;
+use Sendity\Domain\Message\Message;
+use Sendity\Mail\SendEmail;
 
 class HomeController
 {
-    public function __construct(protected MailerInterface $mailer, protected MessageIdGenerator $messageIdGenerator)
-    {
-    }
+    public function __construct(
+    protected SendEmail $sendEmail
+) {
+}
 
     public function index(): Response
     {
@@ -26,21 +28,49 @@ class HomeController
     }
 
     public function sendTest(): Response
-    {
-        $message = new MailMessage($this->messageIdGenerator);
+{
+    $sender = new Identity(
+        'alex@company.com',
+        'Alex Botha'
+    );
 
-        $message->to("admin@btm-sa.co.za")->subject("Sendity Test")->text("Testing Sendity Delivery.");
+    $recipient = new Identity(
+        'admin@btm-sa.co.za',
+        'Sendity Admin'
+    );
 
-        try {
-            $this->mailer->send($message);
-            echo '<pre>';
-print_r($message->lifecycle()->events());
-echo '</pre>';
-exit;
+    $conversation = new Conversation(
+        $sender,
+        'Sendity Test'
+    );
 
-            return Response::text("Email sent successfully! ID: " . $message->id());
-        } catch (\Throwable $e) {
-            return Response::text($e->getMessage());
-        }
+    $message = new Message(
+        $sender,
+        $conversation,
+        'Sendity Test',
+        'Testing Sendity Delivery.',
+        [$recipient]
+    );
+
+    try {
+
+        $mailMessage = $this->sendEmail->execute(
+            $message
+        );
+
+        echo '<pre>';
+        print_r(
+            $mailMessage->lifecycle()->events()
+        );
+        echo '</pre>';
+
+        exit;
+
+    } catch (\Throwable $e) {
+
+        return Response::text(
+            $e->getMessage()
+        );
     }
+}
 }

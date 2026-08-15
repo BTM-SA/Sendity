@@ -323,6 +323,39 @@ $router->get('/domain-send-resolve-test', function () use ($container) {
 
     return get_class($sendEmail);
 });
+$router->get('/domain-send-test', function () use ($container) {
+
+    $sender = new \Sendity\Domain\Identity\Identity(
+        'alex@company.com',
+        'Alex Botha'
+    );
+
+    $recipient = new \Sendity\Domain\Identity\Identity(
+        'client@example.com',
+        'Client'
+    );
+
+    $conversation = new \Sendity\Domain\Conversation\Conversation(
+        $sender,
+        'Invoice Discussion'
+    );
+
+    $message = new \Sendity\Domain\Message\Message(
+        $sender,
+        $conversation,
+        'Invoice #1001',
+        'Please find the invoice attached.',
+        [$recipient]
+    );
+
+    $sendEmail = $container->get(
+        \Sendity\Mail\SendEmail::class
+    );
+
+    $sendEmail->execute($message);
+
+    return 'Domain message sent successfully';
+});
 $router->get('/boom', function () {
     throw new RuntimeException('Boom!');
 });
