@@ -57,7 +57,7 @@ class JsonAuditStore implements AuditStoreInterface
                     ->occurredAt()
                     ->format(DATE_ATOM),
 
-                'metadata' => $event->metadata(),
+                'metadata' => (object) $event->metadata(),
             ];
         }
 
