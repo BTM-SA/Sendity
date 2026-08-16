@@ -30,8 +30,8 @@ class HomeController
     public function sendTest(): Response
 {
     $sender = new Identity(
-        'alex@company.com',
-        'Alex Botha'
+        'cedric@bichet.co.za',
+        'Cedric Bichet'
     );
 
     $recipient = new Identity(
