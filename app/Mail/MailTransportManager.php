@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Sendity\Mail;
 
+use InvalidArgumentException;
 use Sendity\Core\Config;
 use Sendity\Core\Container;
-use Sendity\Mail\Contracts\MailerInterface;
-use InvalidArgumentException;
+use Sendity\Mail\Contracts\DeliveryTransportInterface;
 
 class MailTransportManager
 {
@@ -17,21 +17,19 @@ class MailTransportManager
     ) {
     }
 
-
-    public function driver(?string $name = null): MailerInterface
-    {
+    public function driver(
+        ?string $name = null
+    ): DeliveryTransportInterface {
         $name ??= $this->config->get(
             'mail.default',
             'smtp'
         );
-
 
         return match ($name) {
 
             'smtp' => $this->container->get(
                 \Sendity\Mail\Drivers\SMTP\SmtpTransport::class
             ),
-
 
             default => throw new InvalidArgumentException(
                 "Unsupported mail transport: {$name}"

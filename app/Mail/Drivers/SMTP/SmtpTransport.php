@@ -10,12 +10,16 @@ use Sendity\Core\Events\EventDispatcher;
 use Sendity\Events\MailFailed;
 use Sendity\Events\MailSending;
 use Sendity\Events\MailSent;
+use Sendity\Mail\Contracts\DeliveryTransportInterface;
 use Sendity\Mail\Contracts\MailboxInterface;
 use Sendity\Mail\Contracts\MailerInterface;
+use Sendity\Mail\DeliveryContext;
 use Sendity\Mail\MailMessage;
 use Throwable;
 
-class SmtpTransport implements MailerInterface
+class SmtpTransport implements
+    MailerInterface,
+    DeliveryTransportInterface
 {
     public function __construct(
         protected Config $config,
@@ -24,9 +28,30 @@ class SmtpTransport implements MailerInterface
     ) {
     }
 
+    /**
+     * Internal delivery entry point.
+     */
+    public function deliver(
+        MailMessage $message,
+        DeliveryContext $context
+    ): void {
+        $this->send(
+            $message,
+            $context
+        );
+    }
 
-    public function send(MailMessage $message): void
-    {
+    /**
+     * Public mailer interface.
+     *
+     * If called directly, attempt defaults to 1.
+     */
+    public function send(
+        MailMessage $message,
+        ?DeliveryContext $context = null
+    ): void {
+        $attempt = $context?->attempt() ?? 1;
+
         $mail = new PHPMailer(true);
 
         $mail->isSMTP();
@@ -39,7 +64,6 @@ class SmtpTransport implements MailerInterface
                 "allow_self_signed" => true,
             ],
         ];
-
 
         /*
         |--------------------------------------------------------------------------
@@ -71,7 +95,6 @@ class SmtpTransport implements MailerInterface
 
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
 
-
         /*
         |--------------------------------------------------------------------------
         | Sender
@@ -81,7 +104,6 @@ class SmtpTransport implements MailerInterface
         $from = $message->getFrom();
 
         if ($from !== null) {
-
             $mail->setFrom(
                 $from->getEmail(),
                 $from->getName()
@@ -90,9 +112,7 @@ class SmtpTransport implements MailerInterface
             $mail->Sender = $this->config->get(
                 "mail.from.address"
             );
-
         } else {
-
             $defaultFrom = $this->config->get(
                 "mail.from"
             );
@@ -105,7 +125,6 @@ class SmtpTransport implements MailerInterface
             $mail->Sender = $defaultFrom["address"];
         }
 
-
         /*
         |--------------------------------------------------------------------------
         | Recipients
@@ -113,31 +132,25 @@ class SmtpTransport implements MailerInterface
         */
 
         foreach ($message->getTo() as $address) {
-
             $mail->addAddress(
                 $address->getEmail(),
                 $address->getName()
             );
         }
 
-
         foreach ($message->getCc() as $address) {
-
             $mail->addCC(
                 $address->getEmail(),
                 $address->getName()
             );
         }
 
-
         foreach ($message->getBcc() as $address) {
-
             $mail->addBCC(
                 $address->getEmail(),
                 $address->getName()
             );
         }
-
 
         /*
         |--------------------------------------------------------------------------
@@ -148,13 +161,11 @@ class SmtpTransport implements MailerInterface
         $replyTo = $message->getReplyTo();
 
         if ($replyTo !== null) {
-
             $mail->addReplyTo(
                 $replyTo->getEmail(),
                 $replyTo->getName()
             );
         }
-
 
         /*
         |--------------------------------------------------------------------------
@@ -165,23 +176,18 @@ class SmtpTransport implements MailerInterface
         $mail->Subject = $message->getSubject();
 
         if ($message->getHtml() !== null) {
-
             $mail->isHTML(true);
 
             $mail->Body = $message->getHtml();
 
             if ($message->getText() !== null) {
-
                 $mail->AltBody = $message->getText();
             }
-
         } else {
-
             $mail->isHTML(false);
 
             $mail->Body = $message->getText() ?? "";
         }
-
 
         /*
         |--------------------------------------------------------------------------
@@ -194,15 +200,12 @@ class SmtpTransport implements MailerInterface
             $message->id()
         );
 
-
         foreach ($message->getHeaders() as $name => $value) {
-
             $mail->addCustomHeader(
                 $name,
                 $value
             );
         }
-
 
         /*
         |--------------------------------------------------------------------------
@@ -211,22 +214,17 @@ class SmtpTransport implements MailerInterface
         */
 
         foreach ($message->getAttachments() as $attachment) {
-
             if ($attachment->hasName()) {
-
                 $mail->addAttachment(
                     $attachment->getPath(),
                     $attachment->getName()
                 );
-
             } else {
-
                 $mail->addAttachment(
                     $attachment->getPath()
                 );
             }
         }
-
 
         /*
         |--------------------------------------------------------------------------
@@ -244,19 +242,15 @@ class SmtpTransport implements MailerInterface
                 "port" => $this->config->get(
                     "mail.transports.smtp.port"
                 ),
-                "attempt" => 1,
+                "attempt" => $attempt,
             ]);
-
 
         $this->events->dispatch(
             new MailSending($message)
         );
 
-
         try {
-
             $mail->send();
-
 
             /*
             |--------------------------------------------------------------------------
@@ -271,7 +265,6 @@ class SmtpTransport implements MailerInterface
                     "message_id" => $message->id(),
                 ]);
 
-
             /*
             |--------------------------------------------------------------------------
             | Save copy to Sent mailbox
@@ -281,17 +274,13 @@ class SmtpTransport implements MailerInterface
             if ($this->config->get(
                 "mail.imap.save_sent"
             )) {
-
                 try {
-
                     $mime = $mail->getSentMIMEMessage();
 
                     $this->mailbox->appendSent(
                         $mime
                     );
-
                 } catch (Throwable $e) {
-
                     /*
                      * SMTP delivery already succeeded.
                      * Saving a copy to Sent is secondary.
@@ -304,7 +293,6 @@ class SmtpTransport implements MailerInterface
                 }
             }
 
-
             /*
             |--------------------------------------------------------------------------
             | Events
@@ -314,11 +302,7 @@ class SmtpTransport implements MailerInterface
             $this->events->dispatch(
                 new MailSent($message)
             );
-
-
         } catch (Throwable $e) {
-
-
             /*
             |--------------------------------------------------------------------------
             | Lifecycle - Failed
@@ -334,9 +318,8 @@ class SmtpTransport implements MailerInterface
                     ),
                     "error" => $e->getMessage(),
                     "exception" => get_class($e),
-                    "attempt" => 1,
+                    "attempt" => $attempt,
                 ]);
-
 
             /*
             |--------------------------------------------------------------------------
@@ -350,7 +333,6 @@ class SmtpTransport implements MailerInterface
                     $e
                 )
             );
-
 
             throw $e;
         }
