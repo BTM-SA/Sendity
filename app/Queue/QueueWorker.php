@@ -39,8 +39,8 @@ class QueueWorker
 
 
             $job
-                ->job()
-                ->handle();
+            ->job()
+            ->handle($job);
 
 
             $job->complete();

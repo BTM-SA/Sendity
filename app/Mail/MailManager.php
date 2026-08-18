@@ -19,8 +19,9 @@ class MailManager implements MailerInterface
         MailMessage $message
     ): void {
         $this->delivery->deliver(
-            $message
-        );
+    $message,
+    new DeliveryContext()
+);
     }
 
 

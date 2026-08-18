@@ -1,0 +1,960 @@
+.
+├── app
+│   ├── Audit
+│   │   ├── AuditManager.php
+│   │   ├── AuditRecord.php
+│   │   ├── Contracts
+│   │   │   └── AuditStoreInterface.php
+│   │   └── Stores
+│   │       └── JsonAuditStore.php
+│   ├── Controllers
+│   │   └── HomeController.php
+│   ├── Core
+│   │   ├── Application.php
+│   │   ├── Config.php
+│   │   ├── Container.php
+│   │   ├── Environment.php
+│   │   ├── Events
+│   │   │   ├── Contracts
+│   │   │   │   ├── EventInterface.php
+│   │   │   │   └── ListenerInterface.php
+│   │   │   └── EventDispatcher.php
+│   │   ├── Exceptions
+│   │   │   └── ExceptionHandler.php
+│   │   ├── Pipeline.php
+│   │   └── Providers
+│   │       ├── ProviderLoader.php
+│   │       ├── RoutingServiceProvider.php
+│   │       └── ServiceProvider.php
+│   ├── Domain
+│   │   ├── Conversation
+│   │   │   └── Conversation.php
+│   │   ├── Identity
+│   │   │   └── identity.php
+│   │   ├── Mailbox
+│   │   │   └── Mailbox.php
+│   │   └── Message
+│   │       └── Message.php
+│   ├── Events
+│   │   ├── MailEvent.php
+│   │   ├── MailFailed.php
+│   │   ├── MailSending.php
+│   │   └── MailSent.php
+│   ├── Http
+│   │   ├── Contracts
+│   │   │   └── MiddlewareInterface.php
+│   │   ├── Middleware
+│   │   │   └── LoggerMiddleware.php
+│   │   ├── Request.php
+│   │   ├── Response.php
+│   │   └── Router.php
+│   ├── Listeners
+│   │   ├── AuditListener.php
+│   │   └── LogMailSent.php
+│   ├── Mail
+│   │   ├── Address.php
+│   │   ├── Attachment.php
+│   │   ├── Contracts
+│   │   │   ├── DeliveryTransportInterface.php
+│   │   │   ├── MailboxInterface.php
+│   │   │   └── MailerInterface.php
+│   │   ├── DeliveryContext.php
+│   │   ├── DeliveryManager.php
+│   │   ├── Drivers
+│   │   │   ├── IMAP
+│   │   │   │   └── ImapMailbox.php
+│   │   │   └── SMTP
+│   │   │       └── SmtpTransport.php
+│   │   ├── Enums
+│   │   │   └── MessageStatus.php
+│   │   ├── Exceptions
+│   │   │   ├── AuthenticationException.php
+│   │   │   ├── MailboxException.php
+│   │   │   ├── MailException.php
+│   │   │   └── TransportException.php
+│   │   ├── LifecycleEvent.php
+│   │   ├── MailboxDiscovery.php
+│   │   ├── MailboxManager.php
+│   │   ├── MailLifecycle.php
+│   │   ├── MailManager.php
+│   │   ├── MailMessage.php
+│   │   ├── MailTransportManager.php
+│   │   ├── MessageIdGenerator.php
+│   │   ├── Retry
+│   │   └── SendEmail.php
+│   ├── Providers
+│   │   ├── AppServiceProvider.php
+│   │   ├── AuditServiceProvider.php
+│   │   ├── EventServiceProvider.php
+│   │   ├── MailServiceProvider.php
+│   │   ├── QueueServiceProvider.php
+│   │   └── RoutingServiceProvider.php
+│   ├── Queue
+│   │   ├── Contracts
+│   │   │   ├── JobInterface.php
+│   │   │   ├── QueueDriverInterface.php
+│   │   │   ├── QueueInterface.php
+│   │   │   └── QueueStorageInterface.php
+│   │   ├── Drivers
+│   │   │   ├── File
+│   │   │   │   └── FileQueueDriver.php
+│   │   │   └── Sync
+│   │   │       └── SyncQueueDriver.php
+│   │   ├── JobEnvelope.php
+│   │   ├── Jobs
+│   │   │   └── TestJob.php
+│   │   ├── QueueDriverManager.php
+│   │   ├── QueueManager.php
+│   │   ├── QueueStorageManager.php
+│   │   ├── QueueWorker.php
+│   │   ├── Retry
+│   │   │   └── RetryPolicy.php
+│   │   └── Storage
+│   │       └── FileQueueStorage.php
+│   ├── Routing
+│   │   └── RouteLoader.php
+│   ├── Services
+│   │   └── Logger.php
+│   └── Support
+│       └── helpers.php
+├── bootstrap
+│   ├── app.php
+│   └── mail.php
+├── composer.json
+├── composer.lock
+├── config
+│   ├── app.php
+│   ├── audit.php
+│   ├── mail.php
+│   ├── providers.php
+│   └── queue.php
+├── docs
+│   ├── architecture
+│   │   ├── 01-framework.md
+│   │   ├── 02-domain.md
+│   │   ├── 03-queue.md
+│   │   └── adr
+│   │       ├── 0001-Framework-Development-Principles.md
+│   │       ├── 0002-Container-Self-Binding.md
+│   │       ├── 0003-Service-Provider-Lifecycle.md
+│   │       ├── 0004-ProviderLoader-Architecture.md
+│   │       ├── 0005-Sendity-Framework-Boundary.md
+│   │       ├── 0006-Separation-of-Framework-and-Application-Providers.md
+│   │       ├── 0007-Mail-Transport-Abstraction.md
+│   │       ├── 0008-Message-Identity.md
+│   │       ├── 0009-Introduce-Message-Lifecycle-Tracking-and-Audit-Persistence.md
+│   │       ├── 0010-Container-Based-Event-Listener-Resolution.md
+│   │       ├── 0011-Mail-Event-Base-Class.md
+│   │       ├── 0012-Isolate-Event-Listener-Failures-From-Core-Operations.md
+│   │       ├── 0013-Event-Listener-Failure-Isolation.md
+│   │       └── 0014-Queue-Architecture.md
+│   ├── filetree.md
+│   ├── northstar.md
+│   ├── product
+│   │   ├── 01-credential-health.md
+│   │   └── 02-email-experience.md
+│   ├── ui
+│   │   └── ui-shell.md
+│   └── workflows
+│       ├── 01-purpose.md
+│       ├── 02-identity.md
+│       ├── 03-send-email.md
+│       ├── 04-receiving-email.md
+│       ├── 05-conversations.md
+│       ├── 06-document-protection.md
+│       ├── 07-templates.md
+│       ├── 08-communication-insights.md
+│       └── 09-security-and-identity.md
+├── filetree.txt
+├── images
+│   └── Sendity-Logo.png
+├── public
+│   └── index.php
+├── README.md
+├── routes
+│   └── web.php
+├── storage
+│   ├── audit
+│   │   └── snd_cc7da15c3c0d320cc2254232d7ca53c1.json
+│   ├── Logs
+│   │   └── app.log
+│   ├── queue
+│   └── queue-test.txt
+└── vendor
+    ├── autoload.php
+    ├── composer
+    │   ├── autoload_classmap.php
+    │   ├── autoload_files.php
+    │   ├── autoload_namespaces.php
+    │   ├── autoload_psr4.php
+    │   ├── autoload_real.php
+    │   ├── autoload_static.php
+    │   ├── ClassLoader.php
+    │   ├── include_paths.php
+    │   ├── installed.json
+    │   ├── installed.php
+    │   ├── InstalledVersions.php
+    │   ├── LICENSE
+    │   └── platform_check.php
+    ├── graham-campbell
+    │   └── result-type
+    │       ├── composer.json
+    │       ├── LICENSE
+    │       └── src
+    │           ├── Error.php
+    │           ├── Result.php
+    │           └── Success.php
+    ├── guzzlehttp
+    │   └── psr7
+    │       ├── CHANGELOG.md
+    │       ├── composer.json
+    │       ├── LICENSE
+    │       ├── README.md
+    │       ├── src
+    │       │   ├── AppendStream.php
+    │       │   ├── BufferStream.php
+    │       │   ├── CachingStream.php
+    │       │   ├── DroppingStream.php
+    │       │   ├── Exception
+    │       │   │   └── MalformedUriException.php
+    │       │   ├── FnStream.php
+    │       │   ├── Header.php
+    │       │   ├── HttpFactory.php
+    │       │   ├── InflateStream.php
+    │       │   ├── LazyOpenStream.php
+    │       │   ├── LimitStream.php
+    │       │   ├── Message.php
+    │       │   ├── MessageTrait.php
+    │       │   ├── MimeType.php
+    │       │   ├── MultipartStream.php
+    │       │   ├── NoSeekStream.php
+    │       │   ├── PumpStream.php
+    │       │   ├── Query.php
+    │       │   ├── Request.php
+    │       │   ├── Response.php
+    │       │   ├── Rfc3986.php
+    │       │   ├── Rfc7230.php
+    │       │   ├── ServerRequest.php
+    │       │   ├── Stream.php
+    │       │   ├── StreamDecoratorTrait.php
+    │       │   ├── StreamWrapper.php
+    │       │   ├── UploadedFile.php
+    │       │   ├── Uri.php
+    │       │   ├── UriComparator.php
+    │       │   ├── UriNormalizer.php
+    │       │   ├── UriResolver.php
+    │       │   └── Utils.php
+    │       └── UPGRADING.md
+    ├── laravel
+    │   └── serializable-closure
+    │       ├── composer.json
+    │       ├── LICENSE.md
+    │       ├── README.md
+    │       └── src
+    │           ├── Contracts
+    │           │   ├── Serializable.php
+    │           │   └── Signer.php
+    │           ├── Exceptions
+    │           │   ├── InvalidSignatureException.php
+    │           │   └── MissingSecretKeyException.php
+    │           ├── SerializableClosure.php
+    │           ├── Serializers
+    │           │   ├── Native.php
+    │           │   └── Signed.php
+    │           ├── Signers
+    │           │   └── Hmac.php
+    │           ├── Support
+    │           │   ├── ClosureScope.php
+    │           │   ├── ClosureStream.php
+    │           │   ├── ReflectionClosure.php
+    │           │   └── SelfReference.php
+    │           └── UnsignedSerializableClosure.php
+    ├── pear
+    │   └── auth_sasl
+    │       ├── Auth
+    │       │   ├── SASL
+    │       │   │   ├── Anonymous.php
+    │       │   │   ├── Common.php
+    │       │   │   ├── CramMD5.php
+    │       │   │   ├── DigestMD5.php
+    │       │   │   ├── External.php
+    │       │   │   ├── Login.php
+    │       │   │   ├── Plain.php
+    │       │   │   └── SCRAM.php
+    │       │   └── SASL.php
+    │       ├── composer.json
+    │       ├── package.xml
+    │       ├── phpunit.xml.dist
+    │       └── README.md
+    ├── php-di
+    │   ├── invoker
+    │   │   ├── composer.json
+    │   │   ├── LICENSE
+    │   │   ├── README.md
+    │   │   └── src
+    │   │       ├── CallableResolver.php
+    │   │       ├── Exception
+    │   │       │   ├── InvocationException.php
+    │   │       │   ├── NotCallableException.php
+    │   │       │   └── NotEnoughParametersException.php
+    │   │       ├── Invoker.php
+    │   │       ├── InvokerInterface.php
+    │   │       ├── ParameterResolver
+    │   │       │   ├── AssociativeArrayResolver.php
+    │   │       │   ├── Container
+    │   │       │   │   ├── ParameterNameContainerResolver.php
+    │   │       │   │   └── TypeHintContainerResolver.php
+    │   │       │   ├── DefaultValueResolver.php
+    │   │       │   ├── NumericArrayResolver.php
+    │   │       │   ├── ParameterResolver.php
+    │   │       │   ├── ResolverChain.php
+    │   │       │   └── TypeHintResolver.php
+    │   │       └── Reflection
+    │   │           └── CallableReflection.php
+    │   └── php-di
+    │       ├── change-log.md
+    │       ├── composer.json
+    │       ├── LICENSE
+    │       ├── README.md
+    │       ├── src
+    │       │   ├── Attribute
+    │       │   │   ├── Inject.php
+    │       │   │   └── Injectable.php
+    │       │   ├── CompiledContainer.php
+    │       │   ├── Compiler
+    │       │   │   ├── Compiler.php
+    │       │   │   ├── ObjectCreationCompiler.php
+    │       │   │   ├── RequestedEntryHolder.php
+    │       │   │   └── Template.php
+    │       │   ├── Container.php
+    │       │   ├── ContainerBuilder.php
+    │       │   ├── Definition
+    │       │   │   ├── ArrayDefinition.php
+    │       │   │   ├── ArrayDefinitionExtension.php
+    │       │   │   ├── AutowireDefinition.php
+    │       │   │   ├── DecoratorDefinition.php
+    │       │   │   ├── Definition.php
+    │       │   │   ├── Dumper
+    │       │   │   │   └── ObjectDefinitionDumper.php
+    │       │   │   ├── EnvironmentVariableDefinition.php
+    │       │   │   ├── Exception
+    │       │   │   │   ├── InvalidAttribute.php
+    │       │   │   │   └── InvalidDefinition.php
+    │       │   │   ├── ExtendsPreviousDefinition.php
+    │       │   │   ├── FactoryDefinition.php
+    │       │   │   ├── Helper
+    │       │   │   │   ├── AutowireDefinitionHelper.php
+    │       │   │   │   ├── CreateDefinitionHelper.php
+    │       │   │   │   ├── DefinitionHelper.php
+    │       │   │   │   └── FactoryDefinitionHelper.php
+    │       │   │   ├── InstanceDefinition.php
+    │       │   │   ├── ObjectDefinition
+    │       │   │   │   ├── MethodInjection.php
+    │       │   │   │   └── PropertyInjection.php
+    │       │   │   ├── ObjectDefinition.php
+    │       │   │   ├── Reference.php
+    │       │   │   ├── Resolver
+    │       │   │   │   ├── ArrayResolver.php
+    │       │   │   │   ├── DecoratorResolver.php
+    │       │   │   │   ├── DefinitionResolver.php
+    │       │   │   │   ├── EnvironmentVariableResolver.php
+    │       │   │   │   ├── FactoryResolver.php
+    │       │   │   │   ├── InstanceInjector.php
+    │       │   │   │   ├── ObjectCreator.php
+    │       │   │   │   ├── ParameterResolver.php
+    │       │   │   │   └── ResolverDispatcher.php
+    │       │   │   ├── SelfResolvingDefinition.php
+    │       │   │   ├── Source
+    │       │   │   │   ├── AttributeBasedAutowiring.php
+    │       │   │   │   ├── Autowiring.php
+    │       │   │   │   ├── DefinitionArray.php
+    │       │   │   │   ├── DefinitionFile.php
+    │       │   │   │   ├── DefinitionNormalizer.php
+    │       │   │   │   ├── DefinitionSource.php
+    │       │   │   │   ├── MutableDefinitionSource.php
+    │       │   │   │   ├── NoAutowiring.php
+    │       │   │   │   ├── ReflectionBasedAutowiring.php
+    │       │   │   │   ├── SourceCache.php
+    │       │   │   │   └── SourceChain.php
+    │       │   │   ├── StringDefinition.php
+    │       │   │   └── ValueDefinition.php
+    │       │   ├── DependencyException.php
+    │       │   ├── Factory
+    │       │   │   └── RequestedEntry.php
+    │       │   ├── FactoryInterface.php
+    │       │   ├── functions.php
+    │       │   ├── Invoker
+    │       │   │   ├── DefinitionParameterResolver.php
+    │       │   │   └── FactoryParameterResolver.php
+    │       │   ├── NotFoundException.php
+    │       │   └── Proxy
+    │       │       ├── NativeProxyFactory.php
+    │       │       ├── ProxyFactory.php
+    │       │       └── ProxyFactoryInterface.php
+    │       └── support.md
+    ├── phpfui
+    │   └── php-imap
+    │       ├── composer.json
+    │       ├── LICENSE
+    │       ├── OldTests
+    │       │   ├── BodyStructureTest.php
+    │       │   ├── bootstrap.php
+    │       │   ├── CleaningTest.php
+    │       │   ├── CompatibilityTest.php
+    │       │   ├── ErrorsTest.php
+    │       │   ├── HeaderInfoTest.php
+    │       │   ├── ImapTestCase.php
+    │       │   ├── legacy
+    │       │   │   ├── fetch-body-error.php
+    │       │   │   └── last-error.php
+    │       │   ├── MinimalTest.php
+    │       │   ├── PolyfillTest.php
+    │       │   ├── RetrofitTest.php
+    │       │   ├── SearchTest.php
+    │       │   ├── SignaturesTest.php
+    │       │   └── XoauthTest.php
+    │       ├── phpstan.neon
+    │       ├── phpunit.xml.dist
+    │       ├── README.md
+    │       ├── src
+    │       │   ├── IMAP
+    │       │   │   └── Connection.php
+    │       │   └── Imap2
+    │       │       ├── BodyStructure.php
+    │       │       ├── Errors.php
+    │       │       ├── Functions.php
+    │       │       ├── HeaderInfo.php
+    │       │       ├── IMAPStubs.php
+    │       │       ├── Mail.php
+    │       │       ├── Mailbox.php
+    │       │       ├── Message.php
+    │       │       ├── Roundcube
+    │       │       │   ├── Charset.php
+    │       │       │   ├── ImapClient.php
+    │       │       │   ├── MessageHeader.php
+    │       │       │   ├── Mime.php
+    │       │       │   ├── ResultIndex.php
+    │       │       │   ├── ResultThread.php
+    │       │       │   └── Utils.php
+    │       │       ├── Thread.php
+    │       │       └── Timeout.php
+    │       └── Tests
+    │           ├── bootstrap.php
+    │           ├── docker
+    │           │   ├── imap2
+    │           │   │   └── Dockerfile
+    │           │   └── retrofit
+    │           │       └── Dockerfile
+    │           ├── ErrorsTest.php
+    │           ├── fixtures
+    │           │   ├── attachment_encoded_filename.eml
+    │           │   ├── attachment_long_filename.eml
+    │           │   ├── attachment_no_disposition.eml
+    │           │   ├── bcc.eml
+    │           │   ├── boolean_decoded_content.eml
+    │           │   ├── date-template.eml
+    │           │   ├── email_address.eml
+    │           │   ├── email_with_image.eml
+    │           │   ├── embedded_email_without_content_disposition.eml
+    │           │   ├── embedded_email.eml
+    │           │   ├── four_nested_emails.eml
+    │           │   ├── gbk_charset.eml
+    │           │   ├── html_only.eml
+    │           │   ├── imap_mime_header_decode_returns_false.eml
+    │           │   ├── inline_attachment.eml
+    │           │   ├── inputs.json
+    │           │   ├── issue_142.eml
+    │           │   ├── ks_c_5601-1987_headers.eml
+    │           │   ├── mail_that_is_attachment.eml
+    │           │   ├── message.eml
+    │           │   ├── missing_date.eml
+    │           │   ├── missing_from.eml
+    │           │   ├── mixed_filename.eml
+    │           │   ├── multiple_nested_attachments.eml
+    │           │   ├── nestes_embedded_with_attachment.eml
+    │           │   ├── null_content_charset.eml
+    │           │   ├── pec.eml
+    │           │   ├── plain_only.eml
+    │           │   ├── plain_text_attachment.eml
+    │           │   ├── references.eml
+    │           │   ├── simple_multipart.eml
+    │           │   ├── structured_with_attachment.eml
+    │           │   ├── thread
+    │           │   │   ├── my_topic.eml
+    │           │   │   ├── re_my_topic.eml
+    │           │   │   └── unrelated.eml
+    │           │   ├── undisclosed-recipients
+    │           │   │   ├── minus.eml
+    │           │   │   └── space.eml
+    │           │   ├── unknown_encoding.eml
+    │           │   ├── without_charset_plain_only.eml
+    │           │   └── without_charset_simple_multipart.eml
+    │           ├── HeaderInfoTest.php
+    │           ├── ImapTestCase.php
+    │           └── Unit
+    │               ├── Rfc822ParseAdrlistTest.php
+    │               └── Rfc822WriteAddressTest.php
+    ├── phpmailer
+    │   └── phpmailer
+    │       ├── COMMITMENT
+    │       ├── composer.json
+    │       ├── get_oauth_token.php
+    │       ├── language
+    │       │   ├── phpmailer.lang-af.php
+    │       │   ├── phpmailer.lang-ar.php
+    │       │   ├── phpmailer.lang-as.php
+    │       │   ├── phpmailer.lang-az.php
+    │       │   ├── phpmailer.lang-ba.php
+    │       │   ├── phpmailer.lang-be.php
+    │       │   ├── phpmailer.lang-bg.php
+    │       │   ├── phpmailer.lang-bn.php
+    │       │   ├── phpmailer.lang-ca.php
+    │       │   ├── phpmailer.lang-cs.php
+    │       │   ├── phpmailer.lang-da.php
+    │       │   ├── phpmailer.lang-de.php
+    │       │   ├── phpmailer.lang-el.php
+    │       │   ├── phpmailer.lang-eo.php
+    │       │   ├── phpmailer.lang-es.php
+    │       │   ├── phpmailer.lang-et.php
+    │       │   ├── phpmailer.lang-fa.php
+    │       │   ├── phpmailer.lang-fi.php
+    │       │   ├── phpmailer.lang-fo.php
+    │       │   ├── phpmailer.lang-fr.php
+    │       │   ├── phpmailer.lang-gl.php
+    │       │   ├── phpmailer.lang-he.php
+    │       │   ├── phpmailer.lang-hi.php
+    │       │   ├── phpmailer.lang-hr.php
+    │       │   ├── phpmailer.lang-hu.php
+    │       │   ├── phpmailer.lang-hy.php
+    │       │   ├── phpmailer.lang-id.php
+    │       │   ├── phpmailer.lang-it.php
+    │       │   ├── phpmailer.lang-ja.php
+    │       │   ├── phpmailer.lang-ka.php
+    │       │   ├── phpmailer.lang-ko.php
+    │       │   ├── phpmailer.lang-ku.php
+    │       │   ├── phpmailer.lang-lt.php
+    │       │   ├── phpmailer.lang-lv.php
+    │       │   ├── phpmailer.lang-mg.php
+    │       │   ├── phpmailer.lang-mn.php
+    │       │   ├── phpmailer.lang-ms.php
+    │       │   ├── phpmailer.lang-nb.php
+    │       │   ├── phpmailer.lang-nl.php
+    │       │   ├── phpmailer.lang-pl.php
+    │       │   ├── phpmailer.lang-pt_br.php
+    │       │   ├── phpmailer.lang-pt.php
+    │       │   ├── phpmailer.lang-ro.php
+    │       │   ├── phpmailer.lang-ru.php
+    │       │   ├── phpmailer.lang-si.php
+    │       │   ├── phpmailer.lang-sk.php
+    │       │   ├── phpmailer.lang-sl.php
+    │       │   ├── phpmailer.lang-sr_latn.php
+    │       │   ├── phpmailer.lang-sr.php
+    │       │   ├── phpmailer.lang-sv.php
+    │       │   ├── phpmailer.lang-tl.php
+    │       │   ├── phpmailer.lang-tr.php
+    │       │   ├── phpmailer.lang-uk.php
+    │       │   ├── phpmailer.lang-ur.php
+    │       │   ├── phpmailer.lang-vi.php
+    │       │   ├── phpmailer.lang-zh_cn.php
+    │       │   └── phpmailer.lang-zh.php
+    │       ├── LICENSE
+    │       ├── README.md
+    │       ├── SECURITY.md
+    │       ├── SMTPUTF8.md
+    │       ├── src
+    │       │   ├── DSNConfigurator.php
+    │       │   ├── Exception.php
+    │       │   ├── OAuth.php
+    │       │   ├── OAuthTokenProvider.php
+    │       │   ├── PHPMailer.php
+    │       │   ├── POP3.php
+    │       │   └── SMTP.php
+    │       └── VERSION
+    ├── phpoption
+    │   └── phpoption
+    │       ├── composer.json
+    │       ├── LICENSE
+    │       └── src
+    │           └── PhpOption
+    │               ├── LazyOption.php
+    │               ├── None.php
+    │               ├── Option.php
+    │               └── Some.php
+    ├── psr
+    │   ├── container
+    │   │   ├── composer.json
+    │   │   ├── LICENSE
+    │   │   ├── README.md
+    │   │   └── src
+    │   │       ├── ContainerExceptionInterface.php
+    │   │       ├── ContainerInterface.php
+    │   │       └── NotFoundExceptionInterface.php
+    │   ├── http-factory
+    │   │   ├── composer.json
+    │   │   ├── LICENSE
+    │   │   ├── README.md
+    │   │   └── src
+    │   │       ├── RequestFactoryInterface.php
+    │   │       ├── ResponseFactoryInterface.php
+    │   │       ├── ServerRequestFactoryInterface.php
+    │   │       ├── StreamFactoryInterface.php
+    │   │       ├── UploadedFileFactoryInterface.php
+    │   │       └── UriFactoryInterface.php
+    │   ├── http-message
+    │   │   ├── CHANGELOG.md
+    │   │   ├── composer.json
+    │   │   ├── docs
+    │   │   │   ├── PSR7-Interfaces.md
+    │   │   │   └── PSR7-Usage.md
+    │   │   ├── LICENSE
+    │   │   ├── README.md
+    │   │   └── src
+    │   │       ├── MessageInterface.php
+    │   │       ├── RequestInterface.php
+    │   │       ├── ResponseInterface.php
+    │   │       ├── ServerRequestInterface.php
+    │   │       ├── StreamInterface.php
+    │   │       ├── UploadedFileInterface.php
+    │   │       └── UriInterface.php
+    │   └── log
+    │       ├── composer.json
+    │       ├── LICENSE
+    │       ├── README.md
+    │       └── src
+    │           ├── AbstractLogger.php
+    │           ├── InvalidArgumentException.php
+    │           ├── LoggerAwareInterface.php
+    │           ├── LoggerAwareTrait.php
+    │           ├── LoggerInterface.php
+    │           ├── LoggerTrait.php
+    │           ├── LogLevel.php
+    │           └── NullLogger.php
+    ├── ralouphie
+    │   └── getallheaders
+    │       ├── composer.json
+    │       ├── LICENSE
+    │       ├── README.md
+    │       └── src
+    │           └── getallheaders.php
+    ├── symfony
+    │   ├── deprecation-contracts
+    │   │   ├── CHANGELOG.md
+    │   │   ├── composer.json
+    │   │   ├── function.php
+    │   │   ├── LICENSE
+    │   │   └── README.md
+    │   ├── polyfill-ctype
+    │   │   ├── bootstrap.php
+    │   │   ├── bootstrap80.php
+    │   │   ├── composer.json
+    │   │   ├── Ctype.php
+    │   │   ├── LICENSE
+    │   │   └── README.md
+    │   ├── polyfill-iconv
+    │   │   ├── bootstrap.php
+    │   │   ├── bootstrap80.php
+    │   │   ├── composer.json
+    │   │   ├── Iconv.php
+    │   │   ├── LICENSE
+    │   │   ├── README.md
+    │   │   └── Resources
+    │   │       └── charset
+    │   │           ├── from.big5.php
+    │   │           ├── from.cp037.php
+    │   │           ├── from.cp1006.php
+    │   │           ├── from.cp1026.php
+    │   │           ├── from.cp424.php
+    │   │           ├── from.cp437.php
+    │   │           ├── from.cp500.php
+    │   │           ├── from.cp737.php
+    │   │           ├── from.cp775.php
+    │   │           ├── from.cp850.php
+    │   │           ├── from.cp852.php
+    │   │           ├── from.cp855.php
+    │   │           ├── from.cp856.php
+    │   │           ├── from.cp857.php
+    │   │           ├── from.cp860.php
+    │   │           ├── from.cp861.php
+    │   │           ├── from.cp862.php
+    │   │           ├── from.cp863.php
+    │   │           ├── from.cp864.php
+    │   │           ├── from.cp865.php
+    │   │           ├── from.cp866.php
+    │   │           ├── from.cp869.php
+    │   │           ├── from.cp874.php
+    │   │           ├── from.cp875.php
+    │   │           ├── from.cp932.php
+    │   │           ├── from.cp936.php
+    │   │           ├── from.cp949.php
+    │   │           ├── from.cp950.php
+    │   │           ├── from.iso-8859-1.php
+    │   │           ├── from.iso-8859-10.php
+    │   │           ├── from.iso-8859-11.php
+    │   │           ├── from.iso-8859-13.php
+    │   │           ├── from.iso-8859-14.php
+    │   │           ├── from.iso-8859-15.php
+    │   │           ├── from.iso-8859-16.php
+    │   │           ├── from.iso-8859-2.php
+    │   │           ├── from.iso-8859-3.php
+    │   │           ├── from.iso-8859-4.php
+    │   │           ├── from.iso-8859-5.php
+    │   │           ├── from.iso-8859-6.php
+    │   │           ├── from.iso-8859-7.php
+    │   │           ├── from.iso-8859-8.php
+    │   │           ├── from.iso-8859-9.php
+    │   │           ├── from.koi8-r.php
+    │   │           ├── from.koi8-u.php
+    │   │           ├── from.us-ascii.php
+    │   │           ├── from.windows-1250.php
+    │   │           ├── from.windows-1251.php
+    │   │           ├── from.windows-1252.php
+    │   │           ├── from.windows-1253.php
+    │   │           ├── from.windows-1254.php
+    │   │           ├── from.windows-1255.php
+    │   │           ├── from.windows-1256.php
+    │   │           ├── from.windows-1257.php
+    │   │           ├── from.windows-1258.php
+    │   │           └── translit.php
+    │   ├── polyfill-mbstring
+    │   │   ├── bootstrap.php
+    │   │   ├── bootstrap72.php
+    │   │   ├── bootstrap80.php
+    │   │   ├── composer.json
+    │   │   ├── LICENSE
+    │   │   ├── Mbstring.php
+    │   │   ├── README.md
+    │   │   └── Resources
+    │   │       └── unidata
+    │   │           ├── caseFolding.php
+    │   │           ├── lowerCase.php
+    │   │           ├── titleCaseRegexp.php
+    │   │           └── upperCase.php
+    │   └── polyfill-php80
+    │       ├── bootstrap.php
+    │       ├── composer.json
+    │       ├── LICENSE
+    │       ├── Php80.php
+    │       ├── PhpToken.php
+    │       ├── README.md
+    │       └── Resources
+    │           └── stubs
+    │               ├── Attribute.php
+    │               ├── PhpToken.php
+    │               ├── Stringable.php
+    │               ├── UnhandledMatchError.php
+    │               └── ValueError.php
+    ├── vlucas
+    │   └── phpdotenv
+    │       ├── composer.json
+    │       ├── LICENSE
+    │       └── src
+    │           ├── Dotenv.php
+    │           ├── Exception
+    │           │   ├── ExceptionInterface.php
+    │           │   ├── InvalidEncodingException.php
+    │           │   ├── InvalidFileException.php
+    │           │   ├── InvalidPathException.php
+    │           │   └── ValidationException.php
+    │           ├── Loader
+    │           │   ├── Loader.php
+    │           │   ├── LoaderInterface.php
+    │           │   └── Resolver.php
+    │           ├── Parser
+    │           │   ├── Entry.php
+    │           │   ├── EntryParser.php
+    │           │   ├── Lexer.php
+    │           │   ├── Lines.php
+    │           │   ├── Parser.php
+    │           │   ├── ParserInterface.php
+    │           │   └── Value.php
+    │           ├── Repository
+    │           │   ├── Adapter
+    │           │   │   ├── AdapterInterface.php
+    │           │   │   ├── ApacheAdapter.php
+    │           │   │   ├── ArrayAdapter.php
+    │           │   │   ├── EnvConstAdapter.php
+    │           │   │   ├── GuardedWriter.php
+    │           │   │   ├── ImmutableWriter.php
+    │           │   │   ├── MultiReader.php
+    │           │   │   ├── MultiWriter.php
+    │           │   │   ├── PutenvAdapter.php
+    │           │   │   ├── ReaderInterface.php
+    │           │   │   ├── ReplacingWriter.php
+    │           │   │   ├── ServerConstAdapter.php
+    │           │   │   └── WriterInterface.php
+    │           │   ├── AdapterRepository.php
+    │           │   ├── RepositoryBuilder.php
+    │           │   └── RepositoryInterface.php
+    │           ├── Store
+    │           │   ├── File
+    │           │   │   ├── Paths.php
+    │           │   │   └── Reader.php
+    │           │   ├── FileStore.php
+    │           │   ├── StoreBuilder.php
+    │           │   ├── StoreInterface.php
+    │           │   └── StringStore.php
+    │           ├── Util
+    │           │   ├── Regex.php
+    │           │   └── Str.php
+    │           └── Validator.php
+    └── zbateson
+        ├── mail-mime-parser
+        │   ├── composer.json
+        │   ├── LICENSE
+        │   ├── phpstan.neon
+        │   ├── PHPStanConstants.php
+        │   ├── README.md
+        │   ├── src
+        │   │   ├── di_config.php
+        │   │   ├── Error.php
+        │   │   ├── ErrorBag.php
+        │   │   ├── Header
+        │   │   │   ├── AbstractHeader.php
+        │   │   │   ├── AddressHeader.php
+        │   │   │   ├── Consumer
+        │   │   │   │   ├── AbstractConsumerService.php
+        │   │   │   │   ├── AbstractGenericConsumerService.php
+        │   │   │   │   ├── AddressBaseConsumerService.php
+        │   │   │   │   ├── AddressConsumerService.php
+        │   │   │   │   ├── AddressEmailConsumerService.php
+        │   │   │   │   ├── AddressGroupConsumerService.php
+        │   │   │   │   ├── CommentConsumerService.php
+        │   │   │   │   ├── DateConsumerService.php
+        │   │   │   │   ├── GenericConsumerMimeLiteralPartService.php
+        │   │   │   │   ├── GenericConsumerService.php
+        │   │   │   │   ├── IConsumerService.php
+        │   │   │   │   ├── IdBaseConsumerService.php
+        │   │   │   │   ├── IdConsumerService.php
+        │   │   │   │   ├── ParameterConsumerService.php
+        │   │   │   │   ├── ParameterNameValueConsumerService.php
+        │   │   │   │   ├── ParameterValueConsumerService.php
+        │   │   │   │   ├── QuotedStringConsumerService.php
+        │   │   │   │   ├── QuotedStringMimeLiteralPartConsumerService.php
+        │   │   │   │   ├── QuotedStringMimeLiteralPartTokenSplitPatternTrait.php
+        │   │   │   │   ├── Received
+        │   │   │   │   │   ├── DomainConsumerService.php
+        │   │   │   │   │   ├── GenericReceivedConsumerService.php
+        │   │   │   │   │   └── ReceivedDateConsumerService.php
+        │   │   │   │   ├── ReceivedConsumerService.php
+        │   │   │   │   └── SubjectConsumerService.php
+        │   │   │   ├── DateHeader.php
+        │   │   │   ├── GenericHeader.php
+        │   │   │   ├── HeaderConsts.php
+        │   │   │   ├── HeaderFactory.php
+        │   │   │   ├── IdHeader.php
+        │   │   │   ├── IHeader.php
+        │   │   │   ├── IHeaderPart.php
+        │   │   │   ├── MimeEncodedHeader.php
+        │   │   │   ├── ParameterHeader.php
+        │   │   │   ├── Part
+        │   │   │   │   ├── AddressGroupPart.php
+        │   │   │   │   ├── AddressPart.php
+        │   │   │   │   ├── CommentPart.php
+        │   │   │   │   ├── ContainerPart.php
+        │   │   │   │   ├── DatePart.php
+        │   │   │   │   ├── HeaderPart.php
+        │   │   │   │   ├── HeaderPartFactory.php
+        │   │   │   │   ├── MimeToken.php
+        │   │   │   │   ├── MimeTokenPartFactory.php
+        │   │   │   │   ├── NameValuePart.php
+        │   │   │   │   ├── ParameterPart.php
+        │   │   │   │   ├── QuotedLiteralPart.php
+        │   │   │   │   ├── ReceivedDomainPart.php
+        │   │   │   │   ├── ReceivedPart.php
+        │   │   │   │   ├── SplitParameterPart.php
+        │   │   │   │   ├── SubjectToken.php
+        │   │   │   │   └── Token.php
+        │   │   │   ├── ReceivedHeader.php
+        │   │   │   └── SubjectHeader.php
+        │   │   ├── IErrorBag.php
+        │   │   ├── IMessage.php
+        │   │   ├── MailMimeParser.php
+        │   │   ├── Message
+        │   │   │   ├── Factory
+        │   │   │   │   ├── IMessagePartFactory.php
+        │   │   │   │   ├── IMimePartFactory.php
+        │   │   │   │   ├── IUUEncodedPartFactory.php
+        │   │   │   │   ├── PartChildrenContainerFactory.php
+        │   │   │   │   ├── PartHeaderContainerFactory.php
+        │   │   │   │   └── PartStreamContainerFactory.php
+        │   │   │   ├── Helper
+        │   │   │   │   ├── AbstractHelper.php
+        │   │   │   │   ├── GenericHelper.php
+        │   │   │   │   ├── MultipartHelper.php
+        │   │   │   │   └── PrivacyHelper.php
+        │   │   │   ├── IMessagePart.php
+        │   │   │   ├── IMimePart.php
+        │   │   │   ├── IMultiPart.php
+        │   │   │   ├── IUUEncodedPart.php
+        │   │   │   ├── MessagePart.php
+        │   │   │   ├── MimePart.php
+        │   │   │   ├── MultiPart.php
+        │   │   │   ├── NonMimePart.php
+        │   │   │   ├── PartChildrenContainer.php
+        │   │   │   ├── PartFilter.php
+        │   │   │   ├── PartHeaderContainer.php
+        │   │   │   ├── PartStreamContainer.php
+        │   │   │   └── UUEncodedPart.php
+        │   │   ├── Message.php
+        │   │   ├── Parser
+        │   │   │   ├── AbstractParserService.php
+        │   │   │   ├── CompatibleParserNotFoundException.php
+        │   │   │   ├── HeaderParserService.php
+        │   │   │   ├── IParserService.php
+        │   │   │   ├── MessageParserService.php
+        │   │   │   ├── MimeParserService.php
+        │   │   │   ├── NonMimeParserService.php
+        │   │   │   ├── ParserManagerService.php
+        │   │   │   ├── Part
+        │   │   │   │   ├── ParserPartChildrenContainer.php
+        │   │   │   │   ├── ParserPartChildrenContainerFactory.php
+        │   │   │   │   ├── ParserPartStreamContainer.php
+        │   │   │   │   ├── ParserPartStreamContainerFactory.php
+        │   │   │   │   ├── UUEncodedPartHeaderContainer.php
+        │   │   │   │   └── UUEncodedPartHeaderContainerFactory.php
+        │   │   │   ├── PartBuilder.php
+        │   │   │   ├── PartBuilderFactory.php
+        │   │   │   └── Proxy
+        │   │   │       ├── ParserMessageProxy.php
+        │   │   │       ├── ParserMessageProxyFactory.php
+        │   │   │       ├── ParserMimePartProxy.php
+        │   │   │       ├── ParserMimePartProxyFactory.php
+        │   │   │       ├── ParserNonMimeMessageProxy.php
+        │   │   │       ├── ParserNonMimeMessageProxyFactory.php
+        │   │   │       ├── ParserPartProxy.php
+        │   │   │       ├── ParserPartProxyFactory.php
+        │   │   │       ├── ParserUUEncodedPartProxy.php
+        │   │   │       └── ParserUUEncodedPartProxyFactory.php
+        │   │   └── Stream
+        │   │       ├── HeaderStream.php
+        │   │       ├── MessagePartStream.php
+        │   │       ├── MessagePartStreamDecorator.php
+        │   │       ├── MessagePartStreamReadException.php
+        │   │       └── StreamFactory.php
+        │   └── version.txt
+        ├── mb-wrapper
+        │   ├── composer.json
+        │   ├── LICENSE
+        │   ├── README.md
+        │   └── src
+        │       ├── MbWrapper.php
+        │       └── UnsupportedCharsetException.php
+        └── stream-decorators
+            ├── composer.json
+            ├── LICENSE
+            ├── PhpCsFixer.php
+            ├── phpstan.neon
+            ├── README.md
+            └── src
+                ├── Base64Stream.php
+                ├── CharsetStream.php
+                ├── ChunkSplitStream.php
+                ├── DecoratedCachingStream.php
+                ├── NonClosingStream.php
+                ├── PregReplaceFilterStream.php
+                ├── QuotedPrintableStream.php
+                ├── SeekingLimitStream.php
+                ├── TellZeroStream.php
+                └── UUStream.php
+
+176 directories, 782 files

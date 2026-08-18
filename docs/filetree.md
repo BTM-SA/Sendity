@@ -1,5 +1,5 @@
 
-    .      
+    .
     ├── app
     │   ├── Audit
     │   │   ├── AuditManager.php
@@ -27,6 +27,15 @@
     │   │       ├── ProviderLoader.php
     │   │       ├── RoutingServiceProvider.php
     │   │       └── ServiceProvider.php
+    │   ├── Domain
+    │   │   ├── Conversation
+    │   │   │   └── Conversation.php
+    │   │   ├── Identity
+    │   │   │   └── identity.php
+    │   │   ├── Mailbox
+    │   │   │   └── Mailbox.php
+    │   │   └── Message
+    │   │       └── Message.php
     │   ├── Events
     │   │   ├── MailEvent.php
     │   │   ├── MailFailed.php
@@ -42,14 +51,15 @@
     │   │   └── Router.php
     │   ├── Listeners
     │   │   ├── AuditListener.php
-    │   │   ├── LogMailSent.php
-    │   │   └── StoreMailAudit.php
+    │   │   └── LogMailSent.php
     │   ├── Mail
     │   │   ├── Address.php
     │   │   ├── Attachment.php
     │   │   ├── Contracts
+    │   │   │   ├── DeliveryTransportInterface.php
     │   │   │   ├── MailboxInterface.php
     │   │   │   └── MailerInterface.php
+    │   │   ├── DeliveryContext.php
     │   │   ├── DeliveryManager.php
     │   │   ├── Drivers
     │   │   │   ├── IMAP
@@ -71,7 +81,8 @@
     │   │   ├── MailMessage.php
     │   │   ├── MailTransportManager.php
     │   │   ├── MessageIdGenerator.php
-    │   │   └── Retry
+    │   │   ├── Retry
+    │   │   └── SendEmail.php
     │   ├── Providers
     │   │   ├── AppServiceProvider.php
     │   │   ├── AuditServiceProvider.php
@@ -119,8 +130,6 @@
     │   ├── providers.php
     │   └── queue.php
     ├── docs
-    │   ├── filetree.md
-    │   ├── northstar.md
     │   ├── architecture
     │   │   ├── 01-framework.md
     │   │   ├── 02-domain.md
@@ -140,21 +149,25 @@
     │   │       ├── 0012-Isolate-Event-Listener-Failures-From-Core-Operations.md
     │   │       ├── 0013-Event-Listener-Failure-Isolation.md
     │   │       └── 0014-Queue-Architecture.md
-    │   ├── workflows
-    │   │   ├── 01-purpose.md
-    │   │   ├── 02-identity.md
-    │   │   ├── 03-send-email.md
-    │   │   ├── 04-receiving-email.md
-    │   │   ├── 05-conversations.md
-    │   │   ├── 06-document-protection.md
-    │   │   ├── 07-templates.md
-    │   │   ├── 08-communication-insights.md
-    │   │   └── 09-security-and-identity
+    │   ├── filetree.md
+    │   ├── northstar.md
     │   ├── product
     │   │   ├── 01-credential-health.md
     │   │   └── 02-email-experience.md
-    │   └── ui
-    │       └── ui-shell.md
+    │   ├── ui
+    │   │   └── ui-shell.md
+    │   └── workflows
+    │       ├── 01-purpose.md
+    │       ├── 02-identity.md
+    │       ├── 03-send-email.md
+    │       ├── 04-receiving-email.md
+    │       ├── 05-conversations.md
+    │       ├── 06-document-protection.md
+    │       ├── 07-templates.md
+    │       ├── 08-communication-insights.md
+    │       └── 09-security-and-identity.md
+    ├── images
+    │   └── Sendity-Logo.png
     ├── public
     │   └── index.php
     ├── README.md
@@ -162,6 +175,7 @@
     │   └── web.php
     ├── storage
     │   ├── audit
+    │   │   └── snd_cc7da15c3c0d320cc2254232d7ca53c1.json
     │   ├── Logs
     │   │   └── app.log
     │   ├── queue
