@@ -37,11 +37,4 @@ class MailManager implements MailerInterface
     {
         return $this->mailbox;
     }
-
-    public function transportName(): string
-    {
-        return get_class(
-            $this->delivery->transport()
-        );
-    }
 }
