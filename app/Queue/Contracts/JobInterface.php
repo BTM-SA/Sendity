@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Sendity\Queue\Contracts;
 
+use Sendity\Core\Container;
 use Sendity\Queue\JobEnvelope;
 
 interface JobInterface
@@ -11,5 +12,8 @@ interface JobInterface
     /**
      * Execute the job.
      */
-    public function handle(JobEnvelope $envelope): void;
+    public function handle(
+        JobEnvelope $envelope,
+        Container $container
+    ): void;
 }
