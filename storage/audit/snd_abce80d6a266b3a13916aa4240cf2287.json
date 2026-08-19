@@ -1,0 +1,29 @@
+{
+    "id": "snd_abce80d6a266b3a13916aa4240cf2287",
+    "subject": "Sendity queued mail test",
+    "events": [
+        {
+            "status": "created",
+            "occurred_at": "2026-08-19T19:05:16+00:00",
+            "metadata": {}
+        },
+        {
+            "status": "sending",
+            "occurred_at": "2026-08-19T19:05:16+00:00",
+            "metadata": {
+                "transport": "smtp",
+                "host": "mail.bichet.co.za",
+                "port": 587,
+                "attempt": 1
+            }
+        },
+        {
+            "status": "sent",
+            "occurred_at": "2026-08-19T19:05:22+00:00",
+            "metadata": {
+                "transport": "smtp",
+                "message_id": "snd_abce80d6a266b3a13916aa4240cf2287"
+            }
+        }
+    ]
+}
