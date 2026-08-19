@@ -14,22 +14,19 @@ class MailManager implements MailerInterface
     ) {
     }
 
-
     public function send(
         MailMessage $message
     ): void {
         $this->delivery->deliver(
-    $message,
-    new DeliveryContext()
-);
+            $message,
+            new DeliveryContext()
+        );
     }
-
 
     public function mailbox(): MailboxManager
     {
         return $this->mailbox;
     }
-
 
     public function transportName(): string
     {
