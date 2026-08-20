@@ -389,6 +389,27 @@ $router->get('/credential-test', function () {
         . '<br>Failed status: ' . $failedStatus
         . '<br>Failed at: ' . $failedAt?->format(DATE_ATOM);
 });
+$router->get('/credential-authentication-test', function () use ($container) {
+
+    $config = $container->get(
+        \Sendity\Core\Config::class
+    );
+
+    $imap = $config->get('mail.imap');
+
+    $authenticator = $container->get(
+        \Sendity\Mail\Contracts\MailAuthenticatorInterface::class
+    );
+
+    $credentials = new \Sendity\Mail\Authentication\AuthenticationCredentials(
+        $imap['username'],
+        $imap['password']
+    );
+
+    $authenticator->authenticate($credentials);
+
+    return 'Credential authentication successful';
+});
 $router->get('/boom', function () {
     throw new RuntimeException('Boom!');
 });
