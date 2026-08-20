@@ -22,6 +22,7 @@ use Sendity\Mail\MailTransportManager;
 use Sendity\Mail\MailboxManager;
 use Sendity\Mail\MessageIdGenerator;
 use Sendity\Queue\QueueManager;
+use Sendity\Services\Identity\CredentialAuthenticationService;
 
 
 class MailServiceProvider extends ServiceProvider
@@ -223,6 +224,24 @@ class MailServiceProvider extends ServiceProvider
 
                 return new ImapAuthenticator(
                     $container->get(Config::class)
+                );
+
+            }
+        );
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Credential Authentication Service
+        |--------------------------------------------------------------------------
+        */
+
+        $this->container->singleton(
+            CredentialAuthenticationService::class,
+            function ($container) {
+
+                return new CredentialAuthenticationService(
+                    $container->get(MailAuthenticatorInterface::class)
                 );
 
             }
