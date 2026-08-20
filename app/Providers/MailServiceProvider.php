@@ -11,7 +11,9 @@ use Sendity\Core\Config;
 use Sendity\Core\Events\EventDispatcher;
 use Sendity\Core\Providers\ServiceProvider;
 use Sendity\Mail\Contracts\MailboxInterface;
+use Sendity\Mail\Contracts\MailAuthenticatorInterface;
 use Sendity\Mail\DeliveryManager;
+use Sendity\Mail\Drivers\IMAP\ImapAuthenticator;
 use Sendity\Mail\Drivers\IMAP\ImapMailbox;
 use Sendity\Mail\Drivers\SMTP\SmtpTransport;
 use Sendity\Mail\Contracts\MailerInterface;
@@ -202,6 +204,24 @@ class MailServiceProvider extends ServiceProvider
             function ($container) {
 
                 return new ImapMailbox(
+                    $container->get(Config::class)
+                );
+
+            }
+        );
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Mail Credential Authenticator
+        |--------------------------------------------------------------------------
+        */
+
+        $this->container->singleton(
+            MailAuthenticatorInterface::class,
+            function ($container) {
+
+                return new ImapAuthenticator(
                     $container->get(Config::class)
                 );
 
