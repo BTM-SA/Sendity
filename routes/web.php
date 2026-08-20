@@ -356,6 +356,39 @@ $router->get('/domain-send-test', function () use ($container) {
 
     return 'Domain message sent successfully';
 });
+$router->get('/credential-test', function () {
+
+    $identity = new \Sendity\Domain\Identity\Identity(
+        'alex@company.com',
+        'Alex Botha'
+    );
+
+    $credential = new \Sendity\Domain\Identity\Credential(
+        $identity,
+        \Sendity\Domain\Identity\Enums\AuthenticationMethod::PASSWORD
+    );
+
+    $createdStatus = $credential->status()->value;
+
+    $credential->authenticated();
+
+    $healthyStatus = $credential->status()->value;
+    $authenticatedAt = $credential->lastSuccessfulAuthenticationAt();
+
+    $credential->authenticationFailed();
+
+    $failedStatus = $credential->status()->value;
+    $failedAt = $credential->lastFailedAuthenticationAt();
+
+    return
+        'Identity: ' . $credential->identity()->email()
+        . '<br>Method: ' . $credential->authenticationMethod()->value
+        . '<br>Initial status: ' . $createdStatus
+        . '<br>Healthy status: ' . $healthyStatus
+        . '<br>Authenticated at: ' . $authenticatedAt?->format(DATE_ATOM)
+        . '<br>Failed status: ' . $failedStatus
+        . '<br>Failed at: ' . $failedAt?->format(DATE_ATOM);
+});
 $router->get('/boom', function () {
     throw new RuntimeException('Boom!');
 });
